@@ -4,6 +4,7 @@ import { useEffect } from "react";
 import { useUser } from "../context/UserContext";
 import { storageSave } from "../utils/storage";
 import keycloak from "../keycloak";
+import { API_URL } from "../utils/apiUrls";
 
 const Main = ({ searchResults, isSearching, setSearching }) => {
   const [selectedCategoryList, setCategoryList] = useState([]);
@@ -16,9 +17,7 @@ const Main = ({ searchResults, isSearching, setSearching }) => {
     if (!allUsers) {
       console.log("fetch all users");
       const allUsersFetch = async () => {
-        const data = await (
-          await fetch(`http://localhost:8080/api/v1/user/`)
-        ).json();
+        const data = await (await fetch(`${API_URL}/api/v1/user/`)).json();
         if (data.data !== null) {
           storageSave("lagalt-allUsers", data.data);
         }
@@ -48,7 +47,7 @@ const Main = ({ searchResults, isSearching, setSearching }) => {
           username: keycloak.tokenParsed.name,
           userEmail: keycloak.tokenParsed.email,
         };
-        fetch("http://localhost:8080/api/v1/user/", {
+        fetch(`${API_URL}/api/v1/user/`, {
           method: "POST",
           headers: {
             "Content-Type": "application/json",
@@ -79,7 +78,7 @@ const Main = ({ searchResults, isSearching, setSearching }) => {
         const userFetch = async () => {
           const data = await (
             await fetch(
-              `http://localhost:8080/api/v1/user/whereEmail=${keycloak.tokenParsed.email}`
+              `${API_URL}/api/v1/user/whereEmail=${keycloak.tokenParsed.email}`
             )
           ).json();
           if (data.data !== null) {
@@ -93,7 +92,7 @@ const Main = ({ searchResults, isSearching, setSearching }) => {
 
     const dataFetch = async () => {
       const data = await (
-        await fetch(`http://localhost:8080/api/v1/project/list`)
+        await fetch(`${API_URL}/api/v1/project/list`)
       ).json();
       storageSave("lagalt-projects", data.data);
       setProjectsList(data.data);

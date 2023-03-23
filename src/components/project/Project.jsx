@@ -5,6 +5,7 @@ import { useEffect } from "react";
 import { faXmark } from "@fortawesome/free-solid-svg-icons";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { useUser } from "../../context/UserContext";
+import { API_URL } from "../../utils/apiUrls";
 
 const ProjectPage = (props) => {
   const [isOpen, setIsOpen] = useState(false);
@@ -26,7 +27,7 @@ const ProjectPage = (props) => {
       const userFetch = async () => {
 
         const data = await (
-          await fetch(`http://localhost:8080/api/v1/user/`)
+          await fetch(`${API_URL}/api/v1/user/`)
         ).json();
         if (data.data !== null) {
           //get the owner of the project

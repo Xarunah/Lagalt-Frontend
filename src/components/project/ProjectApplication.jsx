@@ -2,6 +2,7 @@ import { useState } from "react";
 import { faXmark } from "@fortawesome/free-solid-svg-icons";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { useUser } from "../../context/UserContext";
+import { API_URL } from "../../utils/apiUrls";
 
 const ProjectApplication = (props) => {
   const [agreeIsCheck, setAgreeCheckbox] = useState();
@@ -28,7 +29,7 @@ const ProjectApplication = (props) => {
         motivation: motivationText,
       };
 
-      fetch("http://localhost:8080/api/v1/projectApplication/", {
+      fetch(`${API_URL}/api/v1/projectApplication/`, {
         method: "POST", // or 'PUT'
         headers: {
           "Content-Type": "application/json",

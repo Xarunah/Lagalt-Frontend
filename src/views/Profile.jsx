@@ -9,6 +9,7 @@ import { useEffect } from "react";
 import { storageSave } from "../utils/storage";
 import { useUser } from "../context/UserContext";
 import keycloak from "../keycloak";
+import { API_URL } from "../utils/apiUrls";
 
 const Profile = (props) => {
   const [projectCreate, setProjectCreate] = useState(false);
@@ -28,7 +29,7 @@ const Profile = (props) => {
   useEffect(() => {
     // const allUsersFetch = async () => {
     //   const data = await (
-    //     await fetch(`http://localhost:8080/api/v1/user/`)
+    //     await fetch(`http://${API_URL}/api/v1/user/`)
     //   ).json();
     //   if (data.data !== null) {
     //     storageSave("lagalt-allUsers", data.data);
@@ -40,7 +41,7 @@ const Profile = (props) => {
     //   const userFetch = async () => {
     //     const data = await (
     //       await fetch(
-    //         `http://localhost:8080/api/v1/user/whereEmail=${keycloak.tokenParsed.email}`
+    //         `http://${API_URL}/api/v1/user/whereEmail=${keycloak.tokenParsed.email}`
     //       )
     //     ).json();
     //     if (data.data !== null) {
@@ -56,7 +57,7 @@ const Profile = (props) => {
     //     username: keycloak.tokenParsed.name,
     //     email: keycloak.tokenParsed.email,
     //   };
-    //   fetch("http://localhost:8080/api/v1/user/", {
+    //   fetch("http://${API_URL}/api/v1/user/", {
     //     method: "POST",
     //     headers: {
     //       "Content-Type": "application/json",
@@ -67,7 +68,7 @@ const Profile = (props) => {
     //   const userFetch = async () => {
     //     const data = await (
     //       await fetch(
-    //         `http://localhost:8080/api/v1/user/whereEmail=${keycloak.tokenParsed.email}`
+    //         `http://${API_URL}/api/v1/user/whereEmail=${keycloak.tokenParsed.email}`
     //       )
     //     ).json();
     //     if (data.data !== null) {
@@ -107,7 +108,7 @@ const Profile = (props) => {
     setProjectList([...projectList, project]);
     console.log(project);
 
-    fetch("http://localhost:8080/api/v1/project/", {
+    fetch(`${API_URL}/api/v1/project/`, {
       method: "POST",
       headers: {
         "Content-Type": "application/json",

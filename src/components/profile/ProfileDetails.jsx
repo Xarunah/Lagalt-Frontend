@@ -3,6 +3,7 @@ import keycloak from "../../keycloak";
 import { useUser } from "../../context/UserContext";
 import ProfileSkills from "./ProfileSkills";
 import { useEffect } from "react";
+import { API_URL } from "../../utils/apiUrls";
 
 function ProfileDetails() {
   const [editDesc, setEditDesc] = useState(true);
@@ -19,12 +20,11 @@ function ProfileDetails() {
 
   const [profileSkills, setSkills] = useState([]);
 
-
   useEffect(() => {
-    if(user){
-      setValue(user.userDescription)
-      setValuePortfolio(user.userPortfolio)
-      setSkills(user.userSkill)
+    if (user) {
+      setValue(user.userDescription);
+      setValuePortfolio(user.userPortfolio);
+      setSkills(user.userSkill);
     }
   }, []);
 
@@ -45,7 +45,7 @@ function ProfileDetails() {
       userVisibility: false, //has to be set by checkbox on profile
     };
 
-    fetch(`http://localhost:8080/api/v1/user/${user.userId}`, {
+    fetch(`${API_URL}/api/v1/user/${user.userId}`, {
       method: "PUT",
       headers: {
         "Content-Type": "application/json",

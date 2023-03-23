@@ -1,5 +1,6 @@
 import { useState } from "react";
 import { useEffect } from "react";
+import { API_URL } from "../../utils/apiUrls";
 
 const ProjectApplicationCard = (props) => {
   const [isOpen, setIsOpen] = useState(false);
@@ -44,7 +45,7 @@ const ProjectApplicationCard = (props) => {
 
     //update projectapplication
     fetch(
-      `http://localhost:8080/api/v1/projectApplication/${props.projectApplicationId}`,
+      `${API_URL}/api/v1/projectApplication/${props.projectApplicationId}`,
       {
         method: "PUT",
         headers: {
@@ -65,7 +66,7 @@ const ProjectApplicationCard = (props) => {
       const userObj = {
         userId: props.userId,
       };
-      fetch(`http://localhost:8080/api/v1/project/join/${props.projectId}`, {
+      fetch(`${API_URL}/api/v1/project/join/${props.projectId}`, {
         method: "PUT",
         headers: {
           "Content-Type": "application/json",
@@ -84,7 +85,7 @@ const ProjectApplicationCard = (props) => {
 
   const dataFetch = async () => {
     const data = await (
-      await fetch(`http://localhost:8080/api/v1/user/${props.userId}`)
+      await fetch(`${API_URL}/api/v1/user/${props.userId}`)
     ).json();
     if (data.data !== null) {
       setName(data.data.username);

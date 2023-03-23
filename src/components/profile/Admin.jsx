@@ -3,6 +3,7 @@ import ProjectApplicationCard from "../cards/ProjectApplicationCard";
 import { useEffect } from "react";
 import { faXmark } from "@fortawesome/free-solid-svg-icons";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
+import { API_URL } from "../../utils/apiUrls";
 
 const ProjectAdminPopup = (props) => {
   //const [editProgress, setEditProgress] = useState(true);
@@ -19,7 +20,7 @@ const ProjectAdminPopup = (props) => {
     const dataFetch = async () => {
       const data = await (
         await fetch(
-          `http://localhost:8080/api/v1/projectApplication/whereProjectId=${props.projectId}`
+          `${API_URL}/api/v1/projectApplication/whereProjectId=${props.projectId}`
         )
       ).json();
       if (data !== null) {
