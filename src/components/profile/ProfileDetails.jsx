@@ -25,6 +25,7 @@ function ProfileDetails() {
       setValue(user.userDescription);
       setValuePortfolio(user.userPortfolio);
       setSkills(user.userSkill);
+      console.log(user.userSkill)
     }
   }, []);
 
@@ -102,7 +103,9 @@ function ProfileDetails() {
         </div>
       </form>
 
+{profileSkills.length > 0 &&
       <ProfileSkills words={profileSkills} skillsToProfile={setSkills} />
+}
 
       <button
         className="bg-gradient-to-r from-orange-300 to-rose-300 hover:text-rose-400 text-white font-bold py-2 px-4 rounded font-playfair"
@@ -115,3 +118,16 @@ function ProfileDetails() {
 }
 
 export default ProfileDetails;
+
+
+
+
+
+
+const kommentar = {
+
+  
+  userId: user.userId,
+  comment: kommentar
+
+}

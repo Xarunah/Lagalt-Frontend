@@ -10,10 +10,9 @@ const SearchBar = ({ setSearchResults, onSearchInputChange }) => {
 
   const handleSearch = (event) => {
     setSearchTerm(event.target.value);
-
-    if (event.target.value === "") {
+  
       onSearchInputChange();
-    }
+    
   };
 
   useEffect(() => {

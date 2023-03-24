@@ -57,6 +57,9 @@ const CreateProject = ({ onProjectCreate, handleClose }) => {
         tags: projectTags,
         shortDescription: projectShortDescription,
         project_is_active: true,
+        progress: "",
+        status: "",
+        collaborators: []
       };
 
       onProjectCreate(newProject);
@@ -87,7 +90,7 @@ const CreateProject = ({ onProjectCreate, handleClose }) => {
           <h1 className="text-2xl font-playfair font-bold">Category</h1>
           <div className=" flex items-center mb-4 w-4 h-4 font-playfair text-sm">
             <input
-              class="form-checkbox rounded text-rose-400"
+              className="form-checkbox rounded text-rose-400"
               type="checkbox"
               name="sorting"
               value="Film"
@@ -98,7 +101,7 @@ const CreateProject = ({ onProjectCreate, handleClose }) => {
             <label className="ml-1 mr-3 text-sm">Film</label>
 
             <input
-              class="form-checkbox rounded text-rose-400"
+              className="form-checkbox rounded text-rose-400"
               type="checkbox"
               name="sorting"
               value="Music"
@@ -106,10 +109,10 @@ const CreateProject = ({ onProjectCreate, handleClose }) => {
               onChange={onCategoryChange}
               checked={projectCategory === "Music"}
             />
-            <label class="ml-1 mr-3">Music</label>
+            <label className="ml-1 mr-3">Music</label>
 
             <input
-              class="form-checkbox rounded text-rose-400"
+              className="form-checkbox rounded text-rose-400"
               type="checkbox"
               name="sorting"
               value="Game"
@@ -117,10 +120,10 @@ const CreateProject = ({ onProjectCreate, handleClose }) => {
               onChange={onCategoryChange}
               checked={projectCategory === "Game"}
             />
-            <label class="ml-1 mr-3">Game</label>
+            <label className="ml-1 mr-3">Game</label>
 
             <input
-              class="form-checkbox rounded text-rose-400"
+              className="form-checkbox rounded text-rose-400"
               type="checkbox"
               name="sorting"
               value="Web"
@@ -128,7 +131,7 @@ const CreateProject = ({ onProjectCreate, handleClose }) => {
               onChange={onCategoryChange}
               checked={projectCategory === "Web"}
             />
-            <label class="ml-1 mr-3">Web</label>
+            <label className="ml-1 mr-3">Web</label>
           </div>
 
           <h1 className="text-2xl font-playfair font-bold">
