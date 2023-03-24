@@ -1,7 +1,9 @@
 import { useUser } from "../../context/UserContext";
-import { useState } from "react";
+import { useEffect, useState } from "react";
 import CommentItem from "./CommentItem";
 import { useRef } from "react";
+import { API_URL } from "../../utils/apiUrls";
+import keycloak from "../../keycloak";
 
 function ProjectComments(props) {
   const [comments, setComments] = useState([]);
@@ -10,38 +12,63 @@ function ProjectComments(props) {
 
   const { user } = useUser();
 
-//   const onCommentChange = (e) => {
-//     commentInput(e.current.value);
-//   };
+useEffect(() => {
+    fetch(`${API_URL}/api/v1/comment/`, {
+      method: "GET",
+      headers: {
+        "Content-Type": "application/json",
+        Authorization: `Bearer ${keycloak.token}`,
+      },
+    })
+      .then((response) => response.json())
+      .then((data) => {
+        if (data.data !== undefined) {
+          console.log(data.data);
+          setComments(data.data);
+        }
+      })
+      .catch((error) => {
+        console.error("Error:", error);
+      });
+}, []);
 
   const postComment = () => {
     console.log(commentInput);
     console.log(user.username);
     if (!commentInput.current.value == "") {
 
-      const kommentar = {
+      const comment = {
         username: user.username,
         message: commentInput.current.value,
       };
       
-      setComments([...comments, kommentar]);
-      comments.push(kommentar);
+      setComments([...comments, comment]);
+      comments.push(comment);
       commentInput.current.value = "";
+
+      fetch(`${API_URL}/api/v1/comment/`, {
+        method: "POST",
+        headers: {
+          "Content-Type": "application/json",
+          Authorization: `Bearer ${keycloak.token}`,
+        },
+        body: JSON.stringify(comment),
+      })
+        .then((response) => response.json())
+        .then((comment) => {
+          console.log("Success:", comment);
+        })
+        .catch((error) => {
+          console.error("Error:", error);
+        });
     }
   };
 
   return (
     <div>
-      {/* <p className="text-xl font-playfair text-center">Skills</p>
-            <input
-              className="bg-slate-100 resize-none p-2 focus:border-rose-400 focus:border-2 rounded-lg font-playfair border-gray-300 border-2 outline-none focus:bg-gray-200"
-              ref={skillInput}
-              placeholder="Add skill"
-              onKeyDown={handleKeyDown}
-            /> */}
 
       <textarea
-        className="bg-slate-100 resize-none focus:border-rose-400 focus:border-2 rounded-lg font-playfair border-gray-300 border-2 outline-none focus:bg-gray-200 p-1 "
+        className="bg-slate-100 resize-none focus:border-rose-400 focus:border-2 rounded-lg font-playfair border-gray-300 border-2 outline-none focus:bg-gray-200 p-1"
         type="text"
         // maxLength={40}
         placeholder="Write a comment"
