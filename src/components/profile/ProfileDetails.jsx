@@ -123,11 +123,3 @@ export default ProfileDetails;
 
 
 
-
-const kommentar = {
-
-  
-  userId: user.userId,
-  comment: kommentar
-
-}
