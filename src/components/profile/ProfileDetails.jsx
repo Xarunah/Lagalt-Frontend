@@ -23,7 +23,7 @@ function ProfileDetails() {
       setValue(user.userDescription);
       setValuePortfolio(user.userPortfolio);
       setSkills(user.userSkill);
-      setHiddenMode(user.userVisibility)
+      setHiddenMode(user.userVisibility);
       console.log("user: " + user.userVisibility);
     }
   }, []);
@@ -31,10 +31,10 @@ function ProfileDetails() {
   const toggleHiddenMode = (e) => {
     if (e.target.checked === true) {
       setHiddenMode(true);
-      console.log(true)
+      console.log(true);
     } else {
       setHiddenMode(false);
-      console.log(false)
+      console.log(false);
     }
   };
 
@@ -56,7 +56,7 @@ function ProfileDetails() {
       userDescription: value,
       userPortfolio: valuePortfolio,
       userSkill: profileSkills,
-      userVisibility: hiddenMode, 
+      userVisibility: hiddenMode,
     };
 
     fetch(`${API_URL}/api/v1/user/${user.userId}`, {
@@ -75,7 +75,6 @@ function ProfileDetails() {
         console.error("Error:", error);
       });
 
-     
     alert("Profile details saved!");
   };
 
@@ -85,20 +84,23 @@ function ProfileDetails() {
         Welcome back: {keycloak.tokenParsed.name}
       </p>
 
-      <img src="/images/catpc.png" alt="Cat with PC" className="h-28" />
+      {!hiddenMode && (
+        <img src="/images/catpc.png" alt="Cat with PC" className="h-28" />
+      )}
+      {hiddenMode && (
+        <img src="/images/catpc_glasses.png" alt="Cat with PC" className="h-28" />
+      )}
 
       <div className="flex items-center pl-3">
-                  <input
-                    type="checkbox"
-                    value="Hidden"
-                    onChange={toggleHiddenMode}
-                    checked={hiddenMode}
-                    className="w-4 h-4  bg-gray-100 border-gray-300 rounded text-rose-400"
-                  />
-                  <label className="w-full py-3 ml-2 text-gray-900 ">
-                    Hidden mode
-                  </label>
-                </div>
+        <input
+          type="checkbox"
+          value="Hidden"
+          onChange={toggleHiddenMode}
+          checked={hiddenMode}
+          className="w-4 h-4  bg-gray-100 border-gray-300 rounded text-rose-400"
+        />
+        <label className="w-full py-3 ml-2 text-gray-900 ">Hidden mode</label>
+      </div>
 
       <form>
         <p className="text-xl font-playfair text-center">Description</p>
