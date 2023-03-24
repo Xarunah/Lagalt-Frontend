@@ -56,9 +56,7 @@ const ProjectCard = (props) => {
                Status: <span className="font-thin">{props.status}</span>
               </p>
 
-              <p>
-               Progress: <span className="font-thin">{props.progress}</span>
-              </p>
+          
             </div>
           </div>
         </div>

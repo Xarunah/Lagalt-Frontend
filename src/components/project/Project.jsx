@@ -97,6 +97,15 @@ const ProjectPage = (props) => {
                     <span className="font-thin">{props.category}</span>
                   </p>
 
+                  <p>
+               Status: <span className="font-thin">{props.status}</span>
+              </p>
+
+              <p>
+               Progress: <span className="font-thin">{props.progress}</span>
+              </p>
+              
+
                   <p className="">
                     Skills:{" "}
                     <span className="font-thin">
