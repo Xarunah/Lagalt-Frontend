@@ -6,6 +6,9 @@ import { faXmark } from "@fortawesome/free-solid-svg-icons";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { useUser } from "../../context/UserContext";
 import { API_URL } from "../../utils/apiUrls";
+import CommentBox from "../commentSection/CommentBox";
+import Comment from "../project/Comment";
+import CommentItem from "./CommentItem";
 
 const ProjectPage = (props) => {
   const [isOpen, setIsOpen] = useState(false);
@@ -25,10 +28,7 @@ const ProjectPage = (props) => {
 
       //fetch all users from database and adds them to the project
       const userFetch = async () => {
-
-        const data = await (
-          await fetch(`${API_URL}/api/v1/user/`)
-        ).json();
+        const data = await (await fetch(`${API_URL}/api/v1/user/`)).json();
         if (data.data !== null) {
           //get the owner of the project
           if (user.userId === props.ownerId) {
@@ -60,7 +60,6 @@ const ProjectPage = (props) => {
       setCanJoin(false);
     }
   }, []);
-  
 
   const toggleProject = () => {
     setIsOpen(!isOpen);
@@ -112,12 +111,10 @@ const ProjectPage = (props) => {
                     </span>
                   </p>
                 </div>
-
-                  Project Description:
-                  <p className="font-playfair font-thin text-lg">
-                    {props.description}
-                  </p>
-
+                Project Description:
+                <p className="font-playfair font-thin text-lg">
+                  {props.description}
+                </p>
                 {user && (
                   <>
                     {user.userId == props.ownerId ||
@@ -126,7 +123,9 @@ const ProjectPage = (props) => {
                         <p>
                           Owner: <span className="font-thin">{owner}</span>
                         </p>
-
+                        {/* <CommentBox></CommentBox> */}
+                        <Comment></Comment>
+                      
                         {/* collaborators */}
                         {joinedNames.length > 0 ? (
                           <p>
@@ -143,6 +142,8 @@ const ProjectPage = (props) => {
                         ) : null}
                       </>
                     ) : null}
+
+  
 
                     {user.userId != props.ownerId &&
                     !props.collaborators.includes(user.userId) ? (
