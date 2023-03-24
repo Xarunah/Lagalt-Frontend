@@ -58,6 +58,9 @@ const OwnedProjectCard = (props) => {
           skills={props.skills}
           tags={props.tags}
           category={props.category}
+          progress={props.progress}
+
+          status={props.status}
         />
       )}
     </>

@@ -11,11 +11,52 @@ const ProjectAdminPopup = (props) => {
 
   const [projectApplications, setApplications] = useState([]);
 
+  const [status, setStatus] = useState("");
+
+  const [progress, setProgress] = useState("");
+
+
+
+  const onProgressChange = event => {
+    setProgress(event.target.value)
+
+  }
+
+  const onStatusChange = event => {
+    setStatus(event.target.value)
+
+  }
+
   const closeApplication = () => {
     console.log("AYAYY");
     //FIX THIS!!!!
     setApplications([]);
   };
+
+  const onSaveProgress = () => {
+    const newProgress = {
+      progress: progress,
+      status: status,
+    };
+
+    fetch(`${API_URL}/api/v1/project/${props.projectId}`, {
+      method: "PUT",
+      headers: {
+        "Content-Type": "application/json",
+        Authorization: `Bearer ${keycloak.token}`,
+      },
+      body: JSON.stringify(newProgress),
+    })
+      .then((response) => response.json())
+      .then((newProgress) => {
+        console.log("Success:", newProgress);
+      })
+      .catch((error) => {
+        console.error("Error:", error);
+      });
+
+    alert("Project progress saved!");
+  }
 
   useEffect(() => {
     const dataFetch = async () => {
@@ -40,6 +81,16 @@ const ProjectAdminPopup = (props) => {
     dataFetch();
 
     console.log(projectApplications);
+
+
+  
+  //    if (user) {
+        setStatus(props.status);
+        setProgress(props.progress);
+    //  }
+
+    console.log("status:" + props.status)
+
   }, []);
 
   return (
@@ -66,6 +117,8 @@ const ProjectAdminPopup = (props) => {
               cols="100"
               type="text"
               placeholder="Edit progress info here"
+              value={progress}
+              onChange={onProgressChange}
             ></textarea>
           </div>
         </div>
@@ -77,13 +130,14 @@ const ProjectAdminPopup = (props) => {
             type="text"
             maxLength={40}
             placeholder="Enter title here"
-          //  onChange={onNameChange}
+            value={status}
+            onChange={onStatusChange}
           />
 
 
           <button
         className="bg-gradient-to-r from-orange-300 to-rose-300 hover:text-rose-400 text-white font-bold py-2 px-4 rounded font-playfair"
-       // onClick={onSaveDetails}
+       onClick={onSaveProgress}
       >
         Save Profile
       </button>
