@@ -14,7 +14,7 @@ import { API_URL } from "../utils/apiUrls";
 const Profile = (props) => {
   const [projectCreate, setProjectCreate] = useState(false);
 
-  const { user, setUser, projectList, setProjectList } = useUser();
+  const {user, setUser, projectList, setProjectList} = useUser();
 
   const [joinedList, setJoinedList] = useState([]);
 
@@ -78,6 +78,8 @@ const Profile = (props) => {
     //   };
     //   userFetch();
     // }
+
+  
     if(projectList){
     for (let j = 0; j < projectList.length; j++) {
       if (
@@ -87,7 +89,6 @@ const Profile = (props) => {
         ownedList.push(projectList[j]);
       }
     }
-
     for (let i = 0; i < projectList.length; i++) {
       for (let j = 0; j < projectList[i].collaborators.length; j++) {
         if (
@@ -106,12 +107,14 @@ const Profile = (props) => {
 
   const onProjectCreate = (project) => {
     setProjectList([...projectList, project]);
+    storageSave("lagalt-projects", projectList)
     console.log(project);
 
     fetch(`${API_URL}/api/v1/project/`, {
       method: "POST",
       headers: {
         "Content-Type": "application/json",
+        Authorization: `Bearer ${keycloak.token}`,
       },
       body: JSON.stringify(project),
     })

@@ -28,7 +28,17 @@ const ProjectPage = (props) => {
 
       //fetch all users from database and adds them to the project
       const userFetch = async () => {
-        const data = await (await fetch(`${API_URL}/api/v1/user/`)).json();
+
+        const data = await (
+          await fetch(`${API_URL}/api/v1/user/`,{
+            method: "GET",
+            mode: "cors",
+            headers: {
+              Authorization: `Bearer ${keycloak.token}`,
+              "Content-Type": "application/json",
+            },
+          })
+        ).json();
         if (data.data !== null) {
           //get the owner of the project
           if (user.userId === props.ownerId) {

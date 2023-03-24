@@ -6,7 +6,7 @@ import { faUser } from "@fortawesome/free-solid-svg-icons";
 import { faRightToBracket } from "@fortawesome/free-solid-svg-icons";
 import { useUser } from "../../context/UserContext";
 import { faRightFromBracket } from "@fortawesome/free-solid-svg-icons";
-import { Link } from "react-router-dom";
+import { Link, useLocation } from "react-router-dom";
 import { faHouse } from "@fortawesome/free-solid-svg-icons";
 import { storageSave } from "../../utils/storage";
 
@@ -14,6 +14,8 @@ const Header = ({ setSearchResults, onSearch }) => {
   const [isOpen, setIsOpen] = useState(false);
 
   const { user } = useUser();
+
+  const location = useLocation()
 
   const togglePopup = () => {
     setIsOpen(!isOpen);
@@ -68,13 +70,21 @@ const Header = ({ setSearchResults, onSearch }) => {
           <div className="items-center justify-between " id="navbar-search">
             <div className="flex flex-col">
               <div className="relative ">
+
+
+              {location.pathname != "/profile" &&
                 <SearchBar
                   setSearchResults={setSearchResults}
                   onSearchInputChange={onSearchInputChange}
                 />
+                }
+                
               </div>
             </div>
           </div>
+
+
+
         </div>
       </nav>
     </>
