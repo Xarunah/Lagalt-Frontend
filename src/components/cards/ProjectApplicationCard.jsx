@@ -1,6 +1,7 @@
 import { useState } from "react";
 import { useEffect } from "react";
 import { API_URL } from "../../utils/apiUrls";
+import keycloak from "../../keycloak";
 
 const ProjectApplicationCard = (props) => {
   const [isOpen, setIsOpen] = useState(false);
@@ -49,8 +50,9 @@ const ProjectApplicationCard = (props) => {
       {
         method: "PUT",
         headers: {
-          "Content-Type": "application/json",
-        },
+              Authorization: `Bearer ${keycloak.token}`,
+              "Content-Type": "application/json",
+            },
         body: JSON.stringify(data),
       }
     )
@@ -69,6 +71,7 @@ const ProjectApplicationCard = (props) => {
       fetch(`${API_URL}/api/v1/project/join/${props.projectId}`, {
         method: "PUT",
         headers: {
+          Authorization: `Bearer ${keycloak.token}`,
           "Content-Type": "application/json",
         },
         body: JSON.stringify(userObj),
@@ -85,7 +88,13 @@ const ProjectApplicationCard = (props) => {
 
   const dataFetch = async () => {
     const data = await (
-      await fetch(`${API_URL}/api/v1/user/${props.userId}`)
+      await fetch(`${API_URL}/api/v1/user/${props.userId}`, {
+        method: "GET",
+        headers: {
+          Authorization: `Bearer ${keycloak.token}`,
+          "Content-Type": "application/json",
+        },
+      })
     ).json();
     if (data.data !== null) {
       setName(data.data.username);

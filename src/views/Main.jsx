@@ -17,7 +17,17 @@ const Main = ({ searchResults, isSearching, setSearching }) => {
     if (!allUsers) {
       console.log("fetch all users");
       const allUsersFetch = async () => {
-        const data = await (await fetch(`${API_URL}/api/v1/user/`)).json();
+        const data = await (
+          await fetch(`${API_URL}/api/v1/user/`,
+          {
+            method: "GET",
+            mode: "cors",
+            headers: {
+              Authorization: `Bearer ${keycloak.token}`,
+              "Content-Type": "application/json",
+            },
+          }
+        )).json();
         if (data.data !== null) {
           storageSave("lagalt-allUsers", data.data);
         }
@@ -49,7 +59,9 @@ const Main = ({ searchResults, isSearching, setSearching }) => {
         };
         fetch(`${API_URL}/api/v1/user/`, {
           method: "POST",
+          mode: "cors",
           headers: {
+            Authorization: `Bearer ${keycloak.token}`,
             "Content-Type": "application/json",
           },
           body: JSON.stringify(userInfo),
@@ -78,7 +90,15 @@ const Main = ({ searchResults, isSearching, setSearching }) => {
         const userFetch = async () => {
           const data = await (
             await fetch(
-              `${API_URL}/api/v1/user/whereEmail=${keycloak.tokenParsed.email}`
+              `${API_URL}/api/v1/user/whereEmail=${keycloak.tokenParsed.email}`,
+              {
+                method: "GET",
+                mode: "cors",
+                headers: {
+                  Authorization: `Bearer ${keycloak.token}`,
+                  "Content-Type": "application/json",
+                },
+              }
             )
           ).json();
           if (data.data !== null) {
@@ -92,8 +112,16 @@ const Main = ({ searchResults, isSearching, setSearching }) => {
 
     const dataFetch = async () => {
       const data = await (
-        await fetch(`${API_URL}/api/v1/project/list`)
+        await fetch(`${API_URL}/api/v1/project/list`, {
+          method: "GET",
+          mode: "cors",
+          headers: {
+            Authorization: `Bearer ${keycloak.token}`,
+            "Content-Type": "application/json",
+          },
+        })
       ).json();
+
       storageSave("lagalt-projects", data.data);
       setProjectsList(data.data);
       setFilteredList(data.data);

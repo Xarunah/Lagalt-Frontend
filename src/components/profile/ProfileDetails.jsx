@@ -49,6 +49,7 @@ function ProfileDetails() {
       method: "PUT",
       headers: {
         "Content-Type": "application/json",
+        Authorization: `Bearer ${keycloak.token}`,
       },
       body: JSON.stringify(newDetails),
     })

@@ -27,7 +27,14 @@ const ProjectPage = (props) => {
       const userFetch = async () => {
 
         const data = await (
-          await fetch(`${API_URL}/api/v1/user/`)
+          await fetch(`${API_URL}/api/v1/user/`,{
+            method: "GET",
+            mode: "cors",
+            headers: {
+              Authorization: `Bearer ${keycloak.token}`,
+              "Content-Type": "application/json",
+            },
+          })
         ).json();
         if (data.data !== null) {
           //get the owner of the project

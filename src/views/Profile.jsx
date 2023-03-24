@@ -112,6 +112,7 @@ const Profile = (props) => {
       method: "POST",
       headers: {
         "Content-Type": "application/json",
+        Authorization: `Bearer ${keycloak.token}`,
       },
       body: JSON.stringify(project),
     })
