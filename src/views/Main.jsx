@@ -14,6 +14,31 @@ const Main = ({ searchResults, isSearching, setSearching }) => {
   const { user, setUser, allUsers, setAllUsers } = useUser();
 
   useEffect(() => {
+    
+    const userFetch = async () => {
+      const data = await (
+        await fetch(
+          `${API_URL}/api/v1/user/whereEmail=${keycloak.tokenParsed.email}`,
+          {
+            method: "GET",
+            mode: "cors",
+            headers: {
+              Authorization: `Bearer ${keycloak.token}`,
+              "Content-Type": "application/json",
+            },
+          }
+
+        )
+      ).json();
+      if (data.data !== null) {
+        storageSave("lagalt-user", data.data);
+        setUser(data.data);
+      }
+    };
+    userFetch(); //get from user list instead
+
+
+
     if (!allUsers) {
       console.log("fetch all users");
       const allUsersFetch = async () => {

@@ -6,7 +6,7 @@ import CreateProject from "../components/project/CreateProject";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { faFolderPlus } from "@fortawesome/free-solid-svg-icons";
 import { useEffect } from "react";
-import { storageSave } from "../utils/storage";
+import { storageRead, storageSave } from "../utils/storage";
 import { useUser } from "../context/UserContext";
 import keycloak from "../keycloak";
 import { API_URL } from "../utils/apiUrls";
@@ -26,6 +26,35 @@ const Profile = (props) => {
     setProjectCreate(!projectCreate);
   };
 
+  const getJoinedAndOwned = () => {
+
+    setProjectList(storageRead("lagalt-projects"))
+
+    if(projectList){
+    
+    for (let j = 0; j < projectList.length; j++) {
+      if (
+        user.userId === projectList[j].userId &&
+        !ownedList.includes(projectList[j])
+      ) {
+        ownedList.push(projectList[j]);
+      }
+    }
+    for (let i = 0; i < projectList.length; i++) {
+      for (let j = 0; j < projectList[i].collaborators.length; j++) {
+        if (
+          projectList[i].collaborators[j] === user.userId &&
+          !joinedList.includes(projectList[i])
+        ) {
+          joinedList.push(projectList[i]);
+        }
+      }
+    }
+
+  }
+
+  } 
+
   useEffect(() => {
     // const allUsersFetch = async () => {
     //   const data = await (
@@ -37,20 +66,29 @@ const Profile = (props) => {
     // };
     // allUsersFetch();
 
-    // if (keycloak.authenticated /*and email already exists*/) {
-    //   const userFetch = async () => {
-    //     const data = await (
-    //       await fetch(
-    //         `http://${API_URL}/api/v1/user/whereEmail=${keycloak.tokenParsed.email}`
-    //       )
-    //     ).json();
-    //     if (data.data !== null) {
-    //       storageSave("lagalt-user", data.data);
-    //       setUser(data.data);
-    //     }
-    //   };
-    //   userFetch(); //get from user list instead
-    // }
+  
+      const userFetch = async () => {
+        const data = await (
+          await fetch(
+            `${API_URL}/api/v1/user/whereEmail=${keycloak.tokenParsed.email}`,
+            {
+              method: "GET",
+              mode: "cors",
+              headers: {
+                Authorization: `Bearer ${keycloak.token}`,
+                "Content-Type": "application/json",
+              },
+            }
+
+          )
+        ).json();
+        if (data.data !== null) {
+          storageSave("lagalt-user", data.data);
+          setUser(data.data);
+        }
+      };
+      userFetch(); //get from user list instead
+    
 
     // if (keycloak.authenticated /*and email does NOT exist*/) {
     //   const userInfo = {
@@ -80,26 +118,10 @@ const Profile = (props) => {
     // }
 
   
-    if(projectList){
-    for (let j = 0; j < projectList.length; j++) {
-      if (
-        user.userId === projectList[j].userId &&
-        !ownedList.includes(projectList[j])
-      ) {
-        ownedList.push(projectList[j]);
-      }
-    }
-    for (let i = 0; i < projectList.length; i++) {
-      for (let j = 0; j < projectList[i].collaborators.length; j++) {
-        if (
-          projectList[i].collaborators[j] === user.userId &&
-          !joinedList.includes(projectList[i])
-        ) {
-          joinedList.push(projectList[i]);
-        }
-      }
-    }
-  }
+ //   if(projectList !== null){
+
+ getJoinedAndOwned()
+  //}
 
 
     setState(false);
@@ -131,10 +153,15 @@ const Profile = (props) => {
     <>
       <div>
         <div className="flex flex-wrap min-h-screen bg-fixed bg-[radial-gradient(ellipse_at_bottom_left,_var(--tw-gradient-stops))] from-yellow-200 via-green-200 to-green-500">
+
+
+
+
           <div className=" text-black w-4/12 mt-16">
             <p className="text-4xl text-center font-playfair mt-4">
               Joined Projects
             </p>
+            
             {joinedList.map((element, index) => (
               <JoinedProjectCard key={index} {...element} />
             ))}
@@ -154,6 +181,7 @@ const Profile = (props) => {
               <FontAwesomeIcon icon={faFolderPlus} />
             </button>
           </div>
+
 
           <div className=" text-black w-4/12 mt-20 ">
             <ProfileDetails />

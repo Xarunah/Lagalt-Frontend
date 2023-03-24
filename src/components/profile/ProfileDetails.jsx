@@ -12,22 +12,35 @@ function ProfileDetails() {
 
   const [value, setValue] = useState("");
 
-  const handleChange = (event) => {
-    setValue(event.target.value);
-  };
-
   const [valuePortfolio, setValuePortfolio] = useState("");
 
   const [profileSkills, setSkills] = useState([]);
+
+  const [hiddenMode, setHiddenMode] = useState(false);
 
   useEffect(() => {
     if (user) {
       setValue(user.userDescription);
       setValuePortfolio(user.userPortfolio);
       setSkills(user.userSkill);
-      console.log(user.userSkill)
+      setHiddenMode(user.userVisibility)
+      console.log("user: " + user.userVisibility);
     }
   }, []);
+
+  const toggleHiddenMode = (e) => {
+    if (e.target.checked === true) {
+      setHiddenMode(true);
+      console.log(true)
+    } else {
+      setHiddenMode(false);
+      console.log(false)
+    }
+  };
+
+  const handleChange = (event) => {
+    setValue(event.target.value);
+  };
 
   const handlePortfolioChange = (event) => {
     setValuePortfolio(event.target.value);
@@ -43,7 +56,7 @@ function ProfileDetails() {
       userDescription: value,
       userPortfolio: valuePortfolio,
       userSkill: profileSkills,
-      userVisibility: false, //has to be set by checkbox on profile
+      userVisibility: hiddenMode, 
     };
 
     fetch(`${API_URL}/api/v1/user/${user.userId}`, {
@@ -62,6 +75,7 @@ function ProfileDetails() {
         console.error("Error:", error);
       });
 
+     
     alert("Profile details saved!");
   };
 
@@ -72,6 +86,19 @@ function ProfileDetails() {
       </p>
 
       <img src="/images/catpc.png" alt="Cat with PC" className="h-28" />
+
+      <div className="flex items-center pl-3">
+                  <input
+                    type="checkbox"
+                    value="Hidden"
+                    onChange={toggleHiddenMode}
+                    checked={hiddenMode}
+                    className="w-4 h-4  bg-gray-100 border-gray-300 rounded text-rose-400"
+                  />
+                  <label className="w-full py-3 ml-2 text-gray-900 ">
+                    Hidden mode
+                  </label>
+                </div>
 
       <form>
         <p className="text-xl font-playfair text-center">Description</p>
@@ -103,9 +130,9 @@ function ProfileDetails() {
         </div>
       </form>
 
-{profileSkills.length > 0 &&
-      <ProfileSkills words={profileSkills} skillsToProfile={setSkills} />
-}
+      {profileSkills.length > 0 && (
+        <ProfileSkills words={profileSkills} skillsToProfile={setSkills} />
+      )}
 
       <button
         className="bg-gradient-to-r from-orange-300 to-rose-300 hover:text-rose-400 text-white font-bold py-2 px-4 rounded font-playfair"
@@ -118,8 +145,3 @@ function ProfileDetails() {
 }
 
 export default ProfileDetails;
-
-
-
-
-
