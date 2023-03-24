@@ -86,7 +86,10 @@ const Main = ({ searchResults, isSearching, setSearching }) => {
 
         storageSave("lagalt-user", toSave);
         storageSave("lagalt-allUsers", [...allUsers, toSave]);
-      } else {
+      } 
+      
+      
+     else {
         const userFetch = async () => {
           const data = await (
             await fetch(
@@ -107,8 +110,32 @@ const Main = ({ searchResults, isSearching, setSearching }) => {
           }
         };
         userFetch();
-      }
+     }
+    
     }
+    //else{
+    //   const userFetch = async () => {
+    //     const data = await (
+    //       await fetch(
+    //         `${API_URL}/api/v1/user/whereEmail=${keycloak.tokenParsed.email}`,
+    //         {
+    //           method: "GET",
+    //           mode: "cors",
+    //           headers: {
+    //             Authorization: `Bearer ${keycloak.token}`,
+    //             "Content-Type": "application/json",
+    //           },
+    //         }
+    //       )
+    //     ).json();
+    //     if (data.data !== null) {
+    //       storageSave("lagalt-user", data.data);
+    //       setUser(data.data);
+    //     }
+    //   };
+    //   userFetch();
+
+    // }
 
     const dataFetch = async () => {
       const data = await (
