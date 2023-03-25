@@ -30,7 +30,9 @@ const Profile = (props) => {
 
     setProjectList(storageRead("lagalt-projects"))
 
-    if(projectList){
+    console.log(projectList)
+
+   // if(projectList){
     
     for (let j = 0; j < projectList.length; j++) {
       if (
@@ -51,7 +53,7 @@ const Profile = (props) => {
       }
     }
 
-  }
+ // }
 
   } 
 

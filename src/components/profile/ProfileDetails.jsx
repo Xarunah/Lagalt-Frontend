@@ -88,7 +88,7 @@ function ProfileDetails() {
         <img src="/images/catpc.png" alt="Cat with PC" className="h-28" />
       )}
       {hiddenMode && (
-        <img src="/images/catpc_glasses.png" alt="Cat with PC" className="h-28" />
+        <img src="/images/catpc_thug.png" alt="Cat with PC" className="h-28" />
       )}
 
       <div className="flex items-center pl-3">

@@ -25,9 +25,8 @@ const ProjectPage = (props) => {
 
       //fetch all users from database and adds them to the project
       const userFetch = async () => {
-
         const data = await (
-          await fetch(`${API_URL}/api/v1/user/`,{
+          await fetch(`${API_URL}/api/v1/user/`, {
             method: "GET",
             mode: "cors",
             headers: {
@@ -67,7 +66,6 @@ const ProjectPage = (props) => {
       setCanJoin(false);
     }
   }, []);
-  
 
   const toggleProject = () => {
     setIsOpen(!isOpen);
@@ -96,15 +94,15 @@ const ProjectPage = (props) => {
                     Category:{" "}
                     <span className="font-thin">{props.category}</span>
                   </p>
+                
+                  <p>
+                    Status: <span className="font-thin">{props.status}</span>
+                  </p>
 
                   <p>
-               Status: <span className="font-thin">{props.status}</span>
-              </p>
-
-              <p>
-               Progress: <span className="font-thin">{props.progress}</span>
-              </p>
-              
+                    Progress:{" "}
+                    <span className="font-thin">{props.progress}</span>
+                  </p>
 
                   <p className="">
                     Skills:{" "}
@@ -129,11 +127,12 @@ const ProjectPage = (props) => {
                   </p>
                 </div>
 
-                  Project Description:
-                  <p className="font-playfair font-thin text-lg">
-                    {props.description}
-                  </p>
-
+                <img src={props.image} alt="" />
+                
+                Project Description:
+                <p className="font-playfair font-thin text-lg">
+                  {props.description}
+                </p>
                 {user && (
                   <>
                     {user.userId == props.ownerId ||

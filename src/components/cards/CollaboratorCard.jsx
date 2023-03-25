@@ -32,6 +32,7 @@ const JoinedProjectCard = (props) => {
           handleClose={toggleProject}
           ownerId={props.userId}
           collaborators={props.collaborators}
+          image={props.image}
         ></ProjectPage>
       )}
     </>

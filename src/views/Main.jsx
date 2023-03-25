@@ -21,7 +21,7 @@ const Main = ({ searchResults, isSearching, setSearching }) => {
           `${API_URL}/api/v1/user/whereEmail=${keycloak.tokenParsed.email}`,
           {
             method: "GET",
-            mode: "cors",
+         //   mode: "cors",
             headers: {
               Authorization: `Bearer ${keycloak.token}`,
               "Content-Type": "application/json",
@@ -46,7 +46,7 @@ const Main = ({ searchResults, isSearching, setSearching }) => {
           await fetch(`${API_URL}/api/v1/user/`,
           {
             method: "GET",
-            mode: "cors",
+     //      mode: "cors",
             headers: {
               Authorization: `Bearer ${keycloak.token}`,
               "Content-Type": "application/json",
@@ -84,7 +84,7 @@ const Main = ({ searchResults, isSearching, setSearching }) => {
         };
         fetch(`${API_URL}/api/v1/user/`, {
           method: "POST",
-          mode: "cors",
+     //     mode: "cors",
           headers: {
             Authorization: `Bearer ${keycloak.token}`,
             "Content-Type": "application/json",
@@ -121,10 +121,11 @@ const Main = ({ searchResults, isSearching, setSearching }) => {
               `${API_URL}/api/v1/user/whereEmail=${keycloak.tokenParsed.email}`,
               {
                 method: "GET",
-                mode: "cors",
+             //   mode: "cors",
                 headers: {
                   Authorization: `Bearer ${keycloak.token}`,
                   "Content-Type": "application/json",
+               
                 },
               }
             )
@@ -164,14 +165,7 @@ const Main = ({ searchResults, isSearching, setSearching }) => {
 
     const dataFetch = async () => {
       const data = await (
-        await fetch(`${API_URL}/api/v1/project/list`, {
-          method: "GET",
-          mode: "cors",
-          headers: {
-            Authorization: `Bearer ${keycloak.token}`,
-            "Content-Type": "application/json",
-          },
-        })
+        await fetch(`${API_URL}/api/v1/project/list`)
       ).json();
 
       storageSave("lagalt-projects", data.data);

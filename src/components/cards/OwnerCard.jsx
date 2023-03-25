@@ -59,7 +59,7 @@ const OwnedProjectCard = (props) => {
           tags={props.tags}
           category={props.category}
           progress={props.progress}
-
+          image={props.image}
           status={props.status}
         />
       )}
