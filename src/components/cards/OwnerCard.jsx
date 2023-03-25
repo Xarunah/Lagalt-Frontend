@@ -46,6 +46,7 @@ const OwnedProjectCard = (props) => {
           category={props.category}
           ownerId={props.userId}
           collaborators={props.collaborators}
+          image={props.image}
           handleClose={toggleProject}
         />
       )}
@@ -59,7 +60,7 @@ const OwnedProjectCard = (props) => {
           tags={props.tags}
           category={props.category}
           progress={props.progress}
-          image={props.image}
+          
           status={props.status}
         />
       )}
