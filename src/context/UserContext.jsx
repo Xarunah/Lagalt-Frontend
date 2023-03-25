@@ -12,10 +12,12 @@ export const useUser = () => {
 // The provder for the user is declared.
 const UserProvider = ({ children }) => {
   // User and setUser are declared, and the user is read from session storage.
+ /* const [user, setUser] = useState(storageRead("lagalt-user"));
+  const [projectList, setProjectList] = useState(storageRead("lagalt-projects"));
+  const [allUsers, setAllUsers] = useState(storageRead("lagalt-allUsers"));*/
+
   const [user, setUser] = useState(storageRead("lagalt-user"));
-  const [projectList, setProjectList] = useState(
-    storageRead("lagalt-projects")
-  );
+  const [projectList, setProjectList] = useState(storageRead("lagalt-projects"));
   const [allUsers, setAllUsers] = useState(storageRead("lagalt-allUsers"));
 
   // State object is created.

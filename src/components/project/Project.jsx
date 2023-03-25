@@ -145,7 +145,7 @@ const ProjectPage = (props) => {
                           Owner: <span className="font-thin">{owner}</span>
                         </p>
                         {/* <CommentBox></CommentBox> */}
-                        <Comment></Comment>
+                        <Comment projectId={props.projectId} ></Comment>
                       
                         {/* collaborators */}
                         {joinedNames.length > 0 ? (

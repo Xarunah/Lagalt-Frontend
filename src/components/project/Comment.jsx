@@ -12,8 +12,8 @@ function ProjectComments(props) {
 
   const { user } = useUser();
 
-useEffect(() => {
-    fetch(`${API_URL}/api/v1/comment/`, {
+  useEffect(() => {
+    fetch(`${API_URL}/api/v1/project/comments/${props.projectId}`, {
       method: "GET",
       headers: {
         "Content-Type": "application/json",
@@ -30,23 +30,34 @@ useEffect(() => {
       .catch((error) => {
         console.error("Error:", error);
       });
-}, []);
+  }, []);
 
   const postComment = () => {
     console.log(commentInput);
     console.log(user.username);
     if (!commentInput.current.value == "") {
-
+      let today = new Date();
       const comment = {
         username: user.username,
+        timestamp:
+          today.getDate() +
+          "-" +
+          (today.getMonth() + 1) +
+          "-" +
+          today.getFullYear() +
+          " at " +
+          today.getHours() +
+          ":" +
+          today.getMinutes() +
+          ":" +
+          today.getSeconds(),
         message: commentInput.current.value,
       };
-      
       setComments([...comments, comment]);
       comments.push(comment);
       commentInput.current.value = "";
 
-      fetch(`${API_URL}/api/v1/comment/`, {
+      fetch(`${API_URL}/api/v1/project/${props.projectId}/${user.userId}`, {
         method: "POST",
         headers: {
           "Content-Type": "application/json",
@@ -66,7 +77,6 @@ useEffect(() => {
 
   return (
     <div>
-
       <textarea
         className="bg-slate-100 resize-none focus:border-rose-400 focus:border-2 rounded-lg font-playfair border-gray-300 border-2 outline-none focus:bg-gray-200 p-1"
         type="text"
@@ -84,11 +94,15 @@ useEffect(() => {
       </button>
 
       {comments.map((item, index) => (
+        <>
         <CommentItem
           key={index}
           username={item.username}
           message={item.message}
+          timestamp={item.timestamp}
         />
+        <br />
+        </>
       ))}
     </div>
   );
