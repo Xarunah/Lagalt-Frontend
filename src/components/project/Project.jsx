@@ -6,6 +6,9 @@ import { faXmark } from "@fortawesome/free-solid-svg-icons";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { useUser } from "../../context/UserContext";
 import { API_URL } from "../../utils/apiUrls";
+import CommentBox from "../commentSection/CommentBox";
+import Comment from "../project/Comment";
+import CommentItem from "./CommentItem";
 
 const ProjectPage = (props) => {
   const [isOpen, setIsOpen] = useState(false);
@@ -141,7 +144,9 @@ const ProjectPage = (props) => {
                         <p>
                           Owner: <span className="font-thin">{owner}</span>
                         </p>
-
+                        {/* <CommentBox></CommentBox> */}
+                        <Comment></Comment>
+                      
                         {/* collaborators */}
                         {joinedNames.length > 0 ? (
                           <p>
@@ -158,6 +163,8 @@ const ProjectPage = (props) => {
                         ) : null}
                       </>
                     ) : null}
+
+  
 
                     {user.userId != props.ownerId &&
                     !props.collaborators.includes(user.userId) ? (
