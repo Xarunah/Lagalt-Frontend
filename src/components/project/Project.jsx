@@ -97,7 +97,7 @@ const ProjectPage = (props) => {
                     Category:{" "}
                     <span className="font-thin">{props.category}</span>
                   </p>
-                
+
                   <p>
                     Status: <span className="font-thin">{props.status}</span>
                   </p>
@@ -129,9 +129,7 @@ const ProjectPage = (props) => {
                     </span>
                   </p>
                 </div>
-
                 <img src={props.image} alt="" />
-                
                 Project Description:
                 <p className="font-playfair font-thin text-lg">
                   {props.description}
@@ -145,8 +143,8 @@ const ProjectPage = (props) => {
                           Owner: <span className="font-thin">{owner}</span>
                         </p>
                         {/* <CommentBox></CommentBox> */}
-                        <Comment projectId={props.projectId} ></Comment>
-                      
+                        <Comment projectId={props.projectId}></Comment>
+
                         {/* collaborators */}
                         {joinedNames.length > 0 ? (
                           <p>
@@ -163,8 +161,6 @@ const ProjectPage = (props) => {
                         ) : null}
                       </>
                     ) : null}
-
-  
 
                     {user.userId != props.ownerId &&
                     !props.collaborators.includes(user.userId) ? (

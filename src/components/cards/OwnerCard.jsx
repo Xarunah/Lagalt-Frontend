@@ -48,6 +48,7 @@ const OwnedProjectCard = (props) => {
           collaborators={props.collaborators}
           image={props.image}
           handleClose={toggleProject}
+          projectId={props.projectId}
         />
       )}
       {isOpenAdmin && (
