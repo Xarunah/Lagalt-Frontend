@@ -9,6 +9,7 @@ import { API_URL } from "../../utils/apiUrls";
 import CommentBox from "../commentSection/CommentBox";
 import Comment from "../project/Comment";
 import CommentItem from "./CommentItem";
+import ProfileDetails from "../profile/ProfileDetails";
 
 const ProjectPage = (props) => {
   const [isOpen, setIsOpen] = useState(false);
@@ -16,10 +17,10 @@ const ProjectPage = (props) => {
   const [canJoin, setCanJoin] = useState(false);
 
   const [owner, setOwner] = useState("");
-  const [joinedNames, setJoinedNames] = useState([]);
+  const [joinedUsers, setJoinedUsers] = useState([]);
   const [fetchAllUsers, setFetchAllUsers] = useState();
 
-  const { user } = useUser();
+  const { user, allUsers } = useUser();
 
   useEffect(() => {
     // console.log("current user:" + user.userId + " owner of project: " + props.ownerId);
@@ -41,26 +42,22 @@ const ProjectPage = (props) => {
         if (data.data !== null) {
           //get the owner of the project
           if (user.userId === props.ownerId) {
-            setOwner(user.username);
+            setOwner(user);
           } else {
-            setOwner(data.data[props.ownerId - 1].username);
+            setOwner(data.data[props.ownerId - 1]);
           }
 
           //get the joined users of the project
           for (let i = 0; i < props.collaborators.length; i++) {
-            if (
-              !joinedNames.includes(
-                data.data[props.collaborators[i] - 1].username
-              )
-            ) {
-              joinedNames.push(data.data[props.collaborators[i] - 1].username);
-              setJoinedNames([
-                ...joinedNames,
-                data.data[props.collaborators[i] - 1].username,
+            if (!joinedUsers.includes(data.data[props.collaborators[i] - 1])) {
+              joinedUsers.push(data.data[props.collaborators[i] - 1]);
+              setJoinedUsers([
+                ...joinedUsers,
+                data.data[props.collaborators[i] - 1],
               ]);
             }
           }
-          setJoinedNames(joinedNames);
+          setJoinedUsers(joinedUsers);
           setFetchAllUsers([data.data]);
         }
       };
@@ -73,6 +70,9 @@ const ProjectPage = (props) => {
   const toggleProject = () => {
     setIsOpen(!isOpen);
   };
+
+  const [isShown, setIsShown] = useState(false);
+  const [isShown2, setIsShown2] = useState(false);
 
   return (
     <>
@@ -97,7 +97,7 @@ const ProjectPage = (props) => {
                     Category:{" "}
                     <span className="font-thin">{props.category}</span>
                   </p>
-                
+
                   <p>
                     Status: <span className="font-thin">{props.status}</span>
                   </p>
@@ -129,9 +129,7 @@ const ProjectPage = (props) => {
                     </span>
                   </p>
                 </div>
-
                 <img src={props.image} alt="" />
-                
                 Project Description:
                 <p className="font-playfair font-thin text-lg">
                   {props.description}
@@ -141,30 +139,55 @@ const ProjectPage = (props) => {
                     {user.userId == props.ownerId ||
                     props.collaborators.includes(user.userId) ? (
                       <>
-                        <p>
-                          Owner: <span className="font-thin">{owner}</span>
+                        <p
+                          onMouseEnter={() => setIsShown(true)}
+                          onMouseLeave={() => setIsShown(false)}
+                        >
+                          Owner:{" "}
+                          <span className="font-thin">{owner.username}</span>
                         </p>
-                        {/* <CommentBox></CommentBox> */}
-                        <Comment projectId={props.projectId} ></Comment>
-                      
+
+                        {isShown && (
+                          <div className="bg-gradient-to-r from-orange-300 to-rose-300 rounded-xl p-1 ">
+                            <p>Skills: <span className="font-thin">{owner.userSkill}</span></p>
+                            <p>Description: <span className="font-thin">{owner.userDescription}</span></p>
+                            <p>Portfolio: <span className="font-thin">{owner.userPortfolio}</span></p>
+                          </div>
+                        )}
+
                         {/* collaborators */}
-                        {joinedNames.length > 0 ? (
+                        {joinedUsers.length > 0 ? (
                           <p>
-                            Collaborators:{" "}
-                            <span className="font-thin">
-                              {" "}
-                              {joinedNames
+                            Collaborators: 
+                            <span
+                              className="font-thin"
+                              onMouseEnter={() => setIsShown2(true)}
+                              onMouseLeave={() => setIsShown2(false)}
+                            >
+                              
+                              {joinedUsers
                                 .map((item, index) => {
-                                  return item;
+                                  return item.username;
+                                  // {isShown2 && (
+                                  //   <div>
+                                  //     <p>Skills: {item.userSkill}</p>
+                                  //     <p>
+                                  //       Description: {item.userDescription}
+                                  //     </p>
+                                  //     <p>Portfolio: {item.userPortfolio}</p>
+                                  //   </div>
+                                  // )}
                                 })
-                                .join(", ")}{" "}
+                                  .join(", ")} 
+                                
                             </span>
                           </p>
                         ) : null}
+
+                        {/* <CommentBox></CommentBox> */}
+                        <Comment projectId={props.projectId}></Comment>
                       </>
                     ) : null}
-
-  
 
                     {user.userId != props.ownerId &&
                     !props.collaborators.includes(user.userId) ? (

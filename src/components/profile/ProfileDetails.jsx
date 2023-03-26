@@ -24,7 +24,7 @@ function ProfileDetails() {
       setValuePortfolio(user.userPortfolio);
       setSkills(user.userSkill);
       setHiddenMode(user.userVisibility);
-      console.log("user: " + user.userVisibility);
+      // console.log("user: " + user.userVisibility);
     }
   }, []);
 
