@@ -6,9 +6,9 @@ import keycloak from "../../keycloak";
 const ProjectApplicationCard = (props) => {
   const [isOpen, setIsOpen] = useState(false);
 
-  const [name, setName] = useState("");
+  // const [name, setName] = useState("");
 
-  const [skills, setSkills] = useState([]);
+  // const [skills, setSkills] = useState([]);
 
   const toggleProject = () => {
     setIsOpen(!isOpen);
@@ -18,22 +18,22 @@ const ProjectApplicationCard = (props) => {
     putData(true);
     alert(
       "You accepted the application from: " +
-        name +
+        props.username +
         " to join: " +
         props.projectTitle
     );
-    props.handleClose();
+    props.handleClose(props.projectApplicationId);
   };
 
   const onDecline = () => {
     putData(false);
     alert(
       "You declined the application from: " +
-        name +
+        props.username +
         " to join: " +
         props.projectTitle
     );
-    props.handleClose();
+    props.handleClose(props.projectApplicationId);
   };
 
   const putData = (isAccepted) => {
@@ -86,32 +86,32 @@ const ProjectApplicationCard = (props) => {
     }
   };
 
-  const dataFetch = async () => {
-    const data = await (
-      await fetch(`${API_URL}/api/v1/user/${props.userId}`, {
-        method: "GET",
-        headers: {
-          Authorization: `Bearer ${keycloak.token}`,
-          "Content-Type": "application/json",
-        },
-      })
-    ).json();
-    if (data.data !== null) {
-      setName(data.data.username);
-      setSkills(data.data.userSkill);
-    }
-  };
+  // const dataFetch = async () => {
+  //   const data = await (
+  //     await fetch(`${API_URL}/api/v1/user/${props.userId}`, {
+  //       method: "GET",
+  //       headers: {
+  //         Authorization: `Bearer ${keycloak.token}`,
+  //         "Content-Type": "application/json",
+  //       },
+  //     })
+  //   ).json();
+  //   if (data.data !== null) {
+  //     setName(data.data.username);
+  //     setSkills(data.data.userSkill);
+  //   }
+  // };
 
-  useEffect(() => {
-    dataFetch();
-  }, []);
+  // useEffect(() => {
+  //   dataFetch();
+  // }, []);
 
   return (
     <>
       <div className="flex flex-col  items-center bg-gray-300 space-y-3 rounded-xl p-3">
         <div className="font-playfair font-bold">
           <p className="text-2xl ">
-            Submitted by: <span className="font-thin">{name}</span>
+            Submitted by: <span className="font-thin">{props.username}</span>
           </p>
           <p className="">
             Motivation: <span className="font-thin">{props.motivation}</span>
@@ -119,7 +119,7 @@ const ProjectApplicationCard = (props) => {
         
         <p>
           Skills: <span className="font-thin">
-            {skills
+            {props.skills
               .map((item, index) => {
                 return item;
               })
