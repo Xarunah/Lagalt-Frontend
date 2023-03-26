@@ -154,6 +154,8 @@ const ProjectPage = (props) => {
                             <p>Portfolio: <span className="font-thin">{owner.userPortfolio}</span></p>
                           </div>
                         )}
+                        {/* <CommentBox></CommentBox> */}
+                        {/* <Comment projectId={props.projectId}></Comment> */}
 
                         {/* collaborators */}
                         {joinedUsers.length > 0 ? (

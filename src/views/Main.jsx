@@ -125,7 +125,6 @@ const Main = ({ searchResults, isSearching, setSearching }) => {
                 headers: {
                   Authorization: `Bearer ${keycloak.token}`,
                   "Content-Type": "application/json",
-               
                 },
               }
             )
