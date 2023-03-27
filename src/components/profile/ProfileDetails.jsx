@@ -104,7 +104,7 @@ function ProfileDetails() {
 
       <form>
         <p className=" text-xl font-playfair text-center">Description</p>
-        <div className="relative 2xl:flex">
+        <div className="2xl:flex">
           <textarea
             className="bg-slate-100 resize-none focus:border-rose-400 focus:border-2 rounded-lg font-playfair border-gray-300 border-2 outline-none focus:bg-gray-200"
             rows="7"
@@ -119,7 +119,7 @@ function ProfileDetails() {
 
       <form>
         <p className="text-xl font-playfair text-center">Portfolio</p>
-        <div className="flex items-center">
+        <div className=" items-center">
           <textarea
             className="bg-slate-100 resize-none focus:border-rose-400 focus:border-2 rounded-lg font-playfair border-gray-300 border-2 outline-none focus:bg-gray-200"
             rows="3"

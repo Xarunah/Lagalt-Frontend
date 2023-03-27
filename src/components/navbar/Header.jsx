@@ -38,7 +38,7 @@ const Header = ({ setSearchResults, onSearch }) => {
             <FontAwesomeIcon icon={faHouse} />
           </Link>
 
-          <div className="flex order-2">
+          <div className="flex order-2 justify-between">
             <ul>
               <li>
                 {!keycloak.authenticated && (
@@ -51,7 +51,7 @@ const Header = ({ setSearchResults, onSearch }) => {
                 )}
 
                 {keycloak.authenticated && (
-                  <div className="flex space-x-12">
+                  <div className="flex space-x-12 my-2">
                     <Link to="/profile" className="scale-150">
                       <FontAwesomeIcon icon={faUser} />
                     </Link>
@@ -67,7 +67,7 @@ const Header = ({ setSearchResults, onSearch }) => {
             </ul>
           </div>
 
-          <div className="items-center justify-between " id="navbar-search">
+          <div className="items-center" id="navbar-search">
             <div className="flex flex-col">
               <div className="relative ">
 
