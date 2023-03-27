@@ -6,10 +6,7 @@ import { faXmark } from "@fortawesome/free-solid-svg-icons";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { useUser } from "../../context/UserContext";
 import { API_URL } from "../../utils/apiUrls";
-import CommentBox from "../commentSection/CommentBox";
 import Comment from "../project/Comment";
-import CommentItem from "./CommentItem";
-import ProfileDetails from "../profile/ProfileDetails";
 
 const ProjectPage = (props) => {
   const [isOpen, setIsOpen] = useState(false);

@@ -7,7 +7,7 @@ import { API_URL } from "../../utils/apiUrls";
 import keycloak from "../../keycloak";
 import { useUser } from "../../context/UserContext";
 
-const ProjectAdminPopup = (props) => {
+const Admin = (props) => {
   //const [editProgress, setEditProgress] = useState(true);
 
   const [projectApplications, setApplications] = useState([]);
@@ -172,4 +172,4 @@ const ProjectAdminPopup = (props) => {
   );
 };
 
-export default ProjectAdminPopup;
+export default Admin;

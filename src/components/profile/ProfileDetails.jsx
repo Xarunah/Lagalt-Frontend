@@ -79,7 +79,7 @@ function ProfileDetails() {
   };
 
   return (
-    <div className="flex flex-col items-center bg-slate-100 m-3 my-2 space-y-3 rounded-xl p-3 shadow-2xl ">
+    <div className="flex flex-col items-center bg-slate-100 m-3 my-2 space-y-3 rounded-xl p-3 shadow-2xl">
       <p className="text-2xl font-playfair">
         Welcome back: {keycloak.tokenParsed.name}
       </p>
@@ -103,7 +103,7 @@ function ProfileDetails() {
       </div>
 
       <form>
-        <p className="text-xl font-playfair text-center">Description</p>
+        <p className=" text-xl font-playfair text-center">Description</p>
         <div className="relative 2xl:flex">
           <textarea
             className="bg-slate-100 resize-none focus:border-rose-400 focus:border-2 rounded-lg font-playfair border-gray-300 border-2 outline-none focus:bg-gray-200"

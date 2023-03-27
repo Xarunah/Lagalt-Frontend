@@ -1,6 +1,6 @@
 import ProjectPage from "../project/Project";
 import { useState } from "react";
-import ProjectAdminPopup from "../profile/Admin";
+import Admin from "../profile/Admin";
 
 const OwnedProjectCard = (props) => {
   const [isOpen, setIsOpen] = useState(false);
@@ -52,7 +52,7 @@ const OwnedProjectCard = (props) => {
         />
       )}
       {isOpenAdmin && (
-        <ProjectAdminPopup
+        <Admin
           handleClose={toggleProjectAdmin}
           projectId={props.projectId}
           title={props.title}
