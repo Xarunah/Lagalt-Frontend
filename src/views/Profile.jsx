@@ -33,7 +33,7 @@ const Profile = (props) => {
 
     for (let j = 0; j < projectList.length; j++) {
       if (
-        user.userId === projectList[j].userId &&
+        keycloak.tokenParsed.sub === projectList[j].userId &&
         !ownedList.includes(projectList[j])
       ) {
         ownedList.push(projectList[j]);
@@ -42,7 +42,7 @@ const Profile = (props) => {
     for (let i = 0; i < projectList.length; i++) {
       for (let j = 0; j < projectList[i].collaborators.length; j++) {
         if (
-          projectList[i].collaborators[j] === user.userId &&
+          projectList[i].collaborators[j] === keycloak.tokenParsed.sub &&
           !joinedList.includes(projectList[i])
         ) {
           joinedList.push(projectList[i]);
@@ -54,17 +54,13 @@ const Profile = (props) => {
   useEffect(() => {
     const userFetch = async () => {
       const data = await (
-        await fetch(
-          `${API_URL}/api/v1/user/whereEmail=${keycloak.tokenParsed.email}`,
-          {
-            method: "GET",
-            mode: "cors",
-            headers: {
-              Authorization: `Bearer ${keycloak.token}`,
-              "Content-Type": "application/json",
-            },
-          }
-        )
+        await fetch(`${API_URL}/api/v1/user/${keycloak.tokenParsed.sub}`, {
+          method: "GET",
+          headers: {
+            Authorization: `Bearer ${keycloak.token}`,
+            "Content-Type": "application/json",
+          },
+        })
       ).json();
       if (data.data !== null) {
         storageSave("lagalt-user", data.data);

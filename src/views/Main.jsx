@@ -2,7 +2,7 @@ import ProjectCard from "../components/cards/ProjectCard";
 import { useState } from "react";
 import { useEffect } from "react";
 import { useUser } from "../context/UserContext";
-import { storageSave } from "../utils/storage";
+import { storageSave, storageRead } from "../utils/storage";
 import keycloak from "../keycloak";
 import { API_URL } from "../utils/apiUrls";
 
@@ -11,28 +11,10 @@ const Main = ({ searchResults, isSearching, setSearching }) => {
   const [filteredList, setFilteredList] = useState([]);
   const [projectsList, setProjectsList] = useState();
 
-  const { user, setUser, allUsers } = useUser();
+  const { user, setUser, allUsers, setAllUsers } = useUser();
 
   useEffect(() => {
-    const userFetch = async () => {
-      const data = await (
-        await fetch(
-          `${API_URL}/api/v1/user/whereEmail=${keycloak.tokenParsed.email}`,
-          {
-            method: "GET",
-            headers: {
-              Authorization: `Bearer ${keycloak.token}`,
-              "Content-Type": "application/json",
-            },
-          }
-        )
-      ).json();
-      if (data.data !== null) {
-        storageSave("lagalt-user", data.data);
-        setUser(data.data);
-      }
-    };
-    userFetch(); //get from user list instead
+    const allUsers = storageRead("lagalt-allUsers");
 
     if (!allUsers) {
       console.log("fetch all users");
@@ -53,79 +35,42 @@ const Main = ({ searchResults, isSearching, setSearching }) => {
       allUsersFetch();
     }
 
-    let exists = true;
-    if (allUsers) {
-      if (keycloak.authenticated) {
-        for (let i = 0; allUsers.length > i; i++) {
-          if (allUsers[i].userEmail === keycloak.tokenParsed.email) {
-            console.log("YES");
-            exists = true;
-            break;
-          } else {
-            console.log("NO");
-            exists = false;
-          }
-        }
-      }
-    }
-
     if (keycloak.authenticated && !user) {
-      if (!exists) {
-        const userInfo = {
-          username: keycloak.tokenParsed.name,
-          userEmail: keycloak.tokenParsed.email,
-        };
-        fetch(`${API_URL}/api/v1/user/`, {
-          method: "POST",
+      const toSave = {
+        userId: keycloak.tokenParsed.sub,
+        username: keycloak.tokenParsed.name,
+        userEmail: keycloak.tokenParsed.email,
+      };
 
-          headers: {
-            Authorization: `Bearer ${keycloak.token}`,
-            "Content-Type": "application/json",
-          },
-          body: JSON.stringify(userInfo),
+      const toSaveV2 = {
+        userId: keycloak.tokenParsed.sub,
+        username: keycloak.tokenParsed.name,
+        userEmail: keycloak.tokenParsed.email,
+        userDescription: "",
+        userPortfolio: "",
+        userSkill: [],
+        userVisibility: false,
+      };
+
+      fetch(`${API_URL}/api/v1/user/`, {
+        method: "POST",
+
+        headers: {
+          Authorization: `Bearer ${keycloak.token}`,
+          "Content-Type": "application/json",
+        },
+        body: JSON.stringify(toSave),
+      })
+        .then((response) => response.json())
+        .then((toSave) => {
+          console.log("Success:", toSave);
+          setUser(toSaveV2);
+
+          storageSave("lagalt-user", toSaveV2);
         })
-          .then((response) => response.json())
-          .then((userInfo) => {
-            console.log("Success:", userInfo);
-          })
-          .catch((error) => {
-            console.error("Error:", error);
-          });
-
-        const toSave = {
-          userId: allUsers.length + 1,
-          username: keycloak.tokenParsed.name,
-          email: keycloak.tokenParsed.email,
-          userDescription: "",
-          userPortfolio: "",
-          userSkill: [],
-          userVisibility: false,
-        };
-
-        storageSave("lagalt-user", toSave);
-        storageSave("lagalt-allUsers", [...allUsers, toSave]);
-      } else {
-        const userFetch = async () => {
-          const data = await (
-            await fetch(
-              `${API_URL}/api/v1/user/whereEmail=${keycloak.tokenParsed.email}`,
-              {
-                method: "GET",
-
-                headers: {
-                  Authorization: `Bearer ${keycloak.token}`,
-                  "Content-Type": "application/json",
-                },
-              }
-            )
-          ).json();
-          if (data.data !== null) {
-            storageSave("lagalt-user", data.data);
-            setUser(data.data);
-          }
-        };
-        userFetch();
-      }
+        .catch((error) => {
+          console.error("Error:", error);
+        });
     }
 
     const dataFetch = async () => {
