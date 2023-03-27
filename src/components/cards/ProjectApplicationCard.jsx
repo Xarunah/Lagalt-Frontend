@@ -1,19 +1,7 @@
-import { useState } from "react";
-import { useEffect } from "react";
 import { API_URL } from "../../utils/apiUrls";
 import keycloak from "../../keycloak";
 
 const ProjectApplicationCard = (props) => {
-  const [isOpen, setIsOpen] = useState(false);
-
-  // const [name, setName] = useState("");
-
-  // const [skills, setSkills] = useState([]);
-
-  const toggleProject = () => {
-    setIsOpen(!isOpen);
-  };
-
   const onAccept = () => {
     putData(true);
     alert(
@@ -44,15 +32,15 @@ const ProjectApplicationCard = (props) => {
       accepted: isAccepted,
     };
 
-    //update projectapplication
+    //update project application
     fetch(
       `${API_URL}/api/v1/projectApplication/${props.projectApplicationId}`,
       {
         method: "PUT",
         headers: {
-              Authorization: `Bearer ${keycloak.token}`,
-              "Content-Type": "application/json",
-            },
+          Authorization: `Bearer ${keycloak.token}`,
+          "Content-Type": "application/json",
+        },
         body: JSON.stringify(data),
       }
     )
@@ -86,26 +74,6 @@ const ProjectApplicationCard = (props) => {
     }
   };
 
-  // const dataFetch = async () => {
-  //   const data = await (
-  //     await fetch(`${API_URL}/api/v1/user/${props.userId}`, {
-  //       method: "GET",
-  //       headers: {
-  //         Authorization: `Bearer ${keycloak.token}`,
-  //         "Content-Type": "application/json",
-  //       },
-  //     })
-  //   ).json();
-  //   if (data.data !== null) {
-  //     setName(data.data.username);
-  //     setSkills(data.data.userSkill);
-  //   }
-  // };
-
-  // useEffect(() => {
-  //   dataFetch();
-  // }, []);
-
   return (
     <>
       <div className="flex flex-col  items-center bg-gray-300 space-y-3 rounded-xl p-3">
@@ -116,16 +84,17 @@ const ProjectApplicationCard = (props) => {
           <p className="">
             Motivation: <span className="font-thin">{props.motivation}</span>
           </p>
-        
-        <p>
-          Skills: <span className="font-thin">
-            {props.skills
-              .map((item, index) => {
-                return item;
-              })
-              .join(", ")}
-          </span>
-        </p>
+
+          <p>
+            Skills:{" "}
+            <span className="font-thin">
+              {props.skills
+                .map((item, index) => {
+                  return item;
+                })
+                .join(", ")}
+            </span>
+          </p>
         </div>
 
         <div className="space-x-2">

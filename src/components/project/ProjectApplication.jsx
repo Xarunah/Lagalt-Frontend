@@ -9,7 +9,7 @@ const ProjectApplication = (props) => {
 
   const [motivationText, setMotivationText] = useState("");
 
-  const { user, setUser } = useUser();
+  const { user } = useUser();
 
   const onCheckBoxChange = (isChecked) => {
     setAgreeCheckbox(isChecked.target.value);

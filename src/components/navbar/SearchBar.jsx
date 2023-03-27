@@ -4,26 +4,21 @@ import { useUser } from "../../context/UserContext";
 const SearchBar = ({ setSearchResults, onSearchInputChange }) => {
   const [searchTerm, setSearchTerm] = useState("");
 
-  const [projects, setProjects] = useState([]);
-
   const { projectList, setProjectList } = useUser();
 
   const handleSearch = (event) => {
     setSearchTerm(event.target.value);
-  
-      onSearchInputChange();
-    
+
+    onSearchInputChange();
   };
 
   useEffect(() => {
-    if(projectList){
-    const filteredList = projectList.filter((item) =>
-      item.title.toLowerCase().includes(searchTerm.toLowerCase())
-    );
-    setSearchResults(filteredList);
+    if (projectList) {
+      const filteredList = projectList.filter((item) =>
+        item.title.toLowerCase().includes(searchTerm.toLowerCase())
+      );
+      setSearchResults(filteredList);
     }
-
-
   }, [searchTerm]);
 
   return (

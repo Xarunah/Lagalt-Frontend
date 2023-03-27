@@ -18,7 +18,6 @@ function ProfileSkills(props) {
       }
 
       props.skillsToProfile(skills);
-      //  props.onWordsChange(skillInput.current.value);
     }
   };
 

@@ -7,27 +7,24 @@ import keycloak from "../keycloak";
 import { API_URL } from "../utils/apiUrls";
 
 const Main = ({ searchResults, isSearching, setSearching }) => {
-  const [selectedCategoryList, setCategoryList] = useState([]);
+  const [selectedCategoryList] = useState([]);
   const [filteredList, setFilteredList] = useState([]);
   const [projectsList, setProjectsList] = useState();
 
-  const { user, setUser, allUsers, setAllUsers } = useUser();
+  const { user, setUser, allUsers } = useUser();
 
   useEffect(() => {
-    
     const userFetch = async () => {
       const data = await (
         await fetch(
           `${API_URL}/api/v1/user/whereEmail=${keycloak.tokenParsed.email}`,
           {
             method: "GET",
-         //   mode: "cors",
             headers: {
               Authorization: `Bearer ${keycloak.token}`,
               "Content-Type": "application/json",
             },
           }
-
         )
       ).json();
       if (data.data !== null) {
@@ -37,22 +34,18 @@ const Main = ({ searchResults, isSearching, setSearching }) => {
     };
     userFetch(); //get from user list instead
 
-
-
     if (!allUsers) {
       console.log("fetch all users");
       const allUsersFetch = async () => {
         const data = await (
-          await fetch(`${API_URL}/api/v1/user/`,
-          {
+          await fetch(`${API_URL}/api/v1/user/`, {
             method: "GET",
-     //      mode: "cors",
             headers: {
               Authorization: `Bearer ${keycloak.token}`,
               "Content-Type": "application/json",
             },
-          }
-        )).json();
+          })
+        ).json();
         if (data.data !== null) {
           storageSave("lagalt-allUsers", data.data);
         }
@@ -84,7 +77,7 @@ const Main = ({ searchResults, isSearching, setSearching }) => {
         };
         fetch(`${API_URL}/api/v1/user/`, {
           method: "POST",
-     //     mode: "cors",
+
           headers: {
             Authorization: `Bearer ${keycloak.token}`,
             "Content-Type": "application/json",
@@ -111,17 +104,14 @@ const Main = ({ searchResults, isSearching, setSearching }) => {
 
         storageSave("lagalt-user", toSave);
         storageSave("lagalt-allUsers", [...allUsers, toSave]);
-      } 
-      
-      
-     else {
+      } else {
         const userFetch = async () => {
           const data = await (
             await fetch(
               `${API_URL}/api/v1/user/whereEmail=${keycloak.tokenParsed.email}`,
               {
                 method: "GET",
-             //   mode: "cors",
+
                 headers: {
                   Authorization: `Bearer ${keycloak.token}`,
                   "Content-Type": "application/json",
@@ -135,37 +125,11 @@ const Main = ({ searchResults, isSearching, setSearching }) => {
           }
         };
         userFetch();
-     }
-    
+      }
     }
-    //else{
-    //   const userFetch = async () => {
-    //     const data = await (
-    //       await fetch(
-    //         `${API_URL}/api/v1/user/whereEmail=${keycloak.tokenParsed.email}`,
-    //         {
-    //           method: "GET",
-    //           mode: "cors",
-    //           headers: {
-    //             Authorization: `Bearer ${keycloak.token}`,
-    //             "Content-Type": "application/json",
-    //           },
-    //         }
-    //       )
-    //     ).json();
-    //     if (data.data !== null) {
-    //       storageSave("lagalt-user", data.data);
-    //       setUser(data.data);
-    //     }
-    //   };
-    //   userFetch();
-
-    // }
 
     const dataFetch = async () => {
-      const data = await (
-        await fetch(`${API_URL}/api/v1/project/list`)
-      ).json();
+      const data = await (await fetch(`${API_URL}/api/v1/project/list`)).json();
 
       storageSave("lagalt-projects", data.data);
       setProjectsList(data.data);

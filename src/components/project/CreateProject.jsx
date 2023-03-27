@@ -8,12 +8,12 @@ import CreateProjectTags from "./CreateProjectTags";
 const CreateProject = ({ onProjectCreate, handleClose }) => {
   const [projectName, setName] = useState("");
   const [projectCategory, setCategory] = useState("");
-  const [projectSkills, setSkills] = useState([]);
-  const [projectTags, setTags] = useState([]);
+  const [projectSkills] = useState([]);
+  const [projectTags] = useState([]);
   const [projectDescription, setDescription] = useState("");
   const [projectShortDescription, setProjectShortDescription] = useState("");
 
-  const { user, setUser } = useUser();
+  const { user } = useUser();
 
   const onNameChange = (event) => {
     setName(event.target.value);
@@ -59,7 +59,7 @@ const CreateProject = ({ onProjectCreate, handleClose }) => {
         project_is_active: true,
         progress: "",
         status: "",
-        collaborators: []
+        collaborators: [],
       };
 
       onProjectCreate(newProject);

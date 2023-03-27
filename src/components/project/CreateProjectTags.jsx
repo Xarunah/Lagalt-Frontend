@@ -3,7 +3,7 @@ import { useRef, useState } from "react";
 function CreateProjectTags(props) {
   const skillInput = useRef(null);
 
-  const [skills, setSkills] = useState([]);
+  const [skills] = useState([]);
 
   const [skillList, setSkillList] = useState([]);
 

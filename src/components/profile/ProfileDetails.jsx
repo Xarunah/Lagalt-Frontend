@@ -6,8 +6,6 @@ import { useEffect } from "react";
 import { API_URL } from "../../utils/apiUrls";
 
 function ProfileDetails() {
-  const [editDesc, setEditDesc] = useState(true);
-  const [editPortfolio, setEditPortfolio] = useState(true);
   const { user, setUser } = useUser();
 
   const [value, setValue] = useState("");
@@ -24,7 +22,6 @@ function ProfileDetails() {
       setValuePortfolio(user.userPortfolio);
       setSkills(user.userSkill);
       setHiddenMode(user.userVisibility);
-      // console.log("user: " + user.userVisibility);
     }
   }, []);
 
@@ -44,11 +41,6 @@ function ProfileDetails() {
 
   const handlePortfolioChange = (event) => {
     setValuePortfolio(event.target.value);
-  };
-
-  const skillsToProfile = (skills) => {
-    setSkills(skills);
-    console.log(profileSkills);
   };
 
   const onSaveDetails = () => {

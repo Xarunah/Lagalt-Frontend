@@ -95,13 +95,13 @@ function ProjectComments(props) {
 
       {comments.map((item, index) => (
         <>
-        <CommentItem
-          key={index}
-          username={item.username}
-          message={item.message}
-          timestamp={item.timestamp}
-        />
-        <br />
+          <CommentItem
+            key={index}
+            username={item.username}
+            message={item.message}
+            timestamp={item.timestamp}
+          />
+          <br />
         </>
       ))}
     </div>

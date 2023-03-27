@@ -8,15 +8,13 @@ import keycloak from "../../keycloak";
 import { useUser } from "../../context/UserContext";
 
 const Admin = (props) => {
-  //const [editProgress, setEditProgress] = useState(true);
-
   const [projectApplications, setApplications] = useState([]);
 
   const [status, setStatus] = useState("");
 
   const [progress, setProgress] = useState("");
 
-  const {allUsers} = useUser();
+  const { allUsers } = useUser();
 
   const onProgressChange = (event) => {
     setProgress(event.target.value);
@@ -27,8 +25,9 @@ const Admin = (props) => {
   };
 
   const closeApplication = (id) => {
-
-    const newList = projectApplications.filter((item) => item.projectApplicationId !== id);
+    const newList = projectApplications.filter(
+      (item) => item.projectApplicationId !== id
+    );
 
     setApplications(newList);
   };
@@ -76,13 +75,6 @@ const Admin = (props) => {
       if (data !== null) {
         console.log(data);
 
-        // let notReviewed = [];
-        // for (const element of data) {
-        //   if(element.reviewed === false){
-        //     notReviewed.push(element);
-
-        //   }
-        // }
         setApplications(data);
       }
     };
@@ -90,10 +82,8 @@ const Admin = (props) => {
 
     console.log(projectApplications);
 
-    //    if (user) {
     setStatus(props.status);
     setProgress(props.progress);
-    //  }
 
     console.log("status:" + props.status);
   }, []);
@@ -140,12 +130,12 @@ const Admin = (props) => {
           />
 
           <div>
-          <button
-            className="bg-gradient-to-r from-orange-300 to-rose-300 hover:text-rose-400 text-white font-bold py-2 px-4 rounded font-playfair"
-            onClick={onSaveProgress}
-          >
-            Save Progress
-          </button>
+            <button
+              className="bg-gradient-to-r from-orange-300 to-rose-300 hover:text-rose-400 text-white font-bold py-2 px-4 rounded font-playfair"
+              onClick={onSaveProgress}
+            >
+              Save Progress
+            </button>
           </div>
 
           <h2 className="">Project applications</h2>
@@ -158,8 +148,8 @@ const Admin = (props) => {
                   <ProjectApplicationCard
                     key={index}
                     userId={element.userId}
-                    username={allUsers[element.userId-1].username}
-                    skills={allUsers[element.userId-1].userSkill}
+                    username={allUsers[element.userId - 1].username}
+                    skills={allUsers[element.userId - 1].userSkill}
                     projectId={element.projectId}
                     projectApplicationId={element.projectApplicationId}
                     projectTitle={props.title}

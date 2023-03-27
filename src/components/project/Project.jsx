@@ -17,7 +17,7 @@ const ProjectPage = (props) => {
   const [joinedUsers, setJoinedUsers] = useState([]);
   const [fetchAllUsers, setFetchAllUsers] = useState();
 
-  const { user, allUsers } = useUser();
+  const { user } = useUser();
 
   useEffect(() => {
     // console.log("current user:" + user.userId + " owner of project: " + props.ownerId);

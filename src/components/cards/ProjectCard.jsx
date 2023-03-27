@@ -1,6 +1,5 @@
 import { useState } from "react";
 import ProjectPage from "../project/Project";
-import { useEffect } from "react";
 
 const ProjectCard = (props) => {
   const [isOpen, setIsOpen] = useState(false);
@@ -14,19 +13,11 @@ const ProjectCard = (props) => {
       <div className="container flex flex-auto my-6" onClick={toggleProject}>
         <div className="w-full max-w-full mr-20 ">
           <div className="bg-gray-200 rounded-xl p-6 shadow-2xl z-50">
-
-          <div className=" float-right">
-              <img className ="h-44 items-end"src={props.image} alt=""  />
-              </div>
+            <div className=" float-right">
+              <img className="h-44 items-end" src={props.image} alt="" />
+            </div>
 
             <h1 className="text-3xl font-playfair font-bold">{props.title}</h1>
-            {/* <div className="text-blue-600 leading-relaxed">
-              {props.owner && <p className="text-3xl">YOU ARE OWNER</p>}
-
-              {props.joined && !props.owner && (
-                <p className="text-3xl">YOU HAVE JOINED</p>
-              )}
-            </div> */}
 
             <p className="font-playfair mb-2">{props.shortDescription}</p>
 
@@ -58,14 +49,9 @@ const ProjectCard = (props) => {
               </p>
 
               <p>
-               Status: <span className="font-thin">{props.status}</span>
+                Status: <span className="font-thin">{props.status}</span>
               </p>
-
-
-
-          
             </div>
-           
           </div>
         </div>
       </div>

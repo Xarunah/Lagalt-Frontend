@@ -1,27 +1,17 @@
-import React, { useState } from "react";
 import SearchBar from "./SearchBar";
 import keycloak from "../../keycloak";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { faUser } from "@fortawesome/free-solid-svg-icons";
 import { faRightToBracket } from "@fortawesome/free-solid-svg-icons";
-import { useUser } from "../../context/UserContext";
 import { faRightFromBracket } from "@fortawesome/free-solid-svg-icons";
 import { Link, useLocation } from "react-router-dom";
 import { faHouse } from "@fortawesome/free-solid-svg-icons";
 import { storageSave } from "../../utils/storage";
 
 const Header = ({ setSearchResults, onSearch }) => {
-  const [isOpen, setIsOpen] = useState(false);
+  const location = useLocation();
 
-  const { user } = useUser();
-
-  const location = useLocation()
-
-  const togglePopup = () => {
-    setIsOpen(!isOpen);
-  };
-
-  const logout = () => { 
+  const logout = () => {
     storageSave("lagalt-user", null);
     keycloak.logout();
   };
@@ -55,10 +45,7 @@ const Header = ({ setSearchResults, onSearch }) => {
                     <Link to="/profile" className="scale-150">
                       <FontAwesomeIcon icon={faUser} />
                     </Link>
-                    <button
-                      className="scale-150"
-                      onClick={() => logout()}
-                    >
+                    <button className="scale-150" onClick={() => logout()}>
                       <FontAwesomeIcon icon={faRightFromBracket} />
                     </button>
                   </div>
@@ -70,21 +57,15 @@ const Header = ({ setSearchResults, onSearch }) => {
           <div className="items-center" id="navbar-search">
             <div className="flex flex-col">
               <div className="relative ">
-
-
-              {location.pathname != "/profile" &&
-                <SearchBar
-                  setSearchResults={setSearchResults}
-                  onSearchInputChange={onSearchInputChange}
-                />
-                }
-                
+                {location.pathname != "/profile" && (
+                  <SearchBar
+                    setSearchResults={setSearchResults}
+                    onSearchInputChange={onSearchInputChange}
+                  />
+                )}
               </div>
             </div>
           </div>
-
-
-
         </div>
       </nav>
     </>
