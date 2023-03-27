@@ -80,7 +80,7 @@ function ProjectComments(props) {
       <textarea
         className="bg-slate-100 resize-none focus:border-rose-400 focus:border-2 rounded-lg font-playfair border-gray-300 border-2 outline-none focus:bg-gray-200 p-1  w-full h-20 "
         type="text"
-        // maxLength={40}
+        maxLength={200}
         placeholder="Write a comment"
         // onChange={onCommentChange}
         ref={commentInput}
