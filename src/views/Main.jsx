@@ -58,11 +58,9 @@ const Main = ({ searchResults, isSearching, setSearching }) => {
       if (keycloak.authenticated) {
         for (let i = 0; allUsers.length > i; i++) {
           if (allUsers[i].userEmail === keycloak.tokenParsed.email) {
-            console.log("YES");
             exists = true;
             break;
           } else {
-            console.log("NO");
             exists = false;
           }
         }
