@@ -169,15 +169,13 @@ const ProjectPage = (props) => {
 
                         {/* collaborators */}
                         {joinedUsers.length > 0 ? (
-                          <p>
-                            Collaborators:
-                            {joinedUsers.map((item, index) => (
-                              <span
-                                className="font-thin"
+                          <div className="">
+                            Collaborators: {joinedUsers.map((item, index) => (
+                              <span className="font-thin"
+                                key={index}
                                 onMouseEnter={() => setIsShown2(true)}
                                 onMouseLeave={() => setIsShown2(false)}
                               >
-                                {" "}
                                 {item.username}
                                 {joinedUsers.length > 1 &&
                                 index < joinedUsers.length - 1
@@ -185,16 +183,16 @@ const ProjectPage = (props) => {
                                   : ""}
                                 <span>
                                   {isShown2 && (
-                                    <div className="bg-gradient-to-r from-orange-300 to-rose-300 rounded-xl p-1 ">
+                                    <ul className="bg-gradient-to-r from-orange-300 to-rose-300 rounded-xl p-1 ">
                                       <p>Skills: {item.userSkill}</p>
                                       <p>Description: {item.userDescription}</p>
                                       <p>Portfolio: {item.userPortfolio}</p>
-                                    </div>
+                                    </ul>
                                   )}
                                 </span>
                               </span>
                             ))}
-                          </p>
+                          </div>
                         ) : null}
 
                         {/* <CommentBox></CommentBox> */}

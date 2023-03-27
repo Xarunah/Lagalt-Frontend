@@ -76,7 +76,7 @@ function ProjectComments(props) {
   };
 
   return (
-    <div className="my-3">
+    <div className="my-3 space-y-2">
       <textarea
         className="bg-slate-100 resize-none focus:border-rose-400 focus:border-2 rounded-lg font-playfair border-gray-300 border-2 outline-none focus:bg-gray-200 p-1  w-full h-20 "
         type="text"
@@ -94,15 +94,12 @@ function ProjectComments(props) {
       </button>
 
       {comments.map((item, index) => (
-        <>
-          <CommentItem
-            key={index}
-            username={item.username}
-            message={item.message}
-            timestamp={item.timestamp}
-          />
-          <br />
-        </>
+        <CommentItem
+          key={index}
+          username={item.username}
+          message={item.message}
+          timestamp={item.timestamp}
+        />
       ))}
     </div>
   );
