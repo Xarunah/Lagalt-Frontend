@@ -131,6 +131,7 @@ const Profile = (props) => {
 
   const onProjectCreate = (project) => {
     setProjectList([...projectList, project]);
+    ownedList.push(project);
     storageSave("lagalt-projects", projectList)
     console.log(project);
 

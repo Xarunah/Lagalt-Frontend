@@ -5,6 +5,7 @@ import { faXmark } from "@fortawesome/free-solid-svg-icons";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { API_URL } from "../../utils/apiUrls";
 import keycloak from "../../keycloak";
+import { useUser } from "../../context/UserContext";
 
 const ProjectAdminPopup = (props) => {
   //const [editProgress, setEditProgress] = useState(true);
@@ -15,22 +16,21 @@ const ProjectAdminPopup = (props) => {
 
   const [progress, setProgress] = useState("");
 
+  const {allUsers} = useUser();
 
+  const onProgressChange = (event) => {
+    setProgress(event.target.value);
+  };
 
-  const onProgressChange = event => {
-    setProgress(event.target.value)
+  const onStatusChange = (event) => {
+    setStatus(event.target.value);
+  };
 
-  }
+  const closeApplication = (id) => {
 
-  const onStatusChange = event => {
-    setStatus(event.target.value)
+    const newList = projectApplications.filter((item) => item.projectApplicationId !== id);
 
-  }
-
-  const closeApplication = () => {
-    console.log("AYAYY");
-    //FIX THIS!!!!
-    setApplications([]);
+    setApplications(newList);
   };
 
   const onSaveProgress = () => {
@@ -56,7 +56,7 @@ const ProjectAdminPopup = (props) => {
       });
 
     alert("Project progress saved!");
-  }
+  };
 
   useEffect(() => {
     const dataFetch = async () => {
@@ -75,6 +75,14 @@ const ProjectAdminPopup = (props) => {
       ).json();
       if (data !== null) {
         console.log(data);
+
+        // let notReviewed = [];
+        // for (const element of data) {
+        //   if(element.reviewed === false){
+        //     notReviewed.push(element);
+
+        //   }
+        // }
         setApplications(data);
       }
     };
@@ -82,15 +90,12 @@ const ProjectAdminPopup = (props) => {
 
     console.log(projectApplications);
 
-
-  
-  //    if (user) {
-        setStatus(props.status);
-        setProgress(props.progress);
+    //    if (user) {
+    setStatus(props.status);
+    setProgress(props.progress);
     //  }
 
-    console.log("status:" + props.status)
-
+    console.log("status:" + props.status);
   }, []);
 
   return (
@@ -134,13 +139,12 @@ const ProjectAdminPopup = (props) => {
             onChange={onStatusChange}
           />
 
-
           <button
-        className="bg-gradient-to-r from-orange-300 to-rose-300 hover:text-rose-400 text-white font-bold py-2 px-4 rounded font-playfair"
-       onClick={onSaveProgress}
-      >
-        Save Profile
-      </button>
+            className="bg-gradient-to-r from-orange-300 to-rose-300 hover:text-rose-400 text-white font-bold py-2 px-4 rounded font-playfair"
+            onClick={onSaveProgress}
+          >
+            Save Profile
+          </button>
 
           <h2 className="">Project applications</h2>
         </div>
@@ -152,6 +156,8 @@ const ProjectAdminPopup = (props) => {
                   <ProjectApplicationCard
                     key={index}
                     userId={element.userId}
+                    username={allUsers[element.userId-1].username}
+                    skills={allUsers[element.userId-1].userSkill}
                     projectId={element.projectId}
                     projectApplicationId={element.projectApplicationId}
                     projectTitle={props.title}
