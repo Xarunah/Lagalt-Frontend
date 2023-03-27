@@ -128,10 +128,10 @@ const Admin = (props) => {
           </div>
         </div>
 
-        <div className="font-bold font-playfair text-2xl">
+        <div className="font-bold font-playfair text-2xl ">
           <h2 className="">Status:</h2>
           <input
-            className="bg-slate-100 resize-none focus:border-rose-400 focus:border-2 rounded-lg font-playfair border-gray-300 border-2 outline-none focus:bg-gray-200 p-1 "
+            className="bg-slate-100 resize-none focus:border-rose-400 focus:border-2 rounded-lg font-playfair border-gray-300 border-2 outline-none focus:bg-gray-200 my-2 "
             type="text"
             maxLength={40}
             placeholder="Enter title here"
@@ -139,12 +139,14 @@ const Admin = (props) => {
             onChange={onStatusChange}
           />
 
+          <div>
           <button
             className="bg-gradient-to-r from-orange-300 to-rose-300 hover:text-rose-400 text-white font-bold py-2 px-4 rounded font-playfair"
             onClick={onSaveProgress}
           >
-            Save Profile
+            Save Progress
           </button>
+          </div>
 
           <h2 className="">Project applications</h2>
         </div>

@@ -126,7 +126,7 @@ const ProjectPage = (props) => {
                     </span>
                   </p>
                 </div>
-                <img src={props.image} alt="" />
+                <img src={props.image} alt="" className="mt-2" />
                 Project Description:
                 <p className="font-playfair font-thin text-lg">
                   {props.description}
@@ -146,40 +146,54 @@ const ProjectPage = (props) => {
 
                         {isShown && (
                           <div className="bg-gradient-to-r from-orange-300 to-rose-300 rounded-xl p-1 ">
-                            <p>Skills: <span className="font-thin">{owner.userSkill}</span></p>
-                            <p>Description: <span className="font-thin">{owner.userDescription}</span></p>
-                            <p>Portfolio: <span className="font-thin">{owner.userPortfolio}</span></p>
+                            <p>
+                              Skills:{" "}
+                              <span className="font-thin">
+                                {owner.userSkill}
+                              </span>
+                            </p>
+                            <p>
+                              Description:{" "}
+                              <span className="font-thin">
+                                {owner.userDescription}
+                              </span>
+                            </p>
+                            <p>
+                              Portfolio:{" "}
+                              <span className="font-thin">
+                                {owner.userPortfolio}
+                              </span>
+                            </p>
                           </div>
                         )}
-                        {/* <CommentBox></CommentBox> */}
-                        {/* <Comment projectId={props.projectId}></Comment> */}
 
                         {/* collaborators */}
                         {joinedUsers.length > 0 ? (
                           <p>
-                            Collaborators: 
-                            <span
-                              className="font-thin"
-                              onMouseEnter={() => setIsShown2(true)}
-                              onMouseLeave={() => setIsShown2(false)}
-                            >
-                              
-                              {joinedUsers
-                                .map((item, index) => {
-                                  return item.username;
-                                  // {isShown2 && (
-                                  //   <div>
-                                  //     <p>Skills: {item.userSkill}</p>
-                                  //     <p>
-                                  //       Description: {item.userDescription}
-                                  //     </p>
-                                  //     <p>Portfolio: {item.userPortfolio}</p>
-                                  //   </div>
-                                  // )}
-                                })
-                                  .join(", ")} 
-                                
-                            </span>
+                            Collaborators:
+                            {joinedUsers.map((item, index) => (
+                              <span
+                                className="font-thin"
+                                onMouseEnter={() => setIsShown2(true)}
+                                onMouseLeave={() => setIsShown2(false)}
+                              >
+                                {" "}
+                                {item.username}
+                                {joinedUsers.length > 1 &&
+                                index < joinedUsers.length - 1
+                                  ? ", "
+                                  : ""}
+                                <span>
+                                  {isShown2 && (
+                                    <div className="bg-gradient-to-r from-orange-300 to-rose-300 rounded-xl p-1 ">
+                                      <p>Skills: {item.userSkill}</p>
+                                      <p>Description: {item.userDescription}</p>
+                                      <p>Portfolio: {item.userPortfolio}</p>
+                                    </div>
+                                  )}
+                                </span>
+                              </span>
+                            ))}
                           </p>
                         ) : null}
 
