@@ -121,7 +121,7 @@ const Admin = (props) => {
             className="bg-slate-100 resize-none focus:border-rose-400 focus:border-2 rounded-lg font-playfair border-gray-300 border-2 outline-none focus:bg-gray-200 my-2 "
             type="text"
             maxLength={40}
-            placeholder="Enter title here"
+            placeholder="Enter status here"
             value={status}
             onChange={onStatusChange}
           />
