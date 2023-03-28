@@ -113,7 +113,7 @@ function ProfileDetails() {
         <p className=" text-xl font-playfair text-center">Description</p>
         <div className="2xl:flex">
           <textarea
-            className="bg-slate-100 resize-none focus:border-rose-400 focus:border-2 rounded-lg font-playfair border-gray-300 border-2 outline-none focus:bg-gray-200"
+            className="w-full bg-slate-100 resize-none focus:border-rose-400 focus:border-2 rounded-lg font-playfair border-gray-300 border-2 outline-none focus:bg-gray-200"
             rows="7"
             cols="50"
             type="text"
@@ -128,7 +128,7 @@ function ProfileDetails() {
         <p className="text-xl font-playfair text-center">Portfolio</p>
         <div className=" items-center">
           <textarea
-            className="bg-slate-100 resize-none focus:border-rose-400 focus:border-2 rounded-lg font-playfair border-gray-300 border-2 outline-none focus:bg-gray-200"
+            className="w-full bg-slate-100 resize-none focus:border-rose-400 focus:border-2 rounded-lg font-playfair border-gray-300 border-2 outline-none focus:bg-gray-200"
             rows="3"
             cols="50"
             type="text"

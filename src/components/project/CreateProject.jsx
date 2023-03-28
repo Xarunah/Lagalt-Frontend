@@ -79,14 +79,14 @@ const CreateProject = ({ onProjectCreate, handleClose }) => {
             <FontAwesomeIcon icon={faXmark} />
           </button>
 
-          <h1 className="text-2xl font-playfair font-bold">Title</h1>
+          <div><h1 className="text-2xl font-playfair font-bold">Title</h1>
           <input
             className="bg-slate-100 resize-none focus:border-rose-400 focus:border-2 rounded-lg font-playfair border-gray-300 border-2 outline-none focus:bg-gray-200 p-1 "
             type="text"
             maxLength={40}
             placeholder="Enter title here"
             onChange={onNameChange}
-          />
+          /></div>
 
           <h1 className="text-2xl font-playfair font-bold">Category</h1>
           <div className=" flex items-center mb-4 w-4 h-4 font-playfair text-sm">
@@ -135,9 +135,8 @@ const CreateProject = ({ onProjectCreate, handleClose }) => {
             <label className="ml-1 mr-3">Web</label>
           </div>
 
-          <h1 className="text-2xl font-playfair font-bold">
-            Short Description
-          </h1>
+         <div>
+         <h1 className="text-2xl font-playfair font-bold">Short Description</h1>
           <form>
             <textarea
               className="bg-slate-100 resize-none focus:border-rose-400 focus:border-2 rounded-lg font-playfair border-gray-300 border-2 outline-none focus:bg-gray-200"
@@ -149,7 +148,9 @@ const CreateProject = ({ onProjectCreate, handleClose }) => {
               onChange={onShortDescriptionChange}
             />
           </form>
+         </div>
 
+          <div>
           <h1 className="text-2xl font-playfair font-bold">Description</h1>
           <form>
             <textarea
@@ -161,17 +162,20 @@ const CreateProject = ({ onProjectCreate, handleClose }) => {
               onChange={onDescriptionChange}
             />
           </form>
+          </div>
 
           <CreateProjectSkills onWordsChange={onSkillsChange} />
 
           <CreateProjectTags onWordsChange={onTagsChange} />
 
+          <div>
           <button
-            className=" bg-gradient-to-r from-orange-300 to-rose-300 hover:text-rose-400 text-white font-bold py-2 px-4 rounded font-playfair shadow-md"
+            className="my-2 bg-gradient-to-r from-orange-300 to-rose-300 hover:text-rose-400 text-white font-bold py-2 px-4 rounded font-playfair"
             onClick={createProjectObj}
           >
             Create
           </button>
+          </div>
         </div>
       </div>
     </>

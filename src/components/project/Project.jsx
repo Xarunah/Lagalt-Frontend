@@ -106,15 +106,6 @@ const ProjectPage = (props) => {
                     <span className="font-thin">{props.category}</span>
                   </p>
 
-                  <p>
-                    Status: <span className="font-thin">{props.status}</span>
-                  </p>
-
-                  <p>
-                    Progress:{" "}
-                    <span className="font-thin">{props.progress}</span>
-                  </p>
-
                   <p className="">
                     Skills:{" "}
                     <span className="font-thin">
@@ -142,11 +133,19 @@ const ProjectPage = (props) => {
                 <p className="font-playfair font-thin text-lg">
                   {props.description}
                 </p>
+
+                <p>
+                    Status: <span className="font-thin">{props.status}</span>
+                  </p>
+
+                  <p>
+                    Progress:{" "}
+                    <span className="font-thin">{props.progress}</span>
+                  </p>
+
                 {user && (
                   <>
-                    {keycloak.tokenParsed.sub == props.ownerId ||
-                    props.collaborators.includes(keycloak.tokenParsed.sub) ? (
-                      <>
+                    
                         <p
                           onMouseEnter={() => setShowOwnerDetails(true)}
                           onMouseLeave={() => setShowOwnerDetails(false)}
@@ -154,6 +153,10 @@ const ProjectPage = (props) => {
                           Owner:{" "}
                           <span className="font-thin">{owner.username}</span>
                         </p>
+
+                        {keycloak.tokenParsed.sub == props.ownerId ||
+                    props.collaborators.includes(keycloak.tokenParsed.sub) ? (
+                      <>
 
                         {showOwnerDetails && (
                           <div className="bg-gradient-to-r from-orange-300 to-rose-300 rounded-xl p-1 ">
@@ -219,7 +222,7 @@ const ProjectPage = (props) => {
                     {user.userId != props.ownerId &&
                     !props.collaborators.includes(user.userId) ? (
                       <button
-                        className="bg-gradient-to-r from-orange-300 to-rose-300 hover:text-rose-400 text-white font-bold py-2 px-4 rounded font-playfair shadow-md mt-2"
+                        className="my-2 bg-gradient-to-r from-orange-300 to-rose-300 hover:text-rose-400 text-white font-bold py-2 px-4 rounded font-playfair"
                         onClick={toggleProject}
                         disabled={!canJoin}
                       >

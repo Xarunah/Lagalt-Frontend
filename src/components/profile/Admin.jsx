@@ -104,7 +104,7 @@ const Admin = (props) => {
         <div className="relative 2xl:flex">
           <div>
             <textarea
-              className="resize-none focus:border-rose-400 focus:border-2 rounded-lg font-playfair border-gray-300 border-2 outline-none"
+              className="resize-none bg-slate-100 focus:border-rose-400 focus:border-2 rounded-lg font-playfair border-gray-300 border-2 outline-none focus:bg-gray-200"
               rows="7"
               cols="100"
               type="text"

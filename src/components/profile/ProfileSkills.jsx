@@ -24,7 +24,7 @@ function ProfileSkills(props) {
     <div>
       <p className="text-xl font-playfair text-center">Skills</p>
       <input
-        className="bg-slate-100 resize-none p-2 focus:border-rose-400 focus:border-2 rounded-lg font-playfair border-gray-300 border-2 outline-none focus:bg-gray-200"
+        className="bg-slate-100 resize-none w-full p-2 focus:border-rose-400 focus:border-2 rounded-lg font-playfair border-gray-300 border-2 outline-none focus:bg-gray-200"
         ref={skillInput}
         placeholder="Add skill"
         onKeyDown={handleKeyDown}
