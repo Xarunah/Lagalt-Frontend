@@ -79,6 +79,8 @@ const CreateProject = ({ onProjectCreate, handleClose }) => {
             <FontAwesomeIcon icon={faXmark} />
           </button>
 
+          <h1 className="text-6xl text-center font-playfair font-bold pb-10">Create Project</h1>
+
           <div><h1 className="text-2xl font-playfair font-bold">Title</h1>
           <input
             className="bg-slate-100 resize-none focus:border-rose-400 focus:border-2 rounded-lg font-playfair border-gray-300 border-2 outline-none focus:bg-gray-200 p-1 "
