@@ -10,7 +10,7 @@ const Main = ({ searchResults, isSearching, setSearching }) => {
   const [selectedCategoryList] = useState([]);
   const [filteredList, setFilteredList] = useState([]);
   const [projectsList, setProjectsList] = useState();
-  const { user, setUser} = useUser();
+  const { user, setUser } = useUser();
 
   useEffect(() => {
     const allUsers = storageRead("lagalt-allUsers");
@@ -36,17 +36,12 @@ const Main = ({ searchResults, isSearching, setSearching }) => {
     }
 
     if (keycloak.authenticated && !user && allUsers) {
-
-  
-    for (const user of allUsers){
-      if(keycloak.tokenParsed.sub === user.userId){
-        setUser(user)
+      for (const user of allUsers) {
+        if (keycloak.tokenParsed.sub === user.userId) {
+          setUser(user);
+        }
       }
-    }
-  
 
-  
-   
       const toSave = {
         userId: keycloak.tokenParsed.sub,
         username: keycloak.tokenParsed.name,

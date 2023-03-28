@@ -34,6 +34,8 @@ const JoinedProjectCard = (props) => {
           collaborators={props.collaborators}
           image={props.image}
           projectId={props.projectId}
+          status={props.status}
+          progress={props.progress}
         ></ProjectPage>
       )}
     </>

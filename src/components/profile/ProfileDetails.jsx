@@ -92,7 +92,7 @@ function ProfileDetails() {
           checked={hiddenMode}
           className="w-4 h-4  bg-gray-100 border-gray-300 rounded text-rose-400"
         />
-        <label className="w-full py-3 ml-2 text-gray-900 ">Hidden mode</label>
+        <label className="w-full py-3 ml-2 text-gray-900 font-playfair ">Hidden mode</label>
       </div>
 
 

@@ -65,8 +65,7 @@ const ProjectPage = (props) => {
         for (const user of allUsers) {
           if (user.userId === props.ownerId) {
             setOwner(user);
-         
-          }
+          } 
           if (props.collaborators.includes(user.userId)) {
             _joinedUsers.push(user);
             setJoinedUsers(_joinedUsers);
@@ -164,6 +163,8 @@ const ProjectPage = (props) => {
                                 {owner.userSkill}
                               </span>
                             </p>
+                            {!owner.userVisibility && (
+                            <>
                             <p>
                               Description:{" "}
                               <span className="font-thin">
@@ -176,6 +177,8 @@ const ProjectPage = (props) => {
                                 {owner.userPortfolio}
                               </span>
                             </p>
+                            </>
+                            )}
                           </div>
                         )}
 

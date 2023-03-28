@@ -48,6 +48,8 @@ const OwnedProjectCard = (props) => {
           image={props.image}
           handleClose={toggleProject}
           projectId={props.projectId}
+          status={props.status}
+          progress={props.progress}
         />
       )}
       {isOpenAdmin && (
