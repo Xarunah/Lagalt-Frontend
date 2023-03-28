@@ -6,6 +6,7 @@ import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { API_URL } from "../../utils/apiUrls";
 import keycloak from "../../keycloak";
 import { useUser } from "../../context/UserContext";
+import { storageRead } from "../../utils/storage";
 
 const Admin = (props) => {
   const [projectApplications, setApplications] = useState([]);
@@ -13,8 +14,6 @@ const Admin = (props) => {
   const [status, setStatus] = useState("");
 
   const [progress, setProgress] = useState("");
-
-  const { allUsers } = useUser();
 
   const onProgressChange = (event) => {
     setProgress(event.target.value);
@@ -58,6 +57,8 @@ const Admin = (props) => {
   };
 
   useEffect(() => {
+
+
     const dataFetch = async () => {
       const data = await (
         await fetch(
@@ -140,7 +141,6 @@ const Admin = (props) => {
 
           <h2 className="">Project applications</h2>
         </div>
-
         {projectApplications
           ? projectApplications.map((element, index) => {
               if (!element.reviewed)
@@ -148,8 +148,6 @@ const Admin = (props) => {
                   <ProjectApplicationCard
                     key={index}
                     userId={element.userId}
-                    username={allUsers[element.userId - 1].username}
-                    skills={allUsers[element.userId - 1].userSkill}
                     projectId={element.projectId}
                     projectApplicationId={element.projectApplicationId}
                     projectTitle={props.title}

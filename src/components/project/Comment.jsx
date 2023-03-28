@@ -57,7 +57,7 @@ function ProjectComments(props) {
       comments.push(comment);
       commentInput.current.value = "";
 
-      fetch(`${API_URL}/api/v1/project/${props.projectId}/${user.userId}`, {
+      fetch(`${API_URL}/api/v1/project/${props.projectId}/${keycloak.tokenParsed.sub}`, {
         method: "POST",
         headers: {
           "Content-Type": "application/json",

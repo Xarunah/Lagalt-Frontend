@@ -11,7 +11,7 @@ const Main = ({ searchResults, isSearching, setSearching }) => {
   const [filteredList, setFilteredList] = useState([]);
   const [projectsList, setProjectsList] = useState();
 
-  const { user, setUser, allUsers, setAllUsers } = useUser();
+  const { user, setUser} = useUser();
 
   useEffect(() => {
     const allUsers = storageRead("lagalt-allUsers");
