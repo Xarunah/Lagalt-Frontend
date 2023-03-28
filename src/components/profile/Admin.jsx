@@ -71,7 +71,6 @@ const Admin = (props) => {
       ).json();
       if (data !== null) {
         console.log(data);
-
         setApplications(data);
       }
     };
@@ -137,22 +136,26 @@ const Admin = (props) => {
 
           <h2 className="">Project applications</h2>
         </div>
-        {projectApplications
-          ? projectApplications.map((element, index) => {
-              if (!element.reviewed)
-                return (
-                  <ProjectApplicationCard
-                    key={index}
-                    userId={element.userId}
-                    projectId={element.projectId}
-                    projectApplicationId={element.projectApplicationId}
-                    projectTitle={props.title}
-                    motivation={element.motivation}
-                    handleClose={closeApplication}
-                  />
-                );
-            })
-          : null}
+        {projectApplications ? (
+          <>
+            {projectApplications.length > 0
+              ? projectApplications.map((element, index) => {
+                  if (!element.reviewed)
+                    return (
+                      <ProjectApplicationCard
+                        key={index}
+                        userId={element.userId}
+                        projectId={element.projectId}
+                        projectApplicationId={element.projectApplicationId}
+                        projectTitle={props.title}
+                        motivation={element.motivation}
+                        handleClose={closeApplication}
+                      />
+                    );
+                })
+              : null}
+          </>
+        ) : null}
       </div>
     </div>
   );

@@ -16,49 +16,14 @@ const ProjectPage = (props) => {
   const [joinedUsers, setJoinedUsers] = useState([]);
   // const [fetchAllUsers, setFetchAllUsers] = useState();
 
-  const { user } = useUser();
+  const { user, allUsers, setAllUsers } = useUser();
 
   useEffect(() => {
 
     if (keycloak.authenticated) {
       setCanJoin(true);
 
-      //fetch all users from database and adds them to the project
-      // const userFetch = async () => {
-      //   const data = await (
-      //     await fetch(`${API_URL}/api/v1/user/`, {
-      //       method: "GET",
-      //       mode: "cors",
-      //       headers: {
-      //         Authorization: `Bearer ${keycloak.token}`,
-      //         "Content-Type": "application/json",
-      //       },
-      //     })
-      //   ).json();
-      //   if (data.data !== null) {
-      //     //get the owner of the project
-      //     if (keycloak.tokenParsed === props.ownerId) {
-      //       setOwner(user);
-      //     } else {
-      //       setOwner(data.data[props.ownerId - 1]);
-      //     }
-
-      //     //get the joined users of the project
-      //     for (let i = 0; i < props.collaborators.length; i++) {
-      //       if (!joinedUsers.includes(data.data[props.collaborators[i] - 1])) {
-      //         joinedUsers.push(data.data[props.collaborators[i] - 1]);
-      //         setJoinedUsers([
-      //           ...joinedUsers,
-      //           data.data[props.collaborators[i] - 1],
-      //         ]);
-      //       }
-      //     }
-      //     setJoinedUsers(joinedUsers);
-      //     setFetchAllUsers([data.data]);
-      //   }
-      // };
-      // userFetch();
-      const allUsers = storageRead("lagalt-allUsers");
+    
       // const allUsers = storageRead ("lagalt-allUsers");
       if (allUsers !== null) {
         let _joinedUsers = [];
@@ -73,7 +38,7 @@ const ProjectPage = (props) => {
         }
       }
     }
-  }, []);
+  }, [allUsers]);
 
   const toggleProject = () => {
     setIsOpen(!isOpen);

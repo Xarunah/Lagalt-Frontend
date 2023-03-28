@@ -80,7 +80,7 @@ const Profile = (props) => {
     ownedList.push(newProject);
     storageSave("lagalt-projects", projectList);
     console.log(project);
-
+    
     fetch(`${API_URL}/api/v1/project/`, {
       method: "POST",
       headers: {
