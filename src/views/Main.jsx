@@ -41,42 +41,44 @@ const Main = ({ searchResults, isSearching, setSearching }) => {
           setUser(user);
         }
       }
-
-      const toSave = {
-        userId: keycloak.tokenParsed.sub,
-        username: keycloak.tokenParsed.name,
-        userEmail: keycloak.tokenParsed.email,
-      };
-
-      const toSaveV2 = {
-        userId: keycloak.tokenParsed.sub,
-        username: keycloak.tokenParsed.name,
-        userEmail: keycloak.tokenParsed.email,
-        userDescription: "",
-        userPortfolio: "",
-        userSkill: [],
-        userVisibility: false,
-      };
-
-      fetch(`${API_URL}/api/v1/user/`, {
-        method: "POST",
-
-        headers: {
-          Authorization: `Bearer ${keycloak.token}`,
-          "Content-Type": "application/json",
-        },
-        body: JSON.stringify(toSave),
-      })
-        .then((response) => response.json())
-        .then((toSave) => {
-          console.log("Success:", toSave);
-          setUser(toSaveV2);
-
-          storageSave("lagalt-user", toSaveV2);
+      if (!user) {
+        const toSave = {
+          userId: keycloak.tokenParsed.sub,
+          username: keycloak.tokenParsed.name,
+          userEmail: keycloak.tokenParsed.email,
+        };
+  
+        const toSaveV2 = {
+          userId: keycloak.tokenParsed.sub,
+          username: keycloak.tokenParsed.name,
+          userEmail: keycloak.tokenParsed.email,
+          userDescription: "",
+          userPortfolio: "",
+          userSkill: [],
+          userVisibility: false,
+        };
+  
+        fetch(`${API_URL}/api/v1/user/`, {
+          method: "POST",
+  
+          headers: {
+            Authorization: `Bearer ${keycloak.token}`,
+            "Content-Type": "application/json",
+          },
+          body: JSON.stringify(toSave),
         })
-        .catch((error) => {
-          console.error("Error:", error);
-        });
+          .then((response) => response.json())
+          .then((toSave) => {
+            console.log("Success:", toSave);
+            setUser(toSaveV2);
+  
+            storageSave("lagalt-user", toSaveV2);
+          })
+          .catch((error) => {
+            console.error("Error:", error);
+          });
+      }
+      
     }
 
     const dataFetch = async () => {

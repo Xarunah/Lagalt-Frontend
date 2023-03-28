@@ -4,8 +4,7 @@ import { useUser } from "../../context/UserContext";
 import ProfileSkills from "./ProfileSkills";
 import { useEffect } from "react";
 import { API_URL } from "../../utils/apiUrls";
-import { storageRead } from "../../utils/storage";
-
+import { storageRead, storageSave } from "../../utils/storage";
 
 function ProfileDetails() {
   const { user, setUser } = useUser();
@@ -17,13 +16,26 @@ function ProfileDetails() {
   const [hiddenMode, setHiddenMode] = useState(false);
 
   useEffect(() => {
-    setValue("hej");
-    if (user) {
-      setValue(user.userDescription);
-      setValuePortfolio(user.userPortfolio);
-      setSkills(user.userSkill);
-      setHiddenMode(user.userVisibility);
-    }
+    console.log("fetch all users");
+    const userFetch = async () => {
+      const data = await (
+        await fetch(`${API_URL}/api/v1/user/${keycloak.tokenParsed.sub}`, {
+          method: "GET",
+          headers: {
+            Authorization: `Bearer ${keycloak.token}`,
+            "Content-Type": "application/json",
+          },
+        })
+      ).json();
+      if (data.data !== null) {
+        // storageSave("lagalt-allUsers", data.data);
+        setValue(data.data.userDescription);
+        setValuePortfolio(data.data.userPortfolio);
+        setSkills(data.data.userSkill);
+        setHiddenMode(data.data.userVisibility);
+      }
+    };
+    userFetch();
   }, []);
 
   const toggleHiddenMode = (e) => {
@@ -92,9 +104,10 @@ function ProfileDetails() {
           checked={hiddenMode}
           className="w-4 h-4  bg-gray-100 border-gray-300 rounded text-rose-400"
         />
-        <label className="w-full py-3 ml-2 text-gray-900 font-playfair ">Hidden mode</label>
+        <label className="w-full py-3 ml-2 text-gray-900 font-playfair ">
+          Hidden mode
+        </label>
       </div>
-
 
       <form>
         <p className=" text-xl font-playfair text-center">Description</p>
@@ -110,7 +123,6 @@ function ProfileDetails() {
           ></textarea>
         </div>
       </form>
-      
 
       <form>
         <p className="text-xl font-playfair text-center">Portfolio</p>
@@ -127,10 +139,9 @@ function ProfileDetails() {
         </div>
       </form>
 
-{profileSkills &&
+      {profileSkills && (
         <ProfileSkills words={profileSkills} skillsToProfile={setSkills} />
-}
-      
+      )}
 
       <button
         className="bg-gradient-to-r from-orange-300 to-rose-300 hover:text-rose-400 text-white font-bold py-2 px-4 rounded font-playfair"
