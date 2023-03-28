@@ -7,13 +7,9 @@ import { API_URL } from "../../utils/apiUrls";
 
 function ProfileDetails() {
   const { user, setUser } = useUser();
-
   const [value, setValue] = useState("");
-
   const [valuePortfolio, setValuePortfolio] = useState("");
-
   const [profileSkills, setSkills] = useState([]);
-
   const [hiddenMode, setHiddenMode] = useState(false);
 
   useEffect(() => {

@@ -10,7 +10,6 @@ const Main = ({ searchResults, isSearching, setSearching }) => {
   const [selectedCategoryList] = useState([]);
   const [filteredList, setFilteredList] = useState([]);
   const [projectsList, setProjectsList] = useState();
-
   const { user, setUser} = useUser();
 
   useEffect(() => {

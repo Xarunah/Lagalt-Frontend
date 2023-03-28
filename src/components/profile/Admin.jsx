@@ -10,9 +10,7 @@ import { storageRead } from "../../utils/storage";
 
 const Admin = (props) => {
   const [projectApplications, setApplications] = useState([]);
-
   const [status, setStatus] = useState("");
-
   const [progress, setProgress] = useState("");
 
   const onProgressChange = (event) => {
@@ -57,8 +55,6 @@ const Admin = (props) => {
   };
 
   useEffect(() => {
-
-
     const dataFetch = async () => {
       const data = await (
         await fetch(

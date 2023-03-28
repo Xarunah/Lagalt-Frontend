@@ -3,27 +3,23 @@ import keycloak from "../../keycloak";
 import { useEffect, useState } from "react";
 import { storageRead } from "../../utils/storage";
 
-const ProjectApplicationCard = (props) => { 
-
+const ProjectApplicationCard = (props) => {
   const [theUser, setTheUser] = useState();
-  
 
   useEffect(() => {
-
     console.log("hej");
 
     const allUsers = storageRead("lagalt-allUsers");
 
     let _user;
 
-    console.log("alle brugere: " + allUsers)
+    console.log("alle brugere: " + allUsers);
     for (const user of allUsers) {
       if (user.userId === props.userId) {
-        _user=user;
+        _user = user;
       }
     }
-    setTheUser(_user)
-
+    setTheUser(_user);
   }, []);
 
   const onAccept = () => {
@@ -102,28 +98,28 @@ const ProjectApplicationCard = (props) => {
     <>
       <div className="flex flex-col  items-center bg-gray-300 space-y-3 rounded-xl p-3">
         <div className="font-playfair font-bold">
-          {theUser &&
-          <p className="text-2xl ">
-            Submitted by: <span className="font-thin">{theUser.username}</span>
-          </p>}
+          {theUser && (
+            <p className="text-2xl ">
+              Submitted by:{" "}
+              <span className="font-thin">{theUser.username}</span>
+            </p>
+          )}
           <p className="">
             Motivation: <span className="font-thin">{props.motivation}</span>
           </p>
 
-          {theUser &&
-          <p>
-            Skills:{" "}
-           
-            <span className="font-thin">
-              {theUser.userSkill
-                .map((item, index) => {
-                  return item;
-                })
-                .join(", ")}
-            </span>
-
-          </p>
-          }
+          {theUser && (
+            <p>
+              Skills:{" "}
+              <span className="font-thin">
+                {theUser.userSkill
+                  .map((item, index) => {
+                    return item;
+                  })
+                  .join(", ")}
+              </span>
+            </p>
+          )}
         </div>
 
         <div className="space-x-2">

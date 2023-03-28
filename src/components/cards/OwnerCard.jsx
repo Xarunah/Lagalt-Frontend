@@ -4,7 +4,6 @@ import Admin from "../profile/Admin";
 
 const OwnedProjectCard = (props) => {
   const [isOpen, setIsOpen] = useState(false);
-
   const [isOpenAdmin, setIsOpenAdmin] = useState(false);
 
   const toggleProject = () => {

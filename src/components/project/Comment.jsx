@@ -7,9 +7,7 @@ import keycloak from "../../keycloak";
 
 function ProjectComments(props) {
   const [comments, setComments] = useState([]);
-
   const commentInput = useRef(null);
-
   const { user } = useUser();
 
   useEffect(() => {
@@ -78,7 +76,7 @@ function ProjectComments(props) {
   return (
     <div className="my-3 space-y-2">
       <textarea
-        className="bg-slate-100 resize-none focus:border-rose-400 focus:border-2 rounded-lg font-playfair border-gray-300 border-2 outline-none focus:bg-gray-200 p-1  w-full h-20 "
+        className="bg-slate-100 resize-none focus:border-rose-400 focus:border-2 rounded-lg font-playfair border-gray-300 border-2 outline-none focus:bg-gray-200 p-1  w-full h-20 font-thin "
         type="text"
         maxLength={200}
         placeholder="Write a comment"

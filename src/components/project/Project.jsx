@@ -15,7 +15,6 @@ const ProjectPage = (props) => {
   const [owner, setOwner] = useState("");
   const [joinedUsers, setJoinedUsers] = useState([]);
   // const [fetchAllUsers, setFetchAllUsers] = useState();
-
   const { user } = useUser();
 
   useEffect(() => {
@@ -58,28 +57,29 @@ const ProjectPage = (props) => {
       //   }
       // };
       // userFetch();
-      const allUsers = storageRead ("lagalt-allUsers");
+      const allUsers = storageRead("lagalt-allUsers");
       if (allUsers !== null) {
-
         let _joinedUsers = [];
         for (const user of allUsers) {
           if (user.userId === props.ownerId) {
             setOwner(user);
-            setCanJoin(false);
+         
           }
           if (props.collaborators.includes(user.userId)) {
             _joinedUsers.push(user);
             setJoinedUsers(_joinedUsers);
           }
-         }}}
+        }
+      }
+    }
   }, []);
 
   const toggleProject = () => {
     setIsOpen(!isOpen);
   };
 
-  const [isShown, setIsShown] = useState(false);
-  const [isShown2, setIsShown2] = useState(false);
+  const [showOwnerDetails, setShowOwnerDetails] = useState(false);
+  const [showCollaboratorDetails, setShowCollaboratorDetails] = useState(false);
 
   return (
     <>
@@ -147,14 +147,14 @@ const ProjectPage = (props) => {
                     props.collaborators.includes(keycloak.tokenParsed.sub) ? (
                       <>
                         <p
-                          onMouseEnter={() => setIsShown(true)}
-                          onMouseLeave={() => setIsShown(false)}
+                          onMouseEnter={() => setShowOwnerDetails(true)}
+                          onMouseLeave={() => setShowOwnerDetails(false)}
                         >
                           Owner:{" "}
                           <span className="font-thin">{owner.username}</span>
                         </p>
 
-                        {isShown && (
+                        {showOwnerDetails && (
                           <div className="bg-gradient-to-r from-orange-300 to-rose-300 rounded-xl p-1 ">
                             <p>
                               Skills:{" "}
@@ -180,11 +180,12 @@ const ProjectPage = (props) => {
                         {/* collaborators */}
                         {joinedUsers.length > 0 ? (
                           <div className="">
-                            Collaborators: {joinedUsers.map((item, index) => (
+                            Collaborators:{" "}
+                            {joinedUsers.map((item, index) => (
                               <span className="font-thin"
                                 key={index}
-                                onMouseEnter={() => setIsShown2(true)}
-                                onMouseLeave={() => setIsShown2(false)}
+                                onMouseEnter={() => setShowCollaboratorDetails(true)}
+                                onMouseLeave={() => setShowCollaboratorDetails(false)}
                               >
                                 {item.username}
                                 {joinedUsers.length > 1 &&
@@ -192,11 +193,11 @@ const ProjectPage = (props) => {
                                   ? ", "
                                   : ""}
                                 <span>
-                                  {isShown2 && (
-                                    <ul className="bg-gradient-to-r from-orange-300 to-rose-300 rounded-xl p-1 ">
-                                      <p>Skills: {item.userSkill}</p>
-                                      <p>Description: {item.userDescription}</p>
-                                      <p>Portfolio: {item.userPortfolio}</p>
+                                  {showCollaboratorDetails && (
+                                    <ul className="bg-gradient-to-r from-orange-300 to-rose-300 rounded-xl p-1 font-bold">
+                                      <p>Skills: <span className="font-thin">{item.userSkill}</span></p>
+                                      <p>Description: <span className="font-thin">{item.userDescription}</span></p>
+                                      <p>Portfolio: <span className="font-thin">{item.userPortfolio}</span></p>
                                     </ul>
                                   )}
                                 </span>
@@ -213,7 +214,7 @@ const ProjectPage = (props) => {
                     {user.userId != props.ownerId &&
                     !props.collaborators.includes(user.userId) ? (
                       <button
-                        className="bg-gradient-to-r from-orange-300 to-rose-300 hover:text-rose-400 text-white font-bold py-2 px-4 rounded font-playfair shadow-md"
+                        className="bg-gradient-to-r from-orange-300 to-rose-300 hover:text-rose-400 text-white font-bold py-2 px-4 rounded font-playfair shadow-md mt-2"
                         onClick={toggleProject}
                         disabled={!canJoin}
                       >
@@ -225,7 +226,7 @@ const ProjectPage = (props) => {
               </div>
 
               {!keycloak.authenticated && (
-                <p>You have to be logged in in order to join a project</p>
+                <p className="font-playfair font-bold text-xl">You have to be logged in in order to join a project</p>
               )}
             </>
           )}

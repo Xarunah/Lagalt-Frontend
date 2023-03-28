@@ -6,9 +6,7 @@ import { API_URL } from "../../utils/apiUrls";
 
 const ProjectApplication = (props) => {
   const [agreeIsCheck, setAgreeCheckbox] = useState();
-
   const [motivationText, setMotivationText] = useState("");
-
   const { user } = useUser();
 
   const onCheckBoxChange = (isChecked) => {

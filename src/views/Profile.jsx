@@ -13,13 +13,9 @@ import { API_URL } from "../utils/apiUrls";
 
 const Profile = (props) => {
   const [projectCreate, setProjectCreate] = useState(false);
-
   const { user, setUser, projectList, setProjectList } = useUser();
-
   const [joinedList] = useState([]);
-
   const [ownedList] = useState([]);
-
   const [state, setState] = useState();
 
   const toggleProjectCreation = () => {

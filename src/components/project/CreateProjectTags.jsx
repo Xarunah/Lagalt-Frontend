@@ -2,9 +2,7 @@ import { useRef, useState } from "react";
 
 function CreateProjectTags(props) {
   const skillInput = useRef(null);
-
   const [skills] = useState([]);
-
   const [skillList, setSkillList] = useState([]);
 
   const handleKeyDown = (event) => {

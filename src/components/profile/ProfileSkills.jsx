@@ -4,7 +4,6 @@ function ProfileSkills(props) {
   const skillInput = useRef(null);
 
   const [skills, setSkills] = useState(props.words);
-
   const [skillList, setSkillList] = useState(props.words);
 
   const handleKeyDown = (event) => {
