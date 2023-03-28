@@ -166,7 +166,7 @@ const CreateProject = ({ onProjectCreate, handleClose }) => {
           <CreateProjectTags onWordsChange={onTagsChange} />
 
           <button
-            className="bg-gradient-to-r from-orange-300 to-rose-300 hover:text-rose-400 text-white font-bold py-2 px-4 rounded font-playfair shadow-md"
+            className=" bg-gradient-to-r from-orange-300 to-rose-300 hover:text-rose-400 text-white font-bold py-2 px-4 rounded font-playfair shadow-md"
             onClick={createProjectObj}
           >
             Create

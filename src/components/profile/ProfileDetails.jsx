@@ -4,15 +4,24 @@ import { useUser } from "../../context/UserContext";
 import ProfileSkills from "./ProfileSkills";
 import { useEffect } from "react";
 import { API_URL } from "../../utils/apiUrls";
+import { storageRead } from "../../utils/storage";
+
 
 function ProfileDetails() {
   const { user, setUser } = useUser();
   const [value, setValue] = useState("");
   const [valuePortfolio, setValuePortfolio] = useState("");
+<<<<<<< Updated upstream
   const [profileSkills, setSkills] = useState([]);
+=======
+
+  const [profileSkills, setSkills] = useState(null);
+
+>>>>>>> Stashed changes
   const [hiddenMode, setHiddenMode] = useState(false);
 
   useEffect(() => {
+    setValue("hej");
     if (user) {
       setValue(user.userDescription);
       setValuePortfolio(user.userPortfolio);
@@ -47,7 +56,7 @@ function ProfileDetails() {
       userVisibility: hiddenMode,
     };
 
-    fetch(`${API_URL}/api/v1/user/${user.userId}`, {
+    fetch(`${API_URL}/api/v1/user/${keycloak.tokenParsed.sub}`, {
       method: "PUT",
       headers: {
         "Content-Type": "application/json",
@@ -90,6 +99,7 @@ function ProfileDetails() {
         <label className="w-full py-3 ml-2 text-gray-900 ">Hidden mode</label>
       </div>
 
+
       <form>
         <p className=" text-xl font-playfair text-center">Description</p>
         <div className="2xl:flex">
@@ -104,6 +114,7 @@ function ProfileDetails() {
           ></textarea>
         </div>
       </form>
+      
 
       <form>
         <p className="text-xl font-playfair text-center">Portfolio</p>
@@ -120,9 +131,10 @@ function ProfileDetails() {
         </div>
       </form>
 
-      {profileSkills.length > 0 && (
+{profileSkills &&
         <ProfileSkills words={profileSkills} skillsToProfile={setSkills} />
-      )}
+}
+      
 
       <button
         className="bg-gradient-to-r from-orange-300 to-rose-300 hover:text-rose-400 text-white font-bold py-2 px-4 rounded font-playfair"

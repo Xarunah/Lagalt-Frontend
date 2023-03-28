@@ -14,6 +14,7 @@ const Main = ({ searchResults, isSearching, setSearching }) => {
 
   useEffect(() => {
     const allUsers = storageRead("lagalt-allUsers");
+    //const user = storageRead("lagalt-user");
 
     if (!allUsers) {
       console.log("fetch all users");
@@ -34,7 +35,18 @@ const Main = ({ searchResults, isSearching, setSearching }) => {
       allUsersFetch();
     }
 
-    if (keycloak.authenticated && !user) {
+    if (keycloak.authenticated && !user && allUsers) {
+
+  
+    for (const user of allUsers){
+      if(keycloak.tokenParsed.sub === user.userId){
+        setUser(user)
+      }
+    }
+  
+
+  
+   
       const toSave = {
         userId: keycloak.tokenParsed.sub,
         username: keycloak.tokenParsed.name,
