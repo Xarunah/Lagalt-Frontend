@@ -7,15 +7,14 @@ import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { useUser } from "../../context/UserContext";
 import { API_URL } from "../../utils/apiUrls";
 import Comment from "../project/Comment";
+import { storageRead } from "../../utils/storage";
 
 const ProjectPage = (props) => {
   const [isOpen, setIsOpen] = useState(false);
-
   const [canJoin, setCanJoin] = useState(false);
-
   const [owner, setOwner] = useState("");
   const [joinedUsers, setJoinedUsers] = useState([]);
-  const [fetchAllUsers, setFetchAllUsers] = useState();
+  // const [fetchAllUsers, setFetchAllUsers] = useState();
 
   const { user } = useUser();
 
@@ -25,43 +24,54 @@ const ProjectPage = (props) => {
       setCanJoin(true);
 
       //fetch all users from database and adds them to the project
-      const userFetch = async () => {
-        const data = await (
-          await fetch(`${API_URL}/api/v1/user/`, {
-            method: "GET",
-            mode: "cors",
-            headers: {
-              Authorization: `Bearer ${keycloak.token}`,
-              "Content-Type": "application/json",
-            },
-          })
-        ).json();
-        if (data.data !== null) {
-          //get the owner of the project
+      // const userFetch = async () => {
+      //   const data = await (
+      //     await fetch(`${API_URL}/api/v1/user/`, {
+      //       method: "GET",
+      //       mode: "cors",
+      //       headers: {
+      //         Authorization: `Bearer ${keycloak.token}`,
+      //         "Content-Type": "application/json",
+      //       },
+      //     })
+      //   ).json();
+      //   if (data.data !== null) {
+      //     //get the owner of the project
+      //     if (keycloak.tokenParsed === props.ownerId) {
+      //       setOwner(user);
+      //     } else {
+      //       setOwner(data.data[props.ownerId - 1]);
+      //     }
+
+      //     //get the joined users of the project
+      //     for (let i = 0; i < props.collaborators.length; i++) {
+      //       if (!joinedUsers.includes(data.data[props.collaborators[i] - 1])) {
+      //         joinedUsers.push(data.data[props.collaborators[i] - 1]);
+      //         setJoinedUsers([
+      //           ...joinedUsers,
+      //           data.data[props.collaborators[i] - 1],
+      //         ]);
+      //       }
+      //     }
+      //     setJoinedUsers(joinedUsers);
+      //     setFetchAllUsers([data.data]);
+      //   }
+      // };
+      // userFetch();
+      const allUsers = storageRead ("lagalt-allUsers");
+      if (allUsers !== null) {
+
+        let _joinedUsers = [];
+        for (const user of allUsers) {
           if (user.userId === props.ownerId) {
             setOwner(user);
-          } else {
-            setOwner(data.data[props.ownerId - 1]);
+            setCanJoin(false);
           }
-
-          //get the joined users of the project
-          for (let i = 0; i < props.collaborators.length; i++) {
-            if (!joinedUsers.includes(data.data[props.collaborators[i] - 1])) {
-              joinedUsers.push(data.data[props.collaborators[i] - 1]);
-              setJoinedUsers([
-                ...joinedUsers,
-                data.data[props.collaborators[i] - 1],
-              ]);
-            }
+          if (props.collaborators.includes(user.userId)) {
+            _joinedUsers.push(user);
+            setJoinedUsers(_joinedUsers);
           }
-          setJoinedUsers(joinedUsers);
-          setFetchAllUsers([data.data]);
-        }
-      };
-      userFetch();
-    } else {
-      setCanJoin(false);
-    }
+         }}}
   }, []);
 
   const toggleProject = () => {
@@ -133,8 +143,8 @@ const ProjectPage = (props) => {
                 </p>
                 {user && (
                   <>
-                    {user.userId == props.ownerId ||
-                    props.collaborators.includes(user.userId) ? (
+                    {keycloak.tokenParsed.sub == props.ownerId ||
+                    props.collaborators.includes(keycloak.tokenParsed.sub) ? (
                       <>
                         <p
                           onMouseEnter={() => setIsShown(true)}
