@@ -16,7 +16,7 @@ const Main = ({ searchResults, isSearching, setSearching }) => {
     const allUsers = storageRead("lagalt-allUsers");
     //const user = storageRead("lagalt-user");
 
-    if (!allUsers) {
+  //  if (!allUsers) {
       console.log("fetch all users");
       const allUsersFetch = async () => {
         const data = await (
@@ -33,7 +33,7 @@ const Main = ({ searchResults, isSearching, setSearching }) => {
         }
       };
       allUsersFetch();
-    }
+   // }
 
     if (keycloak.authenticated && !user && allUsers) {
       for (const user of allUsers) {
