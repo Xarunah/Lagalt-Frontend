@@ -11,13 +11,9 @@ function ProfileDetails() {
   const { user, setUser } = useUser();
   const [value, setValue] = useState("");
   const [valuePortfolio, setValuePortfolio] = useState("");
-<<<<<<< Updated upstream
-  const [profileSkills, setSkills] = useState([]);
-=======
 
   const [profileSkills, setSkills] = useState(null);
 
->>>>>>> Stashed changes
   const [hiddenMode, setHiddenMode] = useState(false);
 
   useEffect(() => {

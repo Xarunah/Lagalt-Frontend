@@ -14,11 +14,8 @@ const ProjectPage = (props) => {
   const [canJoin, setCanJoin] = useState(false);
   const [owner, setOwner] = useState("");
   const [joinedUsers, setJoinedUsers] = useState([]);
-<<<<<<< Updated upstream
   // const [fetchAllUsers, setFetchAllUsers] = useState();
-=======
 
->>>>>>> Stashed changes
   const { user } = useUser();
 
   useEffect(() => {
@@ -26,7 +23,6 @@ const ProjectPage = (props) => {
     if (keycloak.authenticated) {
       setCanJoin(true);
 
-<<<<<<< Updated upstream
       //fetch all users from database and adds them to the project
       // const userFetch = async () => {
       //   const data = await (
@@ -63,9 +59,7 @@ const ProjectPage = (props) => {
       // };
       // userFetch();
       const allUsers = storageRead("lagalt-allUsers");
-=======
-      const allUsers = storageRead ("lagalt-allUsers");
->>>>>>> Stashed changes
+      // const allUsers = storageRead ("lagalt-allUsers");
       if (allUsers !== null) {
         let _joinedUsers = [];
         for (const user of allUsers) {
