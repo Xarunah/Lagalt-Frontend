@@ -4,6 +4,7 @@ import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { useUser } from "../../context/UserContext";
 import CreateProjectSkills from "./CreateProjectSkills";
 import CreateProjectTags from "./CreateProjectTags";
+import keycloak from "../../keycloak";
 
 const CreateProject = ({ onProjectCreate, handleClose }) => {
   const [projectName, setName] = useState("");
@@ -49,7 +50,7 @@ const CreateProject = ({ onProjectCreate, handleClose }) => {
       projectShortDescription.length > 0
     ) {
       const newProject = {
-        userId: user.userId,
+        userId: keycloak.tokenParsed.sub,
         title: projectName,
         category: projectCategory,
         description: projectDescription,

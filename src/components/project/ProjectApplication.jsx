@@ -3,6 +3,7 @@ import { faXmark } from "@fortawesome/free-solid-svg-icons";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { useUser } from "../../context/UserContext";
 import { API_URL } from "../../utils/apiUrls";
+import keycloak from "../../keycloak";
 
 const ProjectApplication = (props) => {
   const [agreeIsCheck, setAgreeCheckbox] = useState();
@@ -22,7 +23,7 @@ const ProjectApplication = (props) => {
       props.handleClose();
       alert("Application sucessfully submited!");
       const toReturn = {
-        userId: user.userId, //get user to retrieve id
+        userId: keycloak.tokenParsed.sub, //get user to retrieve id
         projectId: props.projectId,
         motivation: motivationText,
       };
@@ -30,6 +31,7 @@ const ProjectApplication = (props) => {
       fetch(`${API_URL}/api/v1/projectApplication/`, {
         method: "POST", // or 'PUT'
         headers: {
+          Authorization: `Bearer ${keycloak.token}`,
           "Content-Type": "application/json",
         },
         body: JSON.stringify(toReturn),
