@@ -75,6 +75,25 @@ function ProfileDetails() {
       .then((response) => response.json())
       .then((newDetails) => {
         console.log("Success:", newDetails);
+
+        //fetchall users and save
+
+        const allUsersFetch = async () => {
+          const data = await (
+            await fetch(`${API_URL}/api/v1/user/`, {
+              method: "GET",
+              headers: {
+                Authorization: `Bearer ${keycloak.token}`,
+                "Content-Type": "application/json",
+              },
+            })
+          ).json();
+          if (data.data !== null) {
+            storageSave("lagalt-allUsers", data.data);
+          }
+        };
+        allUsersFetch();
+
       })
       .catch((error) => {
         console.error("Error:", error);

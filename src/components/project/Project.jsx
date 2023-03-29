@@ -14,9 +14,12 @@ const ProjectPage = (props) => {
   const [canJoin, setCanJoin] = useState(false);
   const [owner, setOwner] = useState("");
   const [joinedUsers, setJoinedUsers] = useState([]);
-  const { user, allUsers, setAllUsers } = useUser();
+  const { user} = useUser();
 
   useEffect(() => {
+
+    const allUsers = storageRead("lagalt-allUsers");
+
     console.log(allUsers);
     if (keycloak.authenticated) {
       setCanJoin(true);
@@ -35,7 +38,9 @@ const ProjectPage = (props) => {
         }
       }
     }
-  }, [allUsers]);
+
+    
+  }, []);
 
   const toggleProject = () => {
     setIsOpen(!isOpen);
