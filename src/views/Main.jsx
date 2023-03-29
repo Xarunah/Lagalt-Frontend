@@ -35,13 +35,15 @@ const Main = ({ searchResults, isSearching, setSearching }) => {
       allUsersFetch();
    // }
 
+   let hasUser = false
     if (keycloak.authenticated && !user && allUsers) {
       for (const user of allUsers) {
         if (keycloak.tokenParsed.sub === user.userId) {
           setUser(user);
+          hasUser=true;
         }
       }
-      if (!user) {
+      if (!user && !hasUser) {
         const toSave = {
           userId: keycloak.tokenParsed.sub,
           username: keycloak.tokenParsed.name,
