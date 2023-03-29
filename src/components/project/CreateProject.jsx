@@ -62,7 +62,7 @@ const CreateProject = ({ onProjectCreate, handleClose }) => {
         status: "",
         collaborators: [],
       };
-
+      
       onProjectCreate(newProject);
       alert("Project successfully created!");
       handleClose();

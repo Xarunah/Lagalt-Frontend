@@ -16,72 +16,70 @@ const Main = ({ searchResults, isSearching, setSearching }) => {
     const allUsers = storageRead("lagalt-allUsers");
     //const user = storageRead("lagalt-user");
 
-  //  if (!allUsers) {
-      console.log("fetch all users");
-      const allUsersFetch = async () => {
-        const data = await (
-          await fetch(`${API_URL}/api/v1/user/`, {
-            method: "GET",
-            headers: {
-              Authorization: `Bearer ${keycloak.token}`,
-              "Content-Type": "application/json",
-            },
-          })
-        ).json();
-        if (data.data !== null) {
-          storageSave("lagalt-allUsers", data.data);
-        }
-      };
-      allUsersFetch();
-   // }
-
-   let hasUser = false
-    if (keycloak.authenticated && !user && allUsers) {
-      for (const user of allUsers) {
-        if (keycloak.tokenParsed.sub === user.userId) {
-          setUser(user);
-          hasUser=true;
-        }
-      }
-      if (!user && !hasUser) {
-        const toSave = {
-          userId: keycloak.tokenParsed.sub,
-          username: keycloak.tokenParsed.name,
-          userEmail: keycloak.tokenParsed.email,
-        };
-  
-        const toSaveV2 = {
-          userId: keycloak.tokenParsed.sub,
-          username: keycloak.tokenParsed.name,
-          userEmail: keycloak.tokenParsed.email,
-          userDescription: "",
-          userPortfolio: "",
-          userSkill: [],
-          userVisibility: false,
-        };
-  
-        fetch(`${API_URL}/api/v1/user/`, {
-          method: "POST",
-  
+    console.log("fetch all users");
+    const allUsersFetch = async () => {
+      const data = await (
+        await fetch(`${API_URL}/api/v1/user/`, {
+          method: "GET",
           headers: {
             Authorization: `Bearer ${keycloak.token}`,
             "Content-Type": "application/json",
           },
-          body: JSON.stringify(toSave),
         })
-          .then((response) => response.json())
-          .then((toSave) => {
-            console.log("Success:", toSave);
-            setUser(toSaveV2);
-  
-            storageSave("lagalt-user", toSaveV2);
-          })
-          .catch((error) => {
-            console.error("Error:", error);
-          });
+      ).json();
+      if (data.data !== null) {
+        storageSave("lagalt-allUsers", data.data);
+        let hasUser = false;
+        if (keycloak.authenticated && !user) {
+          for (const user of data.data) {
+            if (keycloak.tokenParsed.sub === user.userId) {
+              setUser(user);
+              storageSave("lagalt-user", user);
+              console.log("userexists!!!");
+              hasUser = true;
+            }
+          }
+          if (!user && !hasUser) {
+            const toSave = {
+              userId: keycloak.tokenParsed.sub,
+              username: keycloak.tokenParsed.name,
+              userEmail: keycloak.tokenParsed.email,
+            };
+
+            const toSaveV2 = {
+              userId: keycloak.tokenParsed.sub,
+              username: keycloak.tokenParsed.name,
+              userEmail: keycloak.tokenParsed.email,
+              userDescription: "",
+              userPortfolio: "",
+              userSkill: [],
+              userVisibility: false,
+            };
+
+            fetch(`${API_URL}/api/v1/user/`, {
+              method: "POST",
+
+              headers: {
+                Authorization: `Bearer ${keycloak.token}`,
+                "Content-Type": "application/json",
+              },
+              body: JSON.stringify(toSave),
+            })
+              .then((response) => response.json())
+              .then((toSave) => {
+                console.log("Success:", toSave);
+                setUser(toSaveV2);
+
+                storageSave("lagalt-user", toSaveV2);
+              })
+              .catch((error) => {
+                console.error("Error:", error);
+              });
+          }
+        }
       }
-      
-    }
+    };
+    allUsersFetch();
 
     const dataFetch = async () => {
       const data = await (await fetch(`${API_URL}/api/v1/project/list`)).json();

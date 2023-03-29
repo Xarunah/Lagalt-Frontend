@@ -14,23 +14,20 @@ const ProjectPage = (props) => {
   const [canJoin, setCanJoin] = useState(false);
   const [owner, setOwner] = useState("");
   const [joinedUsers, setJoinedUsers] = useState([]);
-  // const [fetchAllUsers, setFetchAllUsers] = useState();
-
   const { user, allUsers, setAllUsers } = useUser();
 
   useEffect(() => {
-
+    console.log(allUsers);
     if (keycloak.authenticated) {
       setCanJoin(true);
 
-    
       // const allUsers = storageRead ("lagalt-allUsers");
       if (allUsers !== null) {
         let _joinedUsers = [];
         for (const user of allUsers) {
           if (user.userId === props.ownerId) {
             setOwner(user);
-          } 
+          }
           if (props.collaborators.includes(user.userId)) {
             _joinedUsers.push(user);
             setJoinedUsers(_joinedUsers);
@@ -98,54 +95,51 @@ const ProjectPage = (props) => {
                 <p className="font-playfair font-thin text-lg">
                   {props.description}
                 </p>
-
                 <p>
-                    Status: <span className="font-thin">{props.status}</span>
-                  </p>
-
-                  <p>
-                    Progress:{" "}
-                    <span className="font-thin">{props.progress}</span>
-                  </p>
-
+                  Status: <span className="font-thin">{props.status}</span>
+                </p>
+                <p>
+                  Progress: <span className="font-thin">{props.progress}</span>
+                </p>
                 {user && (
                   <>
-                    
-                        <p
-                          onMouseEnter={() => setShowOwnerDetails(true)}
-                          onMouseLeave={() => setShowOwnerDetails(false)}
-                        >
-                          Owner:{" "}
-                          <span className="font-thin">{owner.username}</span>
-                        </p>
+                    <p
+                      onMouseEnter={() => setShowOwnerDetails(true)}
+                      onMouseLeave={() => setShowOwnerDetails(false)}
+                    >
+                      Owner: <span className="font-thin">{owner.username}</span>
+                    </p>
 
-                        {keycloak.tokenParsed.sub == props.ownerId ||
+                    {keycloak.tokenParsed.sub == props.ownerId ||
                     props.collaborators.includes(keycloak.tokenParsed.sub) ? (
                       <>
-
                         {showOwnerDetails && (
                           <div className="bg-gradient-to-r from-orange-300 to-rose-300 rounded-xl p-1 ">
                             <p>
                               Skills:{" "}
                               <span className="font-thin">
-                                {owner.userSkill}
+                                {owner.userSkill
+                                  .map((item, index) => {
+                                    return item;
+                                  })
+                                  .join(", ")}
                               </span>
                             </p>
-                            {!owner.userVisibility && (
-                            <>
-                            <p>
-                              Description:{" "}
-                              <span className="font-thin">
-                                {owner.userDescription}
-                              </span>
-                            </p>
-                            <p>
-                              Portfolio:{" "}
-                              <span className="font-thin">
-                                {owner.userPortfolio}
-                              </span>
-                            </p>
-                            </>
+                            {!owner.profileVisibility && (
+                              <>
+                                <p>
+                                  Description:{" "}
+                                  <span className="font-thin">
+                                    {owner.userDescription}
+                                  </span>
+                                </p>
+                                <p>
+                                  Portfolio:{" "}
+                                  <span className="font-thin">
+                                    {owner.userPortfolio}
+                                  </span>
+                                </p>
+                              </>
                             )}
                           </div>
                         )}
@@ -155,10 +149,15 @@ const ProjectPage = (props) => {
                           <div className="">
                             Collaborators:{" "}
                             {joinedUsers.map((item, index) => (
-                              <span className="font-thin"
+                              <span
+                                className="font-thin"
                                 key={index}
-                                onMouseEnter={() => setShowCollaboratorDetails(true)}
-                                onMouseLeave={() => setShowCollaboratorDetails(false)}
+                                onMouseEnter={() =>
+                                  setShowCollaboratorDetails(true)
+                                }
+                                onMouseLeave={() =>
+                                  setShowCollaboratorDetails(false)
+                                }
                               >
                                 {item.username}
                                 {joinedUsers.length > 1 &&
@@ -168,9 +167,33 @@ const ProjectPage = (props) => {
                                 <span>
                                   {showCollaboratorDetails && (
                                     <ul className="bg-gradient-to-r from-orange-300 to-rose-300 rounded-xl p-1 font-bold">
-                                      <p>Skills: <span className="font-thin">{item.userSkill}</span></p>
-                                      <p>Description: <span className="font-thin">{item.userDescription}</span></p>
-                                      <p>Portfolio: <span className="font-thin">{item.userPortfolio}</span></p>
+                                      <p>
+                                        Skills:{" "}
+                                        <span className="font-thin">
+                                          {" "}
+                                          {item.userSkill
+                                            .map((item, index) => {
+                                              return item;
+                                            })
+                                            .join(", ")}
+                                        </span>
+                                      </p>
+                                      {!item.profileVisibility && (
+                                        <>
+                                          <p>
+                                            Description:{" "}
+                                            <span className="font-thin">
+                                              {item.userDescription}
+                                            </span>
+                                          </p>
+                                          <p>
+                                            Portfolio:{" "}
+                                            <span className="font-thin">
+                                              {item.userPortfolio}
+                                            </span>
+                                          </p>
+                                        </>
+                                      )}
                                     </ul>
                                   )}
                                 </span>
@@ -199,7 +222,9 @@ const ProjectPage = (props) => {
               </div>
 
               {!keycloak.authenticated && (
-                <p className="font-playfair font-bold text-xl">You have to be logged in in order to join a project</p>
+                <p className="font-playfair font-bold text-xl">
+                  You have to be logged in in order to join a project
+                </p>
               )}
             </>
           )}
