@@ -124,7 +124,7 @@ const Main = ({ searchResults, isSearching, setSearching }) => {
   return (
     <>
       <div className="flex">
-        {/* <aside className="h-screen fixed w-64 top-16 left-0 flex-auto max-h-full mr-24 bg-slate-100 text-3xl text-gray-900  border-gray-200 font-playfair font-bold backdrop-filter backdrop-blur-lg bg-opacity-30 firefox:bg-opacity-30">
+        <aside className="h-screen fixed w-64 top-16 left-0 flex-auto max-h-full mr-24 bg-slate-100 text-3xl text-gray-900  border-gray-200 font-playfair font-bold backdrop-filter backdrop-blur-lg bg-opacity-30 firefox:bg-opacity-30">
           <div>
             <ul>
               <li>
@@ -182,7 +182,7 @@ const Main = ({ searchResults, isSearching, setSearching }) => {
               </li>
             </ul>
           </div>
-        </aside> */}
+        </aside>
 
         <div className="flex-auto ml-96 mt-16">
           {filteredList ? (
