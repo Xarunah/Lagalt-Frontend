@@ -25,8 +25,6 @@ const Profile = (props) => {
   const getJoinedAndOwned = () => {
     setProjectList(storageRead("lagalt-projects"));
 
-    console.log(projectList);
-
     for (let j = 0; j < projectList.length; j++) {
       if (
         keycloak.tokenParsed.sub === projectList[j].userId &&
@@ -79,7 +77,6 @@ const Profile = (props) => {
     setProjectList([...projectList, newProject]);
     ownedList.push(newProject);
     storageSave("lagalt-projects", projectList);
-    console.log(project);
     
     fetch(`${API_URL}/api/v1/project/`, {
       method: "POST",

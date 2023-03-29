@@ -4,16 +4,14 @@ import { useEffect, useState } from "react";
 import { storageRead } from "../../utils/storage";
 
 const ProjectApplicationCard = (props) => {
+  // State to store the user who submitted the project application.
   const [theUser, setTheUser] = useState();
 
+  // In this useEffect all the users are read from storage
+  // Then the user that submitted the application is found by their id
   useEffect(() => {
-    console.log("hej");
-
     const allUsers = storageRead("lagalt-allUsers");
-
     let _user;
-
-    console.log("alle brugere: " + allUsers);
     for (const user of allUsers) {
       if (user.userId === props.userId) {
         _user = user;
@@ -22,6 +20,7 @@ const ProjectApplicationCard = (props) => {
     setTheUser(_user);
   }, []);
 
+  // When the user accepts a project application.
   const onAccept = () => {
     putData(true);
     alert(
@@ -33,6 +32,7 @@ const ProjectApplicationCard = (props) => {
     props.handleClose(props.projectApplicationId);
   };
 
+  // When the user declines a project application.
   const onDecline = () => {
     putData(false);
     alert(
@@ -44,7 +44,9 @@ const ProjectApplicationCard = (props) => {
     props.handleClose(props.projectApplicationId);
   };
 
+  // Method that uses the fetch API to PUT the new info about the porject application to the API.
   const putData = (isAccepted) => {
+    // Object to be sent to the API is defined.
     const data = {
       projectId: props.projectId,
       userId: props.userId,
@@ -52,7 +54,7 @@ const ProjectApplicationCard = (props) => {
       accepted: isAccepted,
     };
 
-    //update project application
+    // Fetch API used to PUT the new data to the API.
     fetch(
       `${API_URL}/api/v1/projectApplication/${props.projectApplicationId}`,
       {
@@ -72,10 +74,13 @@ const ProjectApplicationCard = (props) => {
         console.error("Error:", error);
       });
 
+    // If the owner has accepted the applcation then the applicant sholud be added to the project
     if (isAccepted) {
+      // Defines object to PUT to the API
       const userObj = {
         userId: props.userId,
       };
+      // Uses fetch to PUT the data to the API.
       fetch(`${API_URL}/api/v1/project/join/${props.projectId}`, {
         method: "PUT",
         headers: {
@@ -97,6 +102,7 @@ const ProjectApplicationCard = (props) => {
   return (
     <>
       <div className="flex flex-col  bg-gray-300 space-y-3 rounded-xl p-3">
+        {/* In this div the details about the project application is shown.*/}
         <div className="font-playfair font-bold">
           {theUser && (
             <p className="text-2xl">
@@ -107,7 +113,6 @@ const ProjectApplicationCard = (props) => {
           <p className="">
             Motivation: <span className="font-thin">{props.motivation}</span>
           </p>
-
           {theUser && (
             <p>
               Skills:{" "}
@@ -122,6 +127,7 @@ const ProjectApplicationCard = (props) => {
           )}
         </div>
 
+        {/* Button for accepting the project application. */}
         <div className="space-x-2 text-center">
           <button
             className="bg-gradient-to-r from-orange-300 to-rose-300 hover:text-rose-400 text-white font-bold py-2 px-4 rounded shadow-md font-playfair"
@@ -129,6 +135,8 @@ const ProjectApplicationCard = (props) => {
           >
             Accept
           </button>
+
+          {/* Button for declining the project application. */}
           <button
             className="bg-gradient-to-r from-orange-300 to-rose-300 hover:text-rose-400 text-white font-bold py-2 px-4 rounded shadow-md font-playfair"
             onClick={onDecline}

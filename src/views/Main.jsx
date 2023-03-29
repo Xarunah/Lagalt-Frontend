@@ -13,7 +13,6 @@ const Main = ({ searchResults, isSearching, setSearching }) => {
   const { user, setUser } = useUser();
 
   useEffect(() => {
-    console.log("fetch all users");
     const allUsersFetch = async () => {
       const data = await (
         await fetch(`${API_URL}/api/v1/user/`, {
@@ -32,7 +31,6 @@ const Main = ({ searchResults, isSearching, setSearching }) => {
             if (keycloak.tokenParsed.sub === user.userId) {
               setUser(user);
               storageSave("lagalt-user", user);
-              console.log("userexists!!!");
               hasUser = true;
             }
           }

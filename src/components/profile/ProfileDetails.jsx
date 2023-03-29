@@ -14,7 +14,6 @@ function ProfileDetails() {
   const [hiddenMode, setHiddenMode] = useState(false);
 
   useEffect(() => {
-    console.log("fetch all users");
     const userFetch = async () => {
       const data = await (
         await fetch(`${API_URL}/api/v1/user/${keycloak.tokenParsed.sub}`, {
@@ -38,10 +37,8 @@ function ProfileDetails() {
   const toggleHiddenMode = (e) => {
     if (e.target.checked === true) {
       setHiddenMode(true);
-      console.log(true);
     } else {
       setHiddenMode(false);
-      console.log(false);
     }
   };
 

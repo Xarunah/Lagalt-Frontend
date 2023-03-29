@@ -17,7 +17,6 @@ const ProjectPage = (props) => {
 
   useEffect(() => {
     const allUsers = storageRead("lagalt-allUsers");
-    console.log(allUsers);
     if (keycloak.authenticated) {
       setCanJoin(true);
       if (allUsers !== null) {

@@ -7,6 +7,7 @@ import { API_URL } from "../../utils/apiUrls";
 import keycloak from "../../keycloak";
 
 const Admin = (props) => {
+  // States for the array of project applications and the current status and progress of the project.
   const [projectApplications, setApplications] = useState([]);
   const [status, setStatus] = useState("");
   const [progress, setProgress] = useState("");
@@ -19,20 +20,22 @@ const Admin = (props) => {
     setStatus(event.target.value);
   };
 
+  // Removes the project application from the list when it has been reviewed.
   const closeApplication = (id) => {
     const newList = projectApplications.filter(
       (item) => item.projectApplicationId !== id
     );
-
     setApplications(newList);
   };
 
   const onSaveProgress = () => {
+    // Object is defined to contain the data to be PUT to the API.
     const newProgress = {
       progress: progress,
       status: status,
     };
 
+    // Fetch is used to PUT new data to the API.
     fetch(`${API_URL}/api/v1/project/${props.projectId}`, {
       method: "PUT",
       headers: {
@@ -52,6 +55,7 @@ const Admin = (props) => {
     alert("Project progress saved!");
   };
 
+  // In this useEffect the project applications are fetched from the API
   useEffect(() => {
     const dataFetch = async () => {
       const data = await (
@@ -68,18 +72,14 @@ const Admin = (props) => {
         )
       ).json();
       if (data !== null) {
-        console.log(data);
+        // State is set to the project applications.
         setApplications(data);
       }
     };
     dataFetch();
-
-    console.log(projectApplications);
-
+    // Set the states of status and progress depending on the passed props.
     setStatus(props.status);
     setProgress(props.progress);
-
-    console.log("status:" + props.status);
   }, []);
 
   return (
@@ -96,8 +96,8 @@ const Admin = (props) => {
           {props.title}
         </h1>
 
+        {/* Textarea for entering the progress */}
         <p className="font-bold font-playfair text-2xl">Progress</p>
-
         <div className="relative 2xl:flex">
           <div>
             <textarea
@@ -122,7 +122,6 @@ const Admin = (props) => {
             value={status}
             onChange={onStatusChange}
           />
-
           <div>
             <button
               className="bg-gradient-to-r from-orange-300 to-rose-300 hover:text-rose-400 text-white font-bold py-2 px-4 rounded font-playfair"
@@ -131,7 +130,6 @@ const Admin = (props) => {
               Save Progress
             </button>
           </div>
-
           <h2 className="">Project applications</h2>
         </div>
         {projectApplications ? (

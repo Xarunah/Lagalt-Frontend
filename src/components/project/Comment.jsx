@@ -21,7 +21,6 @@ function ProjectComments(props) {
       .then((response) => response.json())
       .then((data) => {
         if (data.data !== undefined) {
-          console.log(data.data);
           setComments(data.data);
         }
       })
@@ -31,8 +30,6 @@ function ProjectComments(props) {
   }, []);
 
   const postComment = () => {
-    console.log(commentInput);
-    console.log(user.username);
     if (!commentInput.current.value == "") {
       let today = new Date();
       const comment = {
