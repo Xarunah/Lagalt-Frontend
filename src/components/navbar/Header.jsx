@@ -29,7 +29,7 @@ const Header = ({ setSearchResults, onSearch }) => {
                 <button onClick={() => keycloak.login()}>
                   <img
                     src="images/LoginIcon.svg"
-                    className="h-6 mr-3"
+                    className="h-9 mr-3"
                     alt="Login icon"
                   />
                 </button>
@@ -66,13 +66,15 @@ const Header = ({ setSearchResults, onSearch }) => {
             />
           )}
         </div>
-
+        {/* Home Button */}
         <div className="order-">
-          <img
-            src="images/HomeIcon.svg"
-            className="h-6 mr-3 sm:h-9"
-            alt="Login icon"
-          />
+          <Link to="/">
+            <img
+              src="images/HomeIcon.svg"
+              className="h-9 mr-3"
+              alt="Login icon"
+            />
+          </Link>
         </div>
       </div>
     </nav>
