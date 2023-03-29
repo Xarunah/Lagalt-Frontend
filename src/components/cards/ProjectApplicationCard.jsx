@@ -96,10 +96,10 @@ const ProjectApplicationCard = (props) => {
 
   return (
     <>
-      <div className="flex flex-col  items-center bg-gray-300 space-y-3 rounded-xl p-3">
+      <div className="flex flex-col  bg-gray-300 space-y-3 rounded-xl p-3">
         <div className="font-playfair font-bold">
           {theUser && (
-            <p className="text-2xl ">
+            <p className="text-2xl">
               Submitted by:{" "}
               <span className="font-thin">{theUser.username}</span>
             </p>
@@ -122,7 +122,7 @@ const ProjectApplicationCard = (props) => {
           )}
         </div>
 
-        <div className="space-x-2">
+        <div className="space-x-2 text-center">
           <button
             className="bg-gradient-to-r from-orange-300 to-rose-300 hover:text-rose-400 text-white font-bold py-2 px-4 rounded shadow-md font-playfair"
             onClick={onAccept}
