@@ -1,7 +1,6 @@
 import { useState } from "react";
 import { faXmark } from "@fortawesome/free-solid-svg-icons";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
-import { useUser } from "../../context/UserContext";
 import CreateProjectSkills from "./CreateProjectSkills";
 import CreateProjectTags from "./CreateProjectTags";
 import keycloak from "../../keycloak";
@@ -13,8 +12,6 @@ const CreateProject = ({ onProjectCreate, handleClose }) => {
   const [projectTags] = useState([]);
   const [projectDescription, setDescription] = useState("");
   const [projectShortDescription, setProjectShortDescription] = useState("");
-
-  const { user } = useUser();
 
   const onNameChange = (event) => {
     setName(event.target.value);
@@ -62,7 +59,7 @@ const CreateProject = ({ onProjectCreate, handleClose }) => {
         status: "",
         collaborators: [],
       };
-      
+
       onProjectCreate(newProject);
       alert("Project successfully created!");
       handleClose();

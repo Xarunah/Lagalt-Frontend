@@ -80,7 +80,6 @@ function ProjectComments(props) {
         type="text"
         maxLength={200}
         placeholder="Write a comment"
-        // onChange={onCommentChange}
         ref={commentInput}
       />
 

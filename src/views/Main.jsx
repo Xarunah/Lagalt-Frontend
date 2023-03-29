@@ -2,7 +2,7 @@ import ProjectCard from "../components/cards/ProjectCard";
 import { useState } from "react";
 import { useEffect } from "react";
 import { useUser } from "../context/UserContext";
-import { storageSave, storageRead } from "../utils/storage";
+import { storageSave } from "../utils/storage";
 import keycloak from "../keycloak";
 import { API_URL } from "../utils/apiUrls";
 
@@ -13,9 +13,6 @@ const Main = ({ searchResults, isSearching, setSearching }) => {
   const { user, setUser } = useUser();
 
   useEffect(() => {
-    const allUsers = storageRead("lagalt-allUsers");
-    //const user = storageRead("lagalt-user");
-
     console.log("fetch all users");
     const allUsersFetch = async () => {
       const data = await (
@@ -90,7 +87,7 @@ const Main = ({ searchResults, isSearching, setSearching }) => {
     };
 
     dataFetch();
-  }, []);
+  }, [user, setUser]);
 
   const handleCategoryChange = (category) => {
     if (category.target.checked) {

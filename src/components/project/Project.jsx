@@ -5,7 +5,6 @@ import { useEffect } from "react";
 import { faXmark } from "@fortawesome/free-solid-svg-icons";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { useUser } from "../../context/UserContext";
-import { API_URL } from "../../utils/apiUrls";
 import Comment from "../project/Comment";
 import { storageRead } from "../../utils/storage";
 
@@ -14,17 +13,13 @@ const ProjectPage = (props) => {
   const [canJoin, setCanJoin] = useState(false);
   const [owner, setOwner] = useState("");
   const [joinedUsers, setJoinedUsers] = useState([]);
-  const { user} = useUser();
+  const { user } = useUser();
 
   useEffect(() => {
-
     const allUsers = storageRead("lagalt-allUsers");
-
     console.log(allUsers);
     if (keycloak.authenticated) {
       setCanJoin(true);
-
-      // const allUsers = storageRead ("lagalt-allUsers");
       if (allUsers !== null) {
         let _joinedUsers = [];
         for (const user of allUsers) {
@@ -38,8 +33,6 @@ const ProjectPage = (props) => {
         }
       }
     }
-
-    
   }, []);
 
   const toggleProject = () => {
@@ -206,8 +199,6 @@ const ProjectPage = (props) => {
                             ))}
                           </div>
                         ) : null}
-
-                        {/* <CommentBox></CommentBox> */}
                         <Comment projectId={props.projectId}></Comment>
                       </>
                     ) : null}
@@ -233,7 +224,6 @@ const ProjectPage = (props) => {
               )}
             </>
           )}
-
           {isOpen && (
             <ProjectApplication
               title={props.title}

@@ -1,14 +1,12 @@
 import { useState } from "react";
 import { faXmark } from "@fortawesome/free-solid-svg-icons";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
-import { useUser } from "../../context/UserContext";
 import { API_URL } from "../../utils/apiUrls";
 import keycloak from "../../keycloak";
 
 const ProjectApplication = (props) => {
   const [agreeIsCheck, setAgreeCheckbox] = useState();
   const [motivationText, setMotivationText] = useState("");
-  const { user } = useUser();
 
   const onCheckBoxChange = (isChecked) => {
     setAgreeCheckbox(isChecked.target.value);
@@ -80,7 +78,6 @@ const ProjectApplication = (props) => {
               I accept that the owner(s) of the project can view my profile info
             </label>
           </div>
-
           <button
             className="bg-gradient-to-r from-orange-300 to-rose-300 hover:text-rose-400 text-white font-bold py-2 px-4 rounded font-playfair shadow-md mt-2"
             onClick={onSubmitApplication}

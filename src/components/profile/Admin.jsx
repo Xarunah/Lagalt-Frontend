@@ -5,8 +5,6 @@ import { faXmark } from "@fortawesome/free-solid-svg-icons";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { API_URL } from "../../utils/apiUrls";
 import keycloak from "../../keycloak";
-import { useUser } from "../../context/UserContext";
-import { storageRead } from "../../utils/storage";
 
 const Admin = (props) => {
   const [projectApplications, setApplications] = useState([]);

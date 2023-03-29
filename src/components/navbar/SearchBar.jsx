@@ -4,7 +4,7 @@ import { useUser } from "../../context/UserContext";
 const SearchBar = ({ setSearchResults, onSearchInputChange }) => {
   const [searchTerm, setSearchTerm] = useState("");
 
-  const { projectList, setProjectList } = useUser();
+  const {projectList}  = useUser();
 
   const handleSearch = (event) => {
     setSearchTerm(event.target.value);

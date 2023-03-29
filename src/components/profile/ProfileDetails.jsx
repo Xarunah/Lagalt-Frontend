@@ -1,13 +1,11 @@
 import { useState } from "react";
 import keycloak from "../../keycloak";
-import { useUser } from "../../context/UserContext";
 import ProfileSkills from "./ProfileSkills";
 import { useEffect } from "react";
 import { API_URL } from "../../utils/apiUrls";
-import { storageRead, storageSave } from "../../utils/storage";
+import { storageSave } from "../../utils/storage";
 
 function ProfileDetails() {
-  const { user, setUser } = useUser();
   const [value, setValue] = useState("");
   const [valuePortfolio, setValuePortfolio] = useState("");
 
@@ -28,7 +26,6 @@ function ProfileDetails() {
         })
       ).json();
       if (data.data !== null) {
-        // storageSave("lagalt-allUsers", data.data);
         setValue(data.data.userDescription);
         setValuePortfolio(data.data.userPortfolio);
         setSkills(data.data.userSkill);
@@ -76,8 +73,6 @@ function ProfileDetails() {
       .then((newDetails) => {
         console.log("Success:", newDetails);
 
-        //fetchall users and save
-
         const allUsersFetch = async () => {
           const data = await (
             await fetch(`${API_URL}/api/v1/user/`, {
@@ -93,7 +88,6 @@ function ProfileDetails() {
           }
         };
         allUsersFetch();
-
       })
       .catch((error) => {
         console.error("Error:", error);
