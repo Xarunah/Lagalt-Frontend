@@ -201,7 +201,7 @@ const Main = ({ searchResults, isSearching, setSearching }) => {
           </div>
         </aside>
 
-        <div className="flex-auto ml-96 mt-16 ">
+        <div className="flex-auto ml-96">
           {filteredList ? (
             <div className="">
               {!isSearching &&
