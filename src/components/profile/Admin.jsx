@@ -86,7 +86,7 @@ const Admin = (props) => {
 
   return (
     <div className="fixed flex-auto bg-black bg-opacity-50 h-screen w-screen top-0 left-0 z-50">
-      <div className="w-5/6 h-3/4 my-44 mx-auto overflow-y-scroll space-y-3 bg-slate-100 rounded-xl px-16 pb-5 shadow-2xl ">
+      <div className="w-5/6 h-3/4 my-44 mx-auto overflow-y-scroll space-y-3 bg-gray-50 rounded-xl px-16 pb-5 shadow-2xl ">
         <button
           className="float-right text-5xl pt-6"
           onClick={props.handleClose}
@@ -103,7 +103,7 @@ const Admin = (props) => {
         <div className="relative 2xl:flex">
           <div>
             <textarea
-              className="resize-none bg-slate-100 focus:border-rose-400 focus:border-2 rounded-lg font-playfair border-gray-300 border-2 outline-none focus:bg-gray-200"
+              className="resize-none bg-gray-50 focus:border-rose-400 focus:border-2 rounded-lg font-playfair border-gray-300 border-2 outline-none focus:bg-gray-200"
               rows="7"
               cols="100"
               type="text"
@@ -117,7 +117,7 @@ const Admin = (props) => {
         <div className="font-bold font-playfair text-2xl ">
           <h2 className="">Status:</h2>
           <input
-            className="bg-slate-100 resize-none focus:border-rose-400 focus:border-2 rounded-lg font-playfair border-gray-300 border-2 outline-none focus:bg-gray-200 my-2 "
+            className="bg-gray-50 resize-none focus:border-rose-400 focus:border-2 rounded-lg font-playfair border-gray-300 border-2 outline-none focus:bg-gray-200 my-2 "
             type="text"
             maxLength={40}
             placeholder="Enter status here"
@@ -127,7 +127,7 @@ const Admin = (props) => {
 
           <div>
             <button
-              className="bg-gradient-to-r from-orange-300 to-rose-300 hover:text-rose-400 text-white font-bold py-2 px-4 rounded font-playfair"
+              className="bg-rose-400 hover:bg-rose-500 text-white font-bold py-2 px-4 rounded font-playfair"
               onClick={onSaveProgress}
             >
               Save Progress

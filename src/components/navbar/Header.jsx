@@ -18,7 +18,7 @@ const Header = ({ setSearchResults, onSearch }) => {
   };
 
   return (
-    <nav className="bg-white ">
+    <nav className="bg-gray-50 sticky top-0">
       <div className="container flex flex-wrap items-center justify-between mx-auto py-2">
         {/* Logo */}
         <div className="flex order-3">

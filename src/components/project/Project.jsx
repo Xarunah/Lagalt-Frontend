@@ -50,7 +50,7 @@ const ProjectPage = (props) => {
   return (
     <>
       <div className="fixed bg-black bg-opacity-50 h-screen w-screen top-0 left-0 z-50">
-        <div className="w-5/6 h-3/4 m-auto my-24 overflow-y-scroll space-y-3 rounded-xl px-16 shadow-2xl bg-slate-100">
+        <div className="w-5/6 h-3/4 m-auto my-24 overflow-y-scroll space-y-3 rounded-xl px-16 shadow-2xl bg-gray-50">
           {!isOpen && (
             <>
               <button
@@ -124,7 +124,7 @@ const ProjectPage = (props) => {
                       <>
 
                         {showOwnerDetails && (
-                          <div className="bg-gradient-to-r from-orange-300 to-rose-300 rounded-xl p-1 ">
+                          <div className="bg-rose-400  text-white rounded-xl p-1 ">
                             <p>
                               Skills:{" "}
                               <span className="font-thin">
@@ -167,7 +167,7 @@ const ProjectPage = (props) => {
                                   : ""}
                                 <span>
                                   {showCollaboratorDetails && (
-                                    <ul className="bg-gradient-to-r from-orange-300 to-rose-300 rounded-xl p-1 font-bold">
+                                    <ul className="bg-rose-400 text-white rounded-xl p-1 font-bold">
                                       <p>Skills: <span className="font-thin">{item.userSkill}</span></p>
                                       <p>Description: <span className="font-thin">{item.userDescription}</span></p>
                                       <p>Portfolio: <span className="font-thin">{item.userPortfolio}</span></p>
@@ -187,7 +187,7 @@ const ProjectPage = (props) => {
                     {user.userId != props.ownerId &&
                     !props.collaborators.includes(user.userId) ? (
                       <button
-                        className="my-2 bg-gradient-to-r from-orange-300 to-rose-300 hover:text-rose-400 text-white font-bold py-2 px-4 rounded font-playfair"
+                        className="my-2 bg-rose-400 hover:bg-rose-500 text-white font-bold py-2 px-4 rounded font-playfair"
                         onClick={toggleProject}
                         disabled={!canJoin}
                       >

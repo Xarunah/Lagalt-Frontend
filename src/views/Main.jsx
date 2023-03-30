@@ -16,31 +16,31 @@ const Main = ({ searchResults, isSearching, setSearching }) => {
     const allUsers = storageRead("lagalt-allUsers");
     //const user = storageRead("lagalt-user");
 
-  //  if (!allUsers) {
-      console.log("fetch all users");
-      const allUsersFetch = async () => {
-        const data = await (
-          await fetch(`${API_URL}/api/v1/user/`, {
-            method: "GET",
-            headers: {
-              Authorization: `Bearer ${keycloak.token}`,
-              "Content-Type": "application/json",
-            },
-          })
-        ).json();
-        if (data.data !== null) {
-          storageSave("lagalt-allUsers", data.data);
-        }
-      };
-      allUsersFetch();
-   // }
+    //  if (!allUsers) {
+    console.log("fetch all users");
+    const allUsersFetch = async () => {
+      const data = await (
+        await fetch(`${API_URL}/api/v1/user/`, {
+          method: "GET",
+          headers: {
+            Authorization: `Bearer ${keycloak.token}`,
+            "Content-Type": "application/json",
+          },
+        })
+      ).json();
+      if (data.data !== null) {
+        storageSave("lagalt-allUsers", data.data);
+      }
+    };
+    allUsersFetch();
+    // }
 
-   let hasUser = false
+    let hasUser = false;
     if (keycloak.authenticated && !user && allUsers) {
       for (const user of allUsers) {
         if (keycloak.tokenParsed.sub === user.userId) {
           setUser(user);
-          hasUser=true;
+          hasUser = true;
         }
       }
       if (!user && !hasUser) {
@@ -49,7 +49,7 @@ const Main = ({ searchResults, isSearching, setSearching }) => {
           username: keycloak.tokenParsed.name,
           userEmail: keycloak.tokenParsed.email,
         };
-  
+
         const toSaveV2 = {
           userId: keycloak.tokenParsed.sub,
           username: keycloak.tokenParsed.name,
@@ -59,10 +59,10 @@ const Main = ({ searchResults, isSearching, setSearching }) => {
           userSkill: [],
           userVisibility: false,
         };
-  
+
         fetch(`${API_URL}/api/v1/user/`, {
           method: "POST",
-  
+
           headers: {
             Authorization: `Bearer ${keycloak.token}`,
             "Content-Type": "application/json",
@@ -73,14 +73,13 @@ const Main = ({ searchResults, isSearching, setSearching }) => {
           .then((toSave) => {
             console.log("Success:", toSave);
             setUser(toSaveV2);
-  
+
             storageSave("lagalt-user", toSaveV2);
           })
           .catch((error) => {
             console.error("Error:", error);
           });
       }
-      
     }
 
     const dataFetch = async () => {
@@ -124,67 +123,85 @@ const Main = ({ searchResults, isSearching, setSearching }) => {
   return (
     <>
       <div className="flex">
-        <aside className="h-screen fixed w-64 top-16 left-0 flex-auto max-h-full mr-24 bg-slate-100 text-3xl text-gray-900  border-gray-200 font-playfair font-bold backdrop-filter backdrop-blur-lg bg-opacity-30 firefox:bg-opacity-30">
+        <aside className="h-screen fixed  w-44 left-0 flex-auto max-h-full mr-24 bg-gray-50 text-xl text-gray-900 border-gray-200 font-playfair font-bold ">
           <div>
             <ul>
               <li>
-                <div className="flex items-center pl-3 ">
+                <div className="flex items-center px-3">
                   <input
+                    id="film"
                     type="checkbox"
                     value="Film"
                     onChange={handleCategoryChange}
-                    className="w-4 h-4 bg-gray-100 border-gray-300 rounded text-rose-400"
+                    className="w-4 h-4 hidden bg-gray-100 border-gray-300 rounded text-rose-400"
                   />
-                  <label className="w-full py-3 ml-2 text-gray-900 ">
+                  <label
+                    htmlFor="film"
+                    className={`w-full py-2 rounded-md text-gray-900 hover:bg-gray-200 px-3 ${selectedCategoryList.includes('Film') ? 'bg-gray-200' : ''}`}
+                  >
                     Film
                   </label>
                 </div>
               </li>
 
               <li>
-                <div className="flex items-center pl-3">
+                <div className="flex items-center px-3">
                   <input
+                    id="music"
                     type="checkbox"
                     value="Music"
                     onChange={handleCategoryChange}
-                    className="w-4 h-4  bg-gray-100 border-gray-300 rounded text-rose-400"
+                    className="w-4 h-4 bg-gray-100 hidden rounded text-rose-400"
                   />
-                  <label className="w-full py-3 ml-2 text-gray-900 ">
+                  <label
+                    htmlFor="music"
+                    className={`w-full py-2 rounded-md text-gray-900 hover:bg-gray-200 px-3 ${selectedCategoryList.includes('Music') ? 'bg-gray-200' : ''}`}
+                  >
                     Music
                   </label>
                 </div>
               </li>
 
               <li>
-                <div className="flex items-center pl-3">
+                <div className="flex items-center px-3">
                   <input
+                    id="game"
                     type="checkbox"
                     value="Game"
                     onChange={handleCategoryChange}
-                    className="w-4 h-4  bg-gray-100 border-gray-300 rounded text-rose-400"
+                    className="w-4 h-4 hidden bg-gray-100 border-gray-300  text-rose-400"
                   />
-                  <label className="w-full py-3 ml-2 text-gray-900 ">
+                  <label
+                    htmlFor="game"
+                    className={`w-full py-2 rounded-md text-gray-900 hover:bg-gray-200 px-3 ${selectedCategoryList.includes('Game') ? 'bg-gray-200' : ''}`}
+                  >
                     Game
                   </label>
                 </div>
               </li>
 
               <li>
-                <div className="flex items-center pl-3">
+                <div className="flex items-center px-3">
                   <input
+                    id="web"
                     type="checkbox"
                     value="Web"
                     onChange={handleCategoryChange}
-                    className="w-4 h-4 bg-gray-100 border-gray-300 rounded text-rose-400"
+                    className="hidden w-4 h-4 bg-gray-100 border-gray-300 rounded text-rose-400"
                   />
-                  <label className="w-full py-3 ml-2 text-gray-900">Web</label>
+                  <label
+                    htmlFor="web"
+                    className={`w-full py-2 rounded-md text-gray-900 hover:bg-gray-200 px-3 ${selectedCategoryList.includes('Web') ? 'bg-gray-200' : ''}`}
+                  >
+                    Web
+                  </label>
                 </div>
               </li>
             </ul>
           </div>
         </aside>
 
-        <div className="flex-auto ml-96 mt-16">
+        <div className="flex-auto ml-96 mt-16 ">
           {filteredList ? (
             <div className="">
               {!isSearching &&
