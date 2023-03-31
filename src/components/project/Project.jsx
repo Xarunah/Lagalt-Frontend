@@ -191,10 +191,6 @@ const ProjectPage = (props) => {
                                           </p>
                                         </>
                                       )}
-                                    {/* <ul className="bg-rose-400 text-white rounded-xl p-1 font-bold">
-                                      <p>Skills: <span className="font-thin">{item.userSkill}</span></p>
-                                      <p>Description: <span className="font-thin">{item.userDescription}</span></p>
-                                      <p>Portfolio: <span className="font-thin">{item.userPortfolio}</span></p> */}
                                     </ul>
                                   )}
                                 </span>
