@@ -94,7 +94,7 @@ function ProfileDetails() {
   };
 
   return (
-    <div className="flex flex-col items-center bg-slate-100 m-3 my-2 space-y-3 rounded-xl p-3 shadow-2xl">
+    <div className="flex flex-col items-center bg-gray-50 m-3 my-2 space-y-3 rounded-xl p-3 shadow-2xl">
       <p className="text-2xl font-playfair">
         Welcome back: {keycloak.tokenParsed.name}
       </p>
@@ -123,7 +123,7 @@ function ProfileDetails() {
         <p className=" text-xl font-playfair text-center">Description</p>
         <div className="2xl:flex">
           <textarea
-            className="w-full bg-slate-100 resize-none focus:border-rose-400 focus:border-2 rounded-lg font-playfair border-gray-300 border-2 outline-none focus:bg-gray-200"
+            className="w-full bg-gray-50 resize-none focus:border-rose-400 focus:border-2 rounded-lg font-playfair border-gray-300 border-2 outline-none focus:bg-gray-200"
             rows="7"
             cols="50"
             type="text"
@@ -138,7 +138,7 @@ function ProfileDetails() {
         <p className="text-xl font-playfair text-center">Portfolio</p>
         <div className=" items-center">
           <textarea
-            className="w-full bg-slate-100 resize-none focus:border-rose-400 focus:border-2 rounded-lg font-playfair border-gray-300 border-2 outline-none focus:bg-gray-200"
+            className="w-full bg-gray-50 resize-none focus:border-rose-400 focus:border-2 rounded-lg font-playfair border-gray-300 border-2 outline-none focus:bg-gray-200"
             rows="3"
             cols="50"
             type="text"
@@ -154,7 +154,7 @@ function ProfileDetails() {
       )}
 
       <button
-        className="bg-gradient-to-r from-orange-300 to-rose-300 hover:text-rose-400 text-white font-bold py-2 px-4 rounded font-playfair"
+        className="bg-rose-400 hover:bg-rose-500 text-white font-bold py-2 px-4 rounded font-playfair"
         onClick={onSaveDetails}
       >
         Save Profile

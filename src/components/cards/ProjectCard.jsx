@@ -14,7 +14,7 @@ const ProjectCard = (props) => {
     <>
       <div className="container flex flex-auto my-6" onClick={toggleProject}>
         <div className="w-full max-w-full mr-20 ">
-          <div className="bg-gray-200 rounded-xl p-6 shadow-2xl z-50">
+          <div className="bg-gray-50 rounded-xl p-6 shadow-2xl z-50">
             <div className=" float-right">
               {/* Shows the details about the project. */}
               <img className="h-44 items-end" src={props.image} alt="" />

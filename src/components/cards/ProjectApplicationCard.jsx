@@ -101,8 +101,7 @@ const ProjectApplicationCard = (props) => {
 
   return (
     <>
-      <div className="flex flex-col  bg-gray-300 space-y-3 rounded-xl p-3">
-        {/* In this div the details about the project application is shown.*/}
+      <div className="flex flex-col bg-slate-200 space-y-3 rounded-xl p-3">
         <div className="font-playfair font-bold">
           {theUser && (
             <p className="text-2xl">
@@ -130,7 +129,7 @@ const ProjectApplicationCard = (props) => {
         {/* Button for accepting the project application. */}
         <div className="space-x-2 text-center">
           <button
-            className="bg-gradient-to-r from-orange-300 to-rose-300 hover:text-rose-400 text-white font-bold py-2 px-4 rounded shadow-md font-playfair"
+            className="bg-rose-400 hover:bg-rose-500 text-white font-bold py-2 px-4 rounded shadow-md font-playfair"
             onClick={onAccept}
           >
             Accept
@@ -138,7 +137,7 @@ const ProjectApplicationCard = (props) => {
 
           {/* Button for declining the project application. */}
           <button
-            className="bg-gradient-to-r from-orange-300 to-rose-300 hover:text-rose-400 text-white font-bold py-2 px-4 rounded shadow-md font-playfair"
+            className="bg-rose-400 hover:bg-rose-500 text-white font-bold py-2 px-4 rounded shadow-md font-playfair"
             onClick={onDecline}
           >
             Decline

@@ -19,7 +19,7 @@ const ProjectApplication = (props) => {
   const onSubmitApplication = () => {
     if (agreeIsCheck && motivationText.length > 0) {
       props.handleClose();
-      alert("Application sucessfully submited!");
+      alert("Application successfully submitted!");
       const toReturn = {
         userId: keycloak.tokenParsed.sub, //get user to retrieve id
         projectId: props.projectId,
@@ -79,7 +79,7 @@ const ProjectApplication = (props) => {
             </label>
           </div>
           <button
-            className="bg-gradient-to-r from-orange-300 to-rose-300 hover:text-rose-400 text-white font-bold py-2 px-4 rounded font-playfair shadow-md mt-2"
+            className="bg-rose-400 hover:bg-rose-500 text-white font-bold py-2 px-4 rounded font-playfair shadow-md mt-2"
             onClick={onSubmitApplication}
           >
             Submit application

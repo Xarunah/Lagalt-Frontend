@@ -22,7 +22,7 @@ function CreateProjectSkills(props) {
     <div>
       <p className="text-xl font-playfair font-bold">Skills</p>
       <input
-        className=" bg-slate-100 resize-none p-2 focus:border-rose-400 focus:border-2 rounded-lg font-playfair border-gray-300 border-2 outline-none focus:bg-gray-200"
+        className=" bg-gray-50 resize-none p-2 focus:border-rose-400 focus:border-2 rounded-lg font-playfair border-gray-300 border-2 outline-none focus:bg-gray-200"
         ref={skillInput}
         maxLength={20}
         placeholder="Add skill"

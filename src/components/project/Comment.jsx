@@ -81,7 +81,7 @@ function ProjectComments(props) {
       />
 
       <button
-        className="my-2 bg-gradient-to-r from-orange-300 to-rose-300 hover:text-rose-400 text-white font-bold py-2 px-4 rounded font-playfair"
+        className="my-2 bg-rose-400 hover:bg-rose-500 text-white font-bold py-2 px-4 rounded font-playfair"
         onClick={postComment}
       >
         Post Comment

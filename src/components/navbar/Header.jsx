@@ -1,11 +1,8 @@
 import SearchBar from "./SearchBar";
 import keycloak from "../../keycloak";
-import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
-import { faUser } from "@fortawesome/free-solid-svg-icons";
-import { faRightToBracket } from "@fortawesome/free-solid-svg-icons";
-import { faRightFromBracket } from "@fortawesome/free-solid-svg-icons";
+
 import { Link, useLocation } from "react-router-dom";
-import { faHouse } from "@fortawesome/free-solid-svg-icons";
+
 import { storageSave } from "../../utils/storage";
 
 const Header = ({ setSearchResults, onSearch }) => {
@@ -21,54 +18,66 @@ const Header = ({ setSearchResults, onSearch }) => {
   };
 
   return (
-    <>
-      <nav className="h-16 top-0 z-100 fixed w-full border-gray-200 px-2 py-2.5 rounded bg-slate-100 backdrop-filter backdrop-blur-lg bg-opacity-30 firefox:bg-opacity-30 z-50">
-        <div className="container flex flex-wrap items-center justify-between mx-auto">
-          <Link className="flex items-center scale-150" to="/">
-            <FontAwesomeIcon icon={faHouse} />
-          </Link>
-
-          <div className="flex order-2 justify-between">
-            <ul>
-              <li>
-                {!keycloak.authenticated && (
-                  <button
-                    className="scale-150"
-                    onClick={() => keycloak.login()}
-                  >
-                    <FontAwesomeIcon icon={faRightToBracket} />
-                  </button>
-                )}
-
-                {keycloak.authenticated && (
-                  <div className="flex space-x-12 my-2">
-                    <Link to="/profile" className="scale-150">
-                      <FontAwesomeIcon icon={faUser} />
-                    </Link>
-                    <button className="scale-150" onClick={() => logout()}>
-                      <FontAwesomeIcon icon={faRightFromBracket} />
-                    </button>
-                  </div>
-                )}
-              </li>
-            </ul>
-          </div>
-
-          <div className="items-center" id="navbar-search">
-            <div className="flex flex-col">
-              <div className="relative ">
-                {location.pathname != "/profile" && (
-                  <SearchBar
-                    setSearchResults={setSearchResults}
-                    onSearchInputChange={onSearchInputChange}
+    <nav className="bg-gray-50 sticky top-0">
+      <div className="container flex flex-wrap items-center justify-between mx-auto py-2">
+        {/* Logo */}
+        <div className="flex order-3">
+          <ul className="">
+            <li>
+              {/* Login Icon */}
+              {!keycloak.authenticated && (
+                <button onClick={() => keycloak.login()}>
+                  <img
+                    src="images/LoginIcon.svg"
+                    className="h-9 mr-3"
+                    alt="Login icon"
                   />
-                )}
-              </div>
-            </div>
-          </div>
+                </button>
+              )}
+              {/* Profile Icon */}
+              {keycloak.authenticated && (
+                <div className="flex space-x-5">
+                  <Link to="/profile">
+                    <img
+                      src="images/UserIcon.svg"
+                      className="h-9 mr-3"
+                      alt="User icon"
+                    />
+                  </Link>
+                  {/* Logout Icon */}
+                  <button className="" onClick={() => logout()}>
+                    <img
+                      src="images/LogOutIcon.svg"
+                      className="h-9 mr-3 "
+                      alt="Login icon"
+                    />
+                  </button>
+                </div>
+              )}
+            </li>
+          </ul>
         </div>
-      </nav>
-    </>
+        {/* Search Bar */}
+        <div className="flex order-2">
+          {location.pathname != "/profile" && (
+            <SearchBar
+              setSearchResults={setSearchResults}
+              onSearchInputChange={onSearchInputChange}
+            />
+          )}
+        </div>
+        {/* Home Button */}
+        <div className="order-">
+          <Link to="/">
+            <img
+              src="images/HomeIcon.svg"
+              className="h-9 mr-3"
+              alt="Login icon"
+            />
+          </Link>
+        </div>
+      </div>
+    </nav>
   );
 };
 

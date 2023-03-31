@@ -30,7 +30,7 @@ function App() {
   };
 
   return (
-    <div className="h-full min-h-screen bg-fixed bg-[radial-gradient(ellipse_at_bottom_left,_var(--tw-gradient-stops))] from-yellow-200 via-green-200 to-green-500 ">
+    <div className="h-full min-h-screen bg-fixed bg-slate-200">
       {/* <Header projects={projects} setSearchResults={setSearchResults} onSearch={onSearch}/> */}
       <BrowserRouter>
         <Header setSearchResults={setSearchResults} onSearch={onSearch} />

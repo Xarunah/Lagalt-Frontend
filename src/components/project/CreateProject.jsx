@@ -71,7 +71,7 @@ const CreateProject = ({ onProjectCreate, handleClose }) => {
   return (
     <>
       <div className="fixed bg-black bg-opacity-50 h-screen w-screen top-0 left-0 z-50">
-        <div className="w-5/6 h-3/4 m-auto my-24 overflow-y-scroll space-y-3 rounded-xl px-16 shadow-2xl bg-slate-100">
+        <div className="w-5/6 h-3/4 m-auto my-24 overflow-y-scroll space-y-3 rounded-xl px-16 shadow-2xl bg-gray-50">
           <button className="float-right text-5xl pt-6" onClick={handleClose}>
             <FontAwesomeIcon icon={faXmark} />
           </button>
@@ -80,7 +80,7 @@ const CreateProject = ({ onProjectCreate, handleClose }) => {
 
           <div><h1 className="text-2xl font-playfair font-bold">Title</h1>
           <input
-            className="bg-slate-100 resize-none focus:border-rose-400 focus:border-2 rounded-lg font-playfair border-gray-300 border-2 outline-none focus:bg-gray-200 p-1 "
+            className="bg-gray-50 resize-none focus:border-rose-400 focus:border-2 rounded-lg font-playfair border-gray-300 border-2 outline-none focus:bg-gray-200 p-1 "
             type="text"
             maxLength={40}
             placeholder="Enter title here"
@@ -138,7 +138,7 @@ const CreateProject = ({ onProjectCreate, handleClose }) => {
          <h1 className="text-2xl font-playfair font-bold">Short Description</h1>
           <form>
             <textarea
-              className="bg-slate-100 resize-none focus:border-rose-400 focus:border-2 rounded-lg font-playfair border-gray-300 border-2 outline-none focus:bg-gray-200"
+              className="bg-gray-50 resize-none focus:border-rose-400 focus:border-2 rounded-lg font-playfair border-gray-300 border-2 outline-none focus:bg-gray-200"
               rows="2"
               cols="50"
               type="text"
@@ -153,7 +153,7 @@ const CreateProject = ({ onProjectCreate, handleClose }) => {
           <h1 className="text-2xl font-playfair font-bold">Description</h1>
           <form>
             <textarea
-              className="bg-slate-100 resize-none focus:border-rose-400 focus:border-2 rounded-lg font-playfair border-gray-300 border-2 outline-none focus:bg-gray-200"
+              className="bg-gray-50 resize-none focus:border-rose-400 focus:border-2 rounded-lg font-playfair border-gray-300 border-2 outline-none focus:bg-gray-200"
               rows="8"
               cols="50"
               type="text"
@@ -169,10 +169,10 @@ const CreateProject = ({ onProjectCreate, handleClose }) => {
 
           <div>
           <button
-            className="my-2 bg-gradient-to-r from-orange-300 to-rose-300 hover:text-rose-400 text-white font-bold py-2 px-4 rounded font-playfair"
+            className="my-2 bg-rose-400 hover:bg-rose-500 text-white font-bold py-2 px-4 rounded font-playfair"
             onClick={createProjectObj}
           >
-            Create
+            Create Project
           </button>
           </div>
         </div>

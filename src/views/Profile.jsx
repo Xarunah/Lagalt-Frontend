@@ -98,8 +98,8 @@ const Profile = (props) => {
   return (
     <>
       <div>
-        <div className="flex flex-wrap min-h-screen bg-fixed bg-[radial-gradient(ellipse_at_bottom_left,_var(--tw-gradient-stops))] from-yellow-200 via-green-200 to-green-500">
-          <div className=" text-black w-4/12 mt-16">
+        <div className="flex flex-wrap min-h-screen bg-fixed bg-slate-200">
+          <div className=" text-black w-4/12">
             <p className="text-4xl text-center font-playfair mt-4">
               Joined Projects
             </p>
@@ -109,7 +109,7 @@ const Profile = (props) => {
             ))}
           </div>
 
-          <div className=" text-black w-4/12 relative mt-16">
+          <div className=" text-black w-4/12 relative">
             <p className="text-4xl text-center font-playfair mt-4 relative">
               Owned Projects
             </p>
@@ -117,14 +117,14 @@ const Profile = (props) => {
               <OwnedProjectCard key={index} {...element} />
             ))}
             <button
-              className="scale-150 absolute right-36 top-6"
+              className="scale-150 absolute right-24 top-7"
               onClick={toggleProjectCreation}
             >
               <FontAwesomeIcon icon={faFolderPlus} />
             </button>
           </div>
 
-          <div className=" text-black w-4/12 mt-20 ">
+          <div className=" text-black w-4/12 mt-7 ">
             <ProfileDetails />
           </div>
         </div>
